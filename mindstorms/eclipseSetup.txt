@@ -1,0 +1,4 @@
+evtl. in build.xml die IP anpassen.
+
+über Window -> Preferences -> Ant -> Runtime -> Ant Home Entries -> Add JARs -> RoboRaceRobot -> build-lib
+die Datei jsch-0.1.50.jar hinzufügen.
