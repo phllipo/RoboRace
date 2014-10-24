@@ -28,13 +28,13 @@ public class SimpleServer extends WebSocketServer {
 	}
 	@Override
 	public void onClose( WebSocket conn, int code, String reason, boolean remote ) {
-		this.sendToAll( conn + " has left the room!" );
-		System.out.println( conn + " has left the room!" );
+		this.sendToAll( conn + " Message : " );
+		System.out.println( conn + " Message : " );
 	}
 	@Override
 	public void onMessage( WebSocket conn, String message ) {
 		this.sendToAll( message );
-		System.out.println( conn + ": " + message );
+		System.out.println( conn + " Message : " + message );
 	}
 	/*@Override
 public void onFragment( WebSocket conn, Framedata fragment ) {
