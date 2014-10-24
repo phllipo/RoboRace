@@ -2,7 +2,7 @@ package de.otto.roborace;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+import jline.*;
 import lejos.hardware.Sound;
 import lejos.hardware.lcd.LCD;
 import lejos.hardware.motor.Motor;
@@ -16,32 +16,47 @@ public class RacerMain {
 		// Sound.playSample(soundFile, 1000);
 		Sound.beepSequenceUp();
 		
-        InputStreamReader sr = new InputStreamReader(System.in);
-        char s;
+		int maxSpeed = 500;
+		int speed = 100;
+		
+		 ConsoleReader s = new ConsoleReader();
+	        while (true) {
+	            int k = s.readVirtualKey();
+	            System.out.println(k);
+        // InputStreamReader sr = new InputStreamReader(System.in);
+       // char s;
 
-        while ((s = (char) sr.read()) != -1) {
+        // while ((s = (char) sr.read()) != -1) {
+      
+        	
+        	Motor.D.getTachoCount();
 
-            if (s == 'w') {
-            	Motor.C.setSpeed(770);
+            if (s.equals("w")) {
             	Motor.D.backward();            	
             }
             
-            if (s == 'a') {
-            	Sound.beep();
-            	Motor.C.rotate(-20);
+            if (s.equals("o")) {
+            	Motor.D.setSpeed(maxSpeed);
+            	maxSpeed = maxSpeed + speed;
+            	System.out.println(Motor.D.getSpeed());
             }
             
-            if (s == 's') {
+            if (s.equals("a")) {
+            	Sound.beep();
+            	Motor.C.rotate(25);
+            }
+            
+            if (s.equals("s")) {
             	Sound.beep();
             	Motor.D.forward();
             }
             
-            if (s == 'd') {
+            if (s.equals("d")) {
             	Sound.beep();
-            	Motor.C.rotate(20);
+            	Motor.C.rotate(-25);
             }
             
-            if (s == 'x') {
+            if (s.equals("x")) {
             	Motor.D.stop();
             }
             
