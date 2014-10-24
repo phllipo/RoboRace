@@ -7,6 +7,9 @@
     <property name="main-class"     value="de.otto.roborace.RacerMain"/>
     <property name="lejos.home"     value="/home/lejos/programs/"/>
     <property name="ev3.host"       value="10.90.177.128"/>
+    <property name="jline-1.0.jar"	value="/home/samaeder/GitRepos/RoboRace/mindstorms/lib/">
+        
+    
 
     <path id="libraries.path">    
         <fileset dir="${lib.dir}">        	
