@@ -4,19 +4,8 @@
 	<classpathentry kind="src" path="src/test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="lib/ev3classes.jar"/>
-<<<<<<< HEAD
 	<classpathentry kind="lib" path="lib/jline-1.0.jar"/>
-=======
-<<<<<<< HEAD
-	<classpathentry kind="lib" path="lib/jline-1.0.jar"/>
-=======
-	<classpathentry kind="lib" path="lib/java_websocket.jar" sourcepath="/home/phillip/RoboRace/Java-WebSocket/src/main/java"/>
-<<<<<<< HEAD
-	<classpathentry kind="lib" path="lib/jline-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/java_websocket.jar" sourcepath="/home/phillip/RoboRace/Java-WebSocket/src/main/java"/
 	<classpathentry kind="lib" path="lib/testng-6.8.8.jar"/>
-=======
->>>>>>> 4c1bb8a3a5e9cdf887e7d5fd39eba120747ec501
->>>>>>> ee716769f4e20f14475f7bda489aff4e10059aa5
->>>>>>> 0319ff827e7781e0f8aa8f83a32673578bf86be8
 	<classpathentry kind="output" path="bin"/>
 </classpath>
