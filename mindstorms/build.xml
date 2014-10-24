@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<project name="roboRacer" basedir="." default="copy">
+<project name="racerRobot" basedir="." default="copy">
     <property name="source.dir"     value="src"/>
-    <property name="lib.dir"        value="lib"/>
+    <property name="lib.dir"        value="/home/ariga/development/RoboRace/mindstorms/lib"/>
     <property name="class.dir"      value="build"/>
     <property name="jar.dir"        value="dist"/>
     <property name="main-class"     value="de.otto.roborace.RacerMain"/>
     <property name="lejos.home"     value="/home/lejos/programs/"/>
-    <property name="ev3.host"       value="10.90.177.128"/>
-    <property name="jline-1.0.jar"	value="/home/samaeder/GitRepos/RoboRace/mindstorms/lib/">
+    <property name="ev3.host"       value="10.90.157.93"/>
+   <!-- <property name="jline-1.0.jar"	value="/home/ariga/development/RoboRace/mindstorms/lib"/> -->
         
     
 
