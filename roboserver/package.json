@@ -1,0 +1,10 @@
+{
+    "name": "RoboRace-Server",
+    "description": "Server zur Verwaltung des RoboRace Projekts",
+    "author": "samaeder",
+    "dependencies": {
+        "mongodb": "*",
+        "monk": "*",
+        "ws": "*"
+    }
+}
