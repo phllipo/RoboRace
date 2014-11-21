@@ -13,9 +13,16 @@ import java.nio.channels.NotYetConnectedException;
 public class WebserverConnector{
 	
 	private WebSocketClient webSocketClient;
+	private boolean isConnected = false;
 
 	public void send( String text ) throws NotYetConnectedException {
+		System.out.println("SpeedTest123");
 		webSocketClient.send( text );
+			System.out.println("Test123");
+	}
+	
+	public boolean isConnected() {
+		return isConnected;
 	}
 
 	public void connect(String url, final OpenWebSocketCallbackHandler callbackHandler) throws URISyntaxException {
@@ -26,6 +33,7 @@ public class WebserverConnector{
 			public void onOpen(final ServerHandshake handshakedata) {
 				System.out.println("You are connected to ChatServer: "
 						+ getURI() + "\n");
+				isConnected = true;
 				callbackHandler.onOpen(handshakedata);	
 			}
 

@@ -15,36 +15,43 @@ public class WebserverConnectorTest {
 	@Test
 	public void createConnectionToServer() throws URISyntaxException {
 		final WebserverConnector webserverConnector = new WebserverConnector();
-
+		
 		webserverConnector.connect("ws://localhost:8887",
 				new OpenWebSocketCallbackHandler() {
 
 					@Override
 					public void onOpen(ServerHandshake handshakedata) {
-						webserverConnector.send("hallo");
-
-						webserverConnector.disconnect();
 
 					}
 
 					@Override
 					public void onMessage(String message) {
-						// TODO Auto-generated method stub
-
+						System.out.println("message: " + message);
 					}
 
 					@Override
 					public void onError(Exception ex) {
-						// TODO Auto-generated method stub
+						System.out.println("Error: " + ex.getMessage());
 
 					}
 
 					@Override
 					public void onClose(int code, String reason, boolean remote) {
-						// TODO Auto-generated method stub
+						System.out.println("OnClose :" + "Code "+ code+"reason :"+ reason+ "remote: "+ remote);
 
 					}
 				});
+		while(true) {
+			try {
+				Thread.sleep(1000);
+				if(webserverConnector.isConnected()) {
+					webserverConnector.send("hallo robo");
+				}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 	}
 }
