@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-<<<<<<< HEAD
 	<classpathentry kind="src" path="src/main"/>
 	<classpathentry kind="src" path="src/test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
@@ -9,19 +8,8 @@
 	<classpathentry kind="lib" path="lib-compile/ev3classes.jar"/>
 	<classpathentry kind="lib" path="lib-compile/testng-6.8.8.jar"/>
 	<classpathentry kind="output" path="bin"/>
-=======
-<<<<<<< HEAD
+
 	<classpathentry kind="lib" path="build.xml"/>
 	<classpathentry kind="output" path="bin"/>
-=======
-<classpathentry kind="src" path="src/main"/>
-<classpathentry kind="src" path="src/test"/>
-<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-<classpathentry kind="lib" path="lib/ev3classes.jar"/>
-<classpathentry kind="lib" path="lib/java_websocket.jar" sourcepath="/home/phillip/RoboRace/Java-WebSocket/src/main/java"/>
-<classpathentry kind="lib" path="lib/jline-1.0.jar"/>
-<classpathentry kind="lib" path="lib/testng-6.8.8.jar"/>
-<classpathentry kind="output" path="bin"/>
->>>>>>> 67903da7346fd9dd0abc1ddad904b309ad095929
->>>>>>> c01e507ff39a651e5b892634f66bc9649eacff44
+
 </classpath>
