@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="racerRobot" basedir="." default="copy">
     <property name="source.dir"     value="src"/>
-    <property name="lib.dir"        value="/home/ariga/development/RoboRace/mindstorms/lib"/>
+    <property name="lib.dir"        value="lib"/>
+	<property name="lib-compile.dir"        value="lib-compile"/>
     <property name="class.dir"      value="build"/>
     <property name="jar.dir"        value="dist"/>
     <property name="main-class"     value="de.otto.roborace.RacerMain"/>
     <property name="lejos.home"     value="/home/lejos/programs/"/>
-    <property name="ev3.host"       value="10.90.157.93"/>
-   <!-- <property name="jline-1.0.jar"	value="/home/ariga/development/RoboRace/mindstorms/lib"/> -->
+    <property name="ev3.host"       value="10.90.151.198"/>
+    <property name="jline-1.0.jar"	value="lib"/> 
         
     
 
@@ -15,6 +16,9 @@
         <fileset dir="${lib.dir}">        	
             <include name="*.jar"/>
         </fileset>
+    	<fileset dir="${lib-compile.dir}">        	
+	        <include name="*.jar"/>
+	    </fileset>
     </path>
 
     <target name="clean" description="delete old files">
@@ -32,6 +36,7 @@
     <target name="jar" depends="compile">
         <mkdir dir="${jar.dir}"/>
         <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${class.dir}">
+        	<zipgroupfileset dir="${lib.dir}" includes="**/*.jar" />
             <manifest>
                 <attribute name="Main-Class" value="${main-class}"/>
                 <attribute name="Class-Path" value="${lejos.home}/lib/ev3classes.jar ${lejos.home}/libjna/usr/share/java/jna.jar"/>

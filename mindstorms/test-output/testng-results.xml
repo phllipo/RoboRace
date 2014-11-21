@@ -2,16 +2,16 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="37" started-at="2014-10-24T13:00:56Z" finished-at="2014-10-24T13:00:56Z">
+  <suite name="Default suite" duration-ms="32" started-at="2014-11-21T09:52:55Z" finished-at="2014-11-21T09:52:55Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="37" started-at="2014-10-24T13:00:56Z" finished-at="2014-10-24T13:00:56Z">
+    <test name="Default test" duration-ms="32" started-at="2014-11-21T09:52:55Z" finished-at="2014-11-21T09:52:55Z">
       <class name="de.otto.roborace.network.client.WebserverConnectorTest">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:de.otto.roborace.network.client.WebserverConnectorTest@eabce30]" name="setUp" is-config="true" duration-ms="6" started-at="2014-10-24T15:00:56Z" finished-at="2014-10-24T15:00:56Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:de.otto.roborace.network.client.WebserverConnectorTest@463b3402]" name="setUp" is-config="true" duration-ms="5" started-at="2014-11-21T10:52:55Z" finished-at="2014-11-21T10:52:55Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="createConnectionToServer()[pri:0, instance:de.otto.roborace.network.client.WebserverConnectorTest@eabce30]" name="createConnectionToServer" duration-ms="18" started-at="2014-10-24T15:00:56Z" finished-at="2014-10-24T15:00:56Z">
+        <test-method status="PASS" signature="createConnectionToServer()[pri:0, instance:de.otto.roborace.network.client.WebserverConnectorTest@463b3402]" name="createConnectionToServer" duration-ms="17" started-at="2014-11-21T10:52:55Z" finished-at="2014-11-21T10:52:55Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- createConnectionToServer -->
