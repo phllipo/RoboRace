@@ -8,7 +8,6 @@
     <property name="main-class"     value="de.otto.roborace.RacerMain"/>
     <property name="lejos.home"     value="/home/lejos/programs/"/>
     <property name="ev3.host"       value="10.90.151.198"/>
-    <property name="jline-1.0.jar"	value="lib"/> 
         
     
 

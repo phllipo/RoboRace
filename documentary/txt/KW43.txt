@@ -1,0 +1,11 @@
+// Sascha
+NodeJS Server "roboserver" hinzugefuegt
+- Server basiert auf minimalen NodeJS-Setup
+- "server.js" beinhaltetet Serverconfig
+- Server hoert auf den Port 8080
+- WebSocket lauscht auf 8000
+- NodeJS Ordner muss auf RasperryPi kopiert werden
+  -> Codezeile 9 in server.js muss angepasst werden. "localhost" muss durch Rasperry IP ersetzt werden
+- NodeJS-Server laesst sich starten, indem man ueber das Terminal in das NodeJS Verzeichnis "roboserver" wechselt und "(sudo) npm start" eingibt
+  -> Server sollte starten. Sobald man ueber einen Browser auf 'rasperrypiIP:8080' verbindet, muesste das Terminal "Client connected" melden, was als Feedback
+  einer erfolgreichen Websocket-Verbindung zu deuten ist
