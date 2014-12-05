@@ -16,11 +16,12 @@ module.exports = {
         };
         
         ws.on('message', function incoming(message) {
-            console.log('received: %s', message);
+            var jsonMessage = JSON.parse(message);
+            console.log('received: %s', jsonMessage.eventtype);
             var connectedClient = getClientByWsConnection(ws);
             console.log("test:" + connectedClient);
-            if (message.eventype === "connect") {
-                connectedClient.type = message.data.clienttype;
+            if (jsonMessage.eventype === "connect") {
+                connectedClient.type = jsonMessage.data.clienttype;
             }
         });
         
