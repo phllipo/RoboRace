@@ -5,11 +5,11 @@ block content
   p Welcome  Number of connected clients: #{connectedClients.length}
   
   hl
-  for client in connectedClients
-    p #{client.id}
-     
-  h3= Speed
-  for robo in connectedClients
-    p Robo #{robo.id+1}: #{robo.speed}
-    br
+  table
+    for client in connectedClients
+      tr
+        td #{client.id}
+        td #{client.name}
+        td #{client.selectedRobo}
+        td #{client.speed}
 
