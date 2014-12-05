@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  console.log(connectedClients[0].type);
+  //console.log(connectedClients[0].type);
   res.render('index', { connectedClients: connectedClients });
 });
 
@@ -14,11 +14,12 @@ var wss = new WebSocketServer({host: 'localhost', port: 8000});
 
 wss.on('connection', function(ws) {
     connectedClients.push({
-        webSocketConnection: ws
+        webSocketConnection: ws,
+        id: connectedClients.length
     });
     
     for (i in connectedClients) {
-        console.log(i);
+        console.log(connectedClients[i]);
     };
     
     ws.on('message', function incoming(message) {

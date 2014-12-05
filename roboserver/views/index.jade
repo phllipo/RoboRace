@@ -2,7 +2,9 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{connectedClients}
+  p Welcome  Number of connected clients: #{connectedClients.length}
+  
+  hl
+  for client in connectedClients
+     p #{client.id}
 
-for client in connectedClients
-     p #{client.type}
