@@ -5,6 +5,8 @@
     "dependencies": {
         "mongodb": "*",
         "monk": "*",
-        "ws": "*"
+        "ws": "*",
+        "express": "*",
+        "jade": "~2.5.0"
     }
 }

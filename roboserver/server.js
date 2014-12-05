@@ -1,16 +1,40 @@
-var connect = require('connect');
-var serveStatic = require('serve-static');
-connect().use(serveStatic('./public/')).listen(8080);
+var express = require('express');
+var app = express();
+var path = require('path');
 
-// Websocket Server
+var routes = require('./routes/index');
 
-var WebSocketServer = require('ws').Server
-var wss = new WebSocketServer({host: 'localhost', port: 8000});
+var app = express();
 
-wss.on('connection', function(ws) {
-    console.log("Client connected ...");
+
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+app.use('/', routes);
+
+app.listen(3000);
+
+
+if (app.get('env') === 'development') {
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
 });
 
-wss.on('close', function(ws) {
-    console.log("Client disconnected ...");
-});
+module.exports = app;
+

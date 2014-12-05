@@ -1,0 +1,18 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/bin/npm', 'start' ]
+2 info using npm@2.1.5
+3 info using node@v0.10.33
+4 verbose node symlink /usr/bin/node
+5 verbose stack Error: ENOENT, open '/home/samaeder/GitRepos/RoboRace/package.json'
+6 verbose cwd /home/samaeder/GitRepos/RoboRace
+7 error Linux 3.13.0-39-generic
+8 error argv "node" "/usr/bin/npm" "start"
+9 error node v0.10.33
+10 error npm  v2.1.5
+11 error path /home/samaeder/GitRepos/RoboRace/package.json
+12 error code ENOENT
+13 error errno 34
+14 error ENOENT, open '/home/samaeder/GitRepos/RoboRace/package.json'
+15 error If you need help, you may report this error at:
+15 error     <http://github.com/npm/npm/issues>
+16 verbose exit [ 34, true ]

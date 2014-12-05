@@ -135,7 +135,7 @@ public class SimpleClient extends JFrame implements ActionListener {
 			location = args[ 0 ];
 			System.out.println( "Default server url specified: \'" + location + "\'" );
 		} else {
-			location = "ws://localhost:8887";
+			location = "ws://localhost:8000";
 			System.out.println( "Default server url not specified: defaulting to \'" + location + "\'" );
 		}
 		new SimpleClient( location );
