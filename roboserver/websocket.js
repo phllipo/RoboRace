@@ -19,9 +19,9 @@ module.exports = {
             var jsonMessage = JSON.parse(message);
             console.log('received: %s', jsonMessage.eventtype);
             var connectedClient = getClientByWsConnection(ws);
-            console.log("test:" + connectedClient);
             if (jsonMessage.eventype === "connect") {
                 connectedClient.type = jsonMessage.data.clienttype;
+                console.log(connectedClient.type);
             }
         });
         
