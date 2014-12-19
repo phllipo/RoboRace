@@ -23,13 +23,7 @@ module.exports = {
               messageProcessor.processSpeed(connectedClient, jsonMessage);
             }
             else if (jsonMessage.eventtype === "selectRobo") {
-                connectedClient.selectedRobo = jsonMessage.data.robo;
-                var controlledRobot = getClientByName(jsonMessage.data.robo);
-                controlledRobot.webSocketConnection.send(JSON.stringify( {
-                  eventtype: "selectedBy",
-                  data: {
-                    playerName: "playerName" }
-                }));                
+              messageProcessor.processRoboSelected(connectedClient, jsonMessage, datamodel);
             }
             else if (jsonMessage.eventtype === "ready") {
               //code  
@@ -50,15 +44,6 @@ module.exports = {
         function getClientByWsConnection(ws){
             for (i = 0; i <= connectedClients.length; i++) {
                 if (connectedClients[i].webSocketConnection === ws) {
-                    return connectedClients[i];
-                }
-            }
-            return null;
-        }
-        
-        function getClientByName(name) {
-            for (i = 0; i <= connectedClients.length; i++) {
-                if (connectedClients[i].name === name) {
                     return connectedClients[i];
                 }
             }
