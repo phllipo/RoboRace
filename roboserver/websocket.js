@@ -1,4 +1,5 @@
 var WebSocketServer = require('ws').Server
+var messageProcessor = require('./messageProcessor.js');
 var wss = new WebSocketServer({host: 'localhost', port: 8000});
 
 module.exports = {
@@ -16,13 +17,10 @@ module.exports = {
             console.log('received: %s', jsonMessage.eventtype);
             var connectedClient = getClientByWsConnection(ws);
             if (jsonMessage.eventtype === "connect") {
-                connectedClient.name = jsonMessage.data.name;
-                connectedClient.type = jsonMessage.data.clienttype;
-                console.log(connectedClient.type);
+              messageProcessor.processConnect(connectedClient, jsonMessage);
             }
             else if (jsonMessage.eventtype === "speed") {
-            	connectedClient.speed = jsonMessage.data.speed;
-            	console.log(connectedClient.speed);
+              messageProcessor.processSpeed(connectedClient, jsonMessage);
             }
             else if (jsonMessage.eventtype === "selectRobo") {
                 connectedClient.selectedRobo = jsonMessage.data.robo;
