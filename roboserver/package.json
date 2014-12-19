@@ -8,5 +8,8 @@
         "ws": "*",
         "express": "*",
         "jade": "~2.5.0"
-    }
+    },
+    "scripts": {
+  		"test": "mocha test"
+	}
 }
