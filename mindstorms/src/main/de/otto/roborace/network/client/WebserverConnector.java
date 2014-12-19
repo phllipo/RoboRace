@@ -31,7 +31,7 @@ public class WebserverConnector{
 
 			@Override
 			public void onOpen(final ServerHandshake handshakedata) {
-				System.out.println("You are connected to ChatServer: "
+				System.out.println("You are connected to server: "
 						+ getURI() + "\n");
 				isConnected = true;
 				callbackHandler.onOpen(handshakedata);	

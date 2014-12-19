@@ -8,15 +8,18 @@ public class RoboClient {
 	private WebserverConnector webserverConnector; 
 	
 	public void createConnectionToServer() throws URISyntaxException {
+		System.out.println("Try to connect");
 		webserverConnector = new WebserverConnector();
-		webserverConnector.connect("ws://10.90.159.197:8887",
+		webserverConnector.connect("ws://10.90.164.57:8887",
 				new OpenWebSocketCallbackHandler()
 
 				{
 
 					@Override
 					public void onOpen(ServerHandshake handshakedata) {
-						System.out.println("Verbunden");
+						System.out.println("connected");
+						webserverConnector.send("{\"eventType\": \"connect\", \"data\": {\"clientType\": \"robo\", \"name\": \"rob0ne\"}}");
+						
 					}
 
 					@Override
@@ -42,7 +45,7 @@ public class RoboClient {
 
 	public void sendCurrentSpeed(int tachoCount) {
 		if ( webserverConnector.isConnected()) {
-			webserverConnector.send("{eventType: 'Speed', data: {speed: "+tachoCount+"}}");
+			webserverConnector.send("{\"eventType\": \"speed\", \"data\": {\"speed\": \"+tachoCount+\"}}");
 		}
 		
 	}

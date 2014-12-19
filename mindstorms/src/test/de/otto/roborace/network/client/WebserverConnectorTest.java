@@ -16,12 +16,12 @@ public class WebserverConnectorTest {
 	public void createConnectionToServer() throws URISyntaxException {
 		final WebserverConnector webserverConnector = new WebserverConnector();
 		
-		webserverConnector.connect("ws://localhost:8887",
+		webserverConnector.connect("ws://localhost:8000",
 				new OpenWebSocketCallbackHandler() {
 
 					@Override
 					public void onOpen(ServerHandshake handshakedata) {
-
+						System.out.println("onOpen message");
 					}
 
 					@Override
@@ -45,7 +45,7 @@ public class WebserverConnectorTest {
 			try {
 				Thread.sleep(1000);
 				if(webserverConnector.isConnected()) {
-					webserverConnector.send("hallo robo");
+					webserverConnector.send("{\"eventtype\": \"speed\", \"data\": {\"speed\": \"800\"}}");
 				}
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block

@@ -1,41 +1,50 @@
 var WebSocketServer = require('ws').Server
 var messageProcessor = require('./messageProcessor.js');
-var wss = new WebSocketServer({host: 'localhost', port: 8000});
+var port = 8887;
+var wss = new WebSocketServer({port: port});
+console.log("server startet on port " +  port);
 
 module.exports = {
   connect: function (datamodel) {
+    
     var connectedClients = datamodel.getConnectedClients();
-    console.log(connectedClients);
     wss.on('connection', function(ws) {
+      console.log("client connected");
         connectedClients.push({
             webSocketConnection: ws,
             id: connectedClients.length
         });
         
         ws.on('message', function incoming(message) {
-            var jsonMessage = JSON.parse(message);
-            console.log('received: %s', jsonMessage.eventtype);
+            console.log('received: %s', message);
+                   
+            try {
+              var jsonMessage = JSON.parse(message);
+              console.log('received: %s', jsonMessage.eventType);
+            } catch (e) {
+              console.log("not a valid json message");
+              return;
+            }
+
             var connectedClient = getClientByWsConnection(ws);
-            if (jsonMessage.eventtype === "connect") {
+            if (jsonMessage.eventType === "connect") {
               messageProcessor.processConnect(connectedClient, jsonMessage);
             }
-            else if (jsonMessage.eventtype === "speed") {
+            else if (jsonMessage.eventType === "speed") {
               messageProcessor.processSpeed(connectedClient, jsonMessage);
             }
-            else if (jsonMessage.eventtype === "selectRobo") {
+            else if (jsonMessage.eventType === "selectRobo") {
               messageProcessor.processRoboSelected(connectedClient, jsonMessage, datamodel);
             }
-            else if (jsonMessage.eventtype === "ready") {
+            else if (jsonMessage.eventType === "ready") {
               //code  
             } else {
-              ws.send(JSON.stringify({eventtype: "error", data: { message: "unknownEventtype"}}));
+              ws.send(JSON.stringify({eventType: "error", data: { message: "unknownEventtype"}}));
             }
           for (i in connectedClients) {
-              console.log(connectedClients[i]);
+              //console.log(connectedClients[i]);
           };            
         });
-        
-        
         
         ws.on('close', function(ws) {
             console.log("Client disconnected ...");
