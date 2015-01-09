@@ -1,20 +1,27 @@
 var processConnect = function(connectedClient, jsonMessage){
-        connectedClient.name = jsonMessage.data.name;
-        connectedClient.type = jsonMessage.data.clienttype;
+        connectedClient.data.name = jsonMessage.data.name;
+        connectedClient.data.type = jsonMessage.data.clientType;
         //console.log(connectedClient.type);
     },
     processSpeed = function(connectedClient, jsonMessage){
-        connectedClient.speed = jsonMessage.data.speed;
+        connectedClient.data.speed = jsonMessage.data.speed;
         //console.log(connectedClient.speed);
     },
     processRoboSelected = function(connectedClient, jsonMessage, datamodel){
-        connectedClient.selectedRobo = jsonMessage.data.robo;
         var controlledRobot = datamodel.getClientByName(jsonMessage.data.robo);
+        connectedClient.data.selectedRobo = controlledRobot;
         controlledRobot.webSocketConnection.send(JSON.stringify( {
             eventType: "selectedBy",
             data: {
-                playerName: "playerName" }
-            }));   
+                playerName: connectedClient.name 
+            }
+        }));  
+        connectedClient.webSocketConnection.send(JSON.stringify( {
+            eventType: "assignment",
+            data: {
+               roboName: controlledRobot.name 
+           } 
+        })); 
     },
     processReady = function(){
         

@@ -2,14 +2,24 @@ extends layout
 
 block content
   h1= title
-  p Welcome  Number of connected clients: #{connectedClients.length}
+  p Number of connected clients: #{connectedClients.length}
   
   hl
   table
-    for client in connectedClients
+    thead
       tr
-        td #{client.id}
-        td #{client.name}
-        td #{client.selectedRobo}
-        td #{client.speed}
+        th Spieler 
+        th Robo
+        th Speed
+        th Item
+        th Time
+      tbody
+        for client in connectedClients
+          if client.data.type=='app'
+            tr
+              td #{client.data.name}
+              if client.data.selectedRobo!=undefined
+                td #{client.data.selectedRobo.data.name}
+                td #{client.data.selectedRobo.data.speed}
+          else
 

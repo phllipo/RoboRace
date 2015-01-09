@@ -5,7 +5,7 @@ var connectedClients = [],
     
     getClientByName = function (name) {
         for (i = 0; i <= connectedClients.length; i++) {
-            if (connectedClients[i].name === name) {
+            if (connectedClients[i].data.name === name) {
                 return connectedClients[i];
             }
         }

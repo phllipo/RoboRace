@@ -12,6 +12,7 @@ module.exports = {
       console.log("client connected");
         connectedClients.push({
             webSocketConnection: ws,
+            data: {},
             id: connectedClients.length
         });
         
