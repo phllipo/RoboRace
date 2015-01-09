@@ -7,7 +7,7 @@ describe('messageProcessor', function(){
         it('should takeover the values into the client connection', function(){
             // given
             var connectedClient = {"data": {}},
-                jsonMessage = {"eventType": "connect", "data": {"clientType": "Test", "name": "TestUnit" }};
+                jsonMessage = {"eventType": "connect", "data": {"clientType": "Test", "name": "TestUnit", "ready": "false" }};
             // when
             messageProccesor.processConnect(connectedClient, jsonMessage);
             // then
@@ -40,7 +40,7 @@ describe('messageProcessor', function(){
             // when
             messageProccesor.processRoboSelected(connectedClient, jsonMessage, datamodel);
             // then
-            assert.equal("rob0ne", connectedClient.data.selectedRobo.data.name);
+            assert.equal("rob0ne", connectedClient.data.selectedRobo.name);
             assert(selectedClient.webSocketConnection.send.called);
             assert(connectedClient.webSocketConnection.send.called);
         })

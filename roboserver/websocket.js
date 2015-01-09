@@ -1,5 +1,6 @@
 var WebSocketServer = require('ws').Server
 var messageProcessor = require('./messageProcessor.js');
+var messageTransmitter = require('./messageTransmitter.js');
 var port = 8887;
 var wss = new WebSocketServer({port: port});
 console.log("server startet on port " +  port);
@@ -30,6 +31,7 @@ module.exports = {
             var connectedClient = getClientByWsConnection(ws);
             if (jsonMessage.eventType === "connect") {
               messageProcessor.processConnect(connectedClient, jsonMessage);
+              messageTransmitter.transmitClients(connectedClients);
             }
             else if (jsonMessage.eventType === "speed") {
               messageProcessor.processSpeed(connectedClient, jsonMessage);
@@ -38,7 +40,7 @@ module.exports = {
               messageProcessor.processRoboSelected(connectedClient, jsonMessage, datamodel);
             }
             else if (jsonMessage.eventType === "ready") {
-              //code  
+              messageProcessor.processReady(connectedClient, jsonMessage);
             } else {
               ws.send(JSON.stringify({eventType: "error", data: { message: "unknownEventtype"}}));
             }
