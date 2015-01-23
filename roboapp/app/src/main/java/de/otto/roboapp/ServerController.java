@@ -18,7 +18,17 @@ import java.net.URISyntaxException;
 public class ServerController {
     private String serverIp;
     private String serverPort;
-    private WebserverConnector wc;
+    private boolean isConnected = false;
+    private String clientName;
+    private WebSocketClient wsc;
+
+    public boolean isConnected() {
+        return isConnected;
+    }
+
+    public WebSocketClient getWsc() {
+        return wsc;
+    }
 
     public Activity getUIActivity() {
         return UIActivity;
@@ -28,11 +38,9 @@ public class ServerController {
         this.UIActivity = UIActivity;
     }
 
-    private WebSocketClient wsc;
     private Activity UIActivity;
 
     public static TextView speed;
-
 
     public String getServerPort() {
         return serverPort;
@@ -50,22 +58,13 @@ public class ServerController {
         this.serverIp = serverIp;
     }
 
-    public ServerController(String serverIp, String serverPort, TextView btn, Activity ui) {
+    public ServerController(String serverIp, String serverPort, String clientName) {
         setServerIp(serverIp);
         setServerPort(serverPort);
-        setUIActivity(ui);
+        this.clientName = clientName;
+
         startWebserverConnector();
-        speed = btn;
-        // TODO
-        speed.setText("testtesttest");
     }
-
-    public void printSpeed(int speed) {
-
-
-    }
-
-
 
     public void processMsg(String msg) throws JSONException {
         JSONObject msgJSON = new JSONObject(msg);
@@ -74,16 +73,13 @@ public class ServerController {
         }
     }
 
-
-
     public void startWebserverConnector(){
         try {
                 wsc = new WebSocketClient(new URI("ws://" + getServerIp() + ":" + getServerPort())) {
                     @Override
                     public void onOpen(ServerHandshake handshakedata) {
                         System.out.println("connected");
-                        this.send("{\"eventType\": \"connect\", \"data\": {\"clientType\": \"app\", \"name\": \"TestUnit\", \"ready\": \"false\" }}");
-
+                        this.send("{\"eventType\": \"connect\", \"data\": {\"clientType\": \"Test\", \"name\": \"" + clientName + "\", \"ready\": \"false\" }}\"");
                     }
 
                     @Override
@@ -97,12 +93,12 @@ public class ServerController {
 
                     @Override
                     public void onClose(int code, String reason, boolean remote) {
-
+                        System.out.println("ONCLOSE " + reason);
                     }
 
                     @Override
                     public void onError(Exception ex) {
-
+                        ex.printStackTrace();
                     }
                 };
             wsc.connect();

@@ -17,7 +17,7 @@ public class TachoKarachoActivity extends ActionBarActivity {
         setContentView(R.layout.activity_tacho_karacho);
         TextView text_speed = (TextView)findViewById(R.id.speed);
         System.out.println("test");
-        ServerController sc = new ServerController("10.90.170.33", "8887", text_speed, this);
+       // ServerController sc = new ServerController("10.90.170.33", "8887", text_speed, this);
     }
 
 
