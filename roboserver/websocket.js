@@ -35,6 +35,7 @@ module.exports = {
             }
             else if (jsonMessage.eventType === "speed") {
               messageProcessor.processSpeed(connectedClient, jsonMessage);
+              messageTransmitter.transmitSpeed(connectedClient, datamodel);
             }
             else if (jsonMessage.eventType === "selectRobo") {
               messageProcessor.processRoboSelected(connectedClient, jsonMessage, datamodel);
