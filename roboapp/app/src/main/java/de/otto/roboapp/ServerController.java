@@ -79,7 +79,7 @@ public class ServerController {
                     @Override
                     public void onOpen(ServerHandshake handshakedata) {
                         System.out.println("connected");
-                        this.send("{\"eventType\": \"connect\", \"data\": {\"clientType\": \"Test\", \"name\": \"" + clientName + "\", \"ready\": \"false\" }}\"");
+                        this.send("{\"eventType\": \"connect\", \"data\": {\"clientType\": \"app\", \"name\": \"" + clientName + "\", \"ready\": \"false\" }}\"");
                     }
 
                     @Override
