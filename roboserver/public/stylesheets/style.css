@@ -1,0 +1,34 @@
+table, td, th {
+	text-align: center;
+	padding: 0px;
+	font-family: tahoma;
+	font-size: 1em;
+}
+
+table {
+	width: 50%;
+}
+
+th {
+	background-color: #848484;
+	color: white;
+	width: 18%;
+}
+
+.white {
+	background-color: #FAFAFA;
+}
+
+.silver {
+	background-color: #F2F2F2;
+}
+
+.green {
+	background-color: green;
+	width: 10%;
+}
+
+.red {
+	background-color: red;
+	width: 10%;
+}

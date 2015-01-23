@@ -13,13 +13,23 @@ block content
         th Speed
         th Item
         th Time
+        th Ready
       tbody
         for client in connectedClients
           if client.data.type=='app'
             tr
-              td #{client.data.name}
+              td.white #{client.data.name}
               if client.data.selectedRobo!=undefined
-                td #{client.data.selectedRobo.data.name}
-                td #{client.data.selectedRobo.data.speed}
+                td.silver #{client.data.selectedRobo.name}
+                td.white #{client.data.selectedRobo.speed}
+                td.silver #{client.data.selectedRobo.item}
+              else
+                td.silver
+                td.white
+                td.silver
+              td.white #{client.data.time}
+              if client.data.ready=='true'
+                td.green
+              else
+                td.red
           else
-
