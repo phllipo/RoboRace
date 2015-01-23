@@ -1,0 +1,91 @@
+
+> RoboRace-Server@ start /home/pi/roborace/roboserver
+> node server.js
+
+server startet on port 8887
+
+events.js:72
+        throw er; // Unhandled 'error' event
+              ^
+Error: listen EADDRINUSE
+    at errnoException (net.js:904:11)
+    at Server._listen2 (net.js:1042:14)
+    at listen (net.js:1064:10)
+    at Server.listen (net.js:1138:5)
+    at EventEmitter.app.listen (/home/pi/roborace/roboserver/node_modules/express/lib/application.js:559:24)
+    at Object.<anonymous> (/home/pi/roborace/roboserver/server.js:23:5)
+    at Module._compile (module.js:456:26)
+    at Object.Module._extensions..js (module.js:474:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:312:12)
+
+npm ERR! RoboRace-Server@ start: `node server.js`
+npm ERR! Exit status 8
+npm ERR! 
+npm ERR! Failed at the RoboRace-Server@ start script.
+npm ERR! This is most likely a problem with the RoboRace-Server package,
+npm ERR! not with npm itself.
+npm ERR! Tell the author that this fails on your system:
+npm ERR!     node server.js
+npm ERR! You can get their info via:
+npm ERR!     npm owner ls RoboRace-Server
+npm ERR! There is likely additional logging output above.
+npm ERR! System Linux 3.12.34+
+npm ERR! command "/usr/local/bin/node" "/usr/local/bin/npm" "start"
+npm ERR! cwd /home/pi/roborace/roboserver
+npm ERR! node -v v0.10.33
+npm ERR! npm -v 1.4.28
+npm ERR! code ELIFECYCLE
+npm ERR! 
+npm ERR! Add[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]
+[]

@@ -1,13 +1,13 @@
 var WebSocketServer = require('ws').Server
 var messageProcessor = require('./messageProcessor.js');
 var messageTransmitter = require('./messageTransmitter.js');
-var port = 8887;
+var port = 8888;
 var wss = new WebSocketServer({port: port});
 console.log("server startet on port " +  port);
 
 module.exports = {
   connect: function (datamodel) {
-    
+
     var connectedClients = datamodel.getConnectedClients();
     wss.on('connection', function(ws) {
       console.log("client connected");
@@ -16,10 +16,10 @@ module.exports = {
             data: {},
             id: connectedClients.length
         });
-        
+
         ws.on('message', function incoming(message) {
             console.log('received: %s', message);
-                   
+
             try {
               var jsonMessage = JSON.parse(message);
               console.log('received: %s', jsonMessage.eventType);
@@ -46,13 +46,13 @@ module.exports = {
             }
           for (i in connectedClients) {
               //console.log(connectedClients[i]);
-          };            
+          };
         });
-        
+
         ws.on('close', function(ws) {
             console.log("Client disconnected ...");
         });
-        
+
         function getClientByWsConnection(ws){
             for (i = 0; i <= connectedClients.length; i++) {
                 if (connectedClients[i].webSocketConnection === ws) {
