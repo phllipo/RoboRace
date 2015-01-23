@@ -2,28 +2,16 @@ package de.otto.roboapp;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
-
-import org.java_websocket.handshake.ServerHandshake;
-
-import java.net.URISyntaxException;
 
 
 public class MainActivity extends ActionBarActivity {
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView text_speed = (TextView)findViewById(R.id.speed);
-
-        ServerController sc = new ServerController("10.90.152.215", "8887", text_speed);
     }
 
 

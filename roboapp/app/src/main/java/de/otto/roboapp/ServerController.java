@@ -1,5 +1,6 @@
 package de.otto.roboapp;
 
+import android.app.Activity;
 import android.widget.TextView;
 
 import org.java_websocket.client.WebSocketClient;
@@ -18,7 +19,17 @@ public class ServerController {
     private String serverIp;
     private String serverPort;
     private WebserverConnector wc;
+
+    public Activity getUIActivity() {
+        return UIActivity;
+    }
+
+    public void setUIActivity(Activity UIActivity) {
+        this.UIActivity = UIActivity;
+    }
+
     private WebSocketClient wsc;
+    private Activity UIActivity;
 
     public static TextView speed;
 
@@ -39,9 +50,10 @@ public class ServerController {
         this.serverIp = serverIp;
     }
 
-    public ServerController(String serverIp, String serverPort, TextView btn) {
+    public ServerController(String serverIp, String serverPort, TextView btn, Activity ui) {
         setServerIp(serverIp);
         setServerPort(serverPort);
+        setUIActivity(ui);
         startWebserverConnector();
         speed = btn;
         // TODO
@@ -58,23 +70,20 @@ public class ServerController {
     public void processMsg(String msg) throws JSONException {
         JSONObject msgJSON = new JSONObject(msg);
         if(msgJSON.getString("eventType").equals("speed")) {
-            String v = "SPEEEEEEEEEEEEEEEEEEEEEEED: " + msgJSON.getJSONObject("data").getString("speed");
-            System.out.println(v);
-            // TODO
-            speed.setText(v);
+           new SpeedMessageProcessor(speed).process(msgJSON, getUIActivity());
         }
     }
 
 
 
     public void startWebserverConnector(){
-        final OpenWebSocketCallbackHandler callbackHandler = null;
         try {
                 wsc = new WebSocketClient(new URI("ws://" + getServerIp() + ":" + getServerPort())) {
                     @Override
                     public void onOpen(ServerHandshake handshakedata) {
                         System.out.println("connected");
-                        callbackHandler.onOpen(handshakedata);
+                        this.send("{\"eventType\": \"connect\", \"data\": {\"clientType\": \"app\", \"name\": \"TestUnit\", \"ready\": \"false\" }}");
+
                     }
 
                     @Override
