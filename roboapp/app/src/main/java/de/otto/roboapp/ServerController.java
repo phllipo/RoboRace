@@ -1,5 +1,6 @@
 package de.otto.roboapp;
 
+import android.app.Activity;
 import android.widget.TextView;
 
 import org.java_websocket.client.WebSocketClient;
@@ -17,11 +18,29 @@ import java.net.URISyntaxException;
 public class ServerController {
     private String serverIp;
     private String serverPort;
-    private WebserverConnector wc;
+    private boolean isConnected = false;
+    private String clientName;
     private WebSocketClient wsc;
 
-    public static TextView speed;
+    public boolean isConnected() {
+        return isConnected;
+    }
 
+    public WebSocketClient getWsc() {
+        return wsc;
+    }
+
+    public Activity getUIActivity() {
+        return UIActivity;
+    }
+
+    public void setUIActivity(Activity UIActivity) {
+        this.UIActivity = UIActivity;
+    }
+
+    private Activity UIActivity;
+
+    public static TextView speed;
 
     public String getServerPort() {
         return serverPort;
@@ -39,42 +58,28 @@ public class ServerController {
         this.serverIp = serverIp;
     }
 
-    public ServerController(String serverIp, String serverPort, TextView btn) {
+    public ServerController(String serverIp, String serverPort, String clientName) {
         setServerIp(serverIp);
         setServerPort(serverPort);
+        this.clientName = clientName;
+
         startWebserverConnector();
-        speed = btn;
-        // TODO
-        speed.setText("testtesttest");
     }
-
-    public void printSpeed(int speed) {
-
-
-    }
-
-
 
     public void processMsg(String msg) throws JSONException {
         JSONObject msgJSON = new JSONObject(msg);
         if(msgJSON.getString("eventType").equals("speed")) {
-            String v = "SPEEEEEEEEEEEEEEEEEEEEEEED: " + msgJSON.getJSONObject("data").getString("speed");
-            System.out.println(v);
-            // TODO
-            speed.setText(v);
+           new SpeedMessageProcessor(speed).process(msgJSON, getUIActivity());
         }
     }
 
-
-
     public void startWebserverConnector(){
-        final OpenWebSocketCallbackHandler callbackHandler = null;
         try {
                 wsc = new WebSocketClient(new URI("ws://" + getServerIp() + ":" + getServerPort())) {
                     @Override
                     public void onOpen(ServerHandshake handshakedata) {
                         System.out.println("connected");
-                        callbackHandler.onOpen(handshakedata);
+                        this.send("{\"eventType\": \"connect\", \"data\": {\"clientType\": \"app\", \"name\": \"" + clientName + "\", \"ready\": \"false\" }}\"");
                     }
 
                     @Override
@@ -88,12 +93,12 @@ public class ServerController {
 
                     @Override
                     public void onClose(int code, String reason, boolean remote) {
-
+                        System.out.println("ONCLOSE " + reason);
                     }
 
                     @Override
                     public void onError(Exception ex) {
-
+                        ex.printStackTrace();
                     }
                 };
             wsc.connect();
