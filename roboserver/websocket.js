@@ -30,7 +30,7 @@ module.exports = {
 
             var connectedClient = getClientByWsConnection(ws);
             if (jsonMessage.eventType === "connect") {
-              messageProcessor.processConnect(connectedClient, jsonMessage);
+              messageProcessor.processConnect(connectedClients, connectedClient, jsonMessage);
               messageTransmitter.transmitClients(connectedClients);
             }
             else if (jsonMessage.eventType === "speed") {
@@ -50,12 +50,22 @@ module.exports = {
           };
         });
 
-        ws.on('close', function(ws) {
-            console.log("Client disconnected ...");
+        ws.on('close', function(errorcode) {
+          var disconnectedClient = getClientByWsConnection(ws);
+          if(disconnectedClient.data.type === "robo") {
+            console.log("robo losing connection");
+            var App = datamodel.getClientByName(disconnectedClient.data.controlledBy);
+            App.data.selectedRobo.name = App.data.selectedRobo.name + "(dc)";
+            App.data.selectedRobo.speed = 0;
+            App.data.ready = "waiting";
+          }
+          connectedClients.splice(connectedClients.indexOf(disconnectedClient), 1);
+          messageTransmitter.transmitClients(connectedClients);
         });
 
         function getClientByWsConnection(ws){
-            for (i = 0; i <= connectedClients.length; i++) {
+
+            for (i = 0; i <= connectedClients.length - 1; i++) {
                 if (connectedClients[i].webSocketConnection === ws) {
                     return connectedClients[i];
                 }
