@@ -30,6 +30,8 @@ block content
               td.white #{client.data.time}
               if client.data.ready=='true'
                 td.green
+              else if client.data.ready=='waiting'
+                td.yellow
               else
                 td.red
           else

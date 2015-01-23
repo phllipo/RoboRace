@@ -1,0 +1,28 @@
+#!/bin/bash
+# Alert IP Address changes over email.
+ 
+MAIL_TO=lego@cooperation5.de
+MAIL_SERVER=smtp.gmail.com:587
+MAIL_FROM=otto.raspi@gmail.com
+USERNAME=otto.raspi@gmail.com
+PASSWORD=raspberry123
+SUBJECT="IP Address Change Notification"
+ 
+LOG=/path/to/log/ip_address
+OLD_IP=( $( cat $LOG ) )
+ 
+# Get IP Address
+NEW_IP=( $(ip addr show dev wlan0 | grep "inet " | awk '{ print $2 }') )
+ 
+# Check for Change
+if [ "$NEW_IP" != "$OLD_IP" ]
+then
+ 
+    # log current ip
+    echo $NEW_IP > $LOG
+ 
+    # Send Email
+    sendEmail -v -f $MAIL_FROM -s $MAIL_SERVER -xu $USERNAME -xp $PASSWORD -t $MAIL_TO -o tls=yes -u $SUBJECT -m $NEW_IP
+fi
+ 
+exit 0
