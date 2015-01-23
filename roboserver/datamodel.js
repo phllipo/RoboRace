@@ -1,7 +1,7 @@
 /*
     connectedClients Array, wo alle Clients gespeichert werden wird initiiert
     datamode = {
-        connectedClients: {
+        connectedClients: 
             [{
                 webSocketConnection: ws,
                 data: {type: "App",
@@ -13,7 +13,7 @@
                 },
                 id: connectedClients.length
             }]
-        }
+        
     }
 */
 

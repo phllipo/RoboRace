@@ -10,7 +10,7 @@ public class RoboClient {
 	public void createConnectionToServer() throws URISyntaxException {
 		System.out.println("Try to connect");
 		webserverConnector = new WebserverConnector();
-		webserverConnector.connect("ws://10.90.152.2154:8887",
+		webserverConnector.connect("ws://10.90.158.60:8888",
 				new OpenWebSocketCallbackHandler()
 
 				{

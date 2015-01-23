@@ -1,4 +1,4 @@
-package de.otto.roboapp;
+/*package de.otto.roboapp;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
@@ -9,7 +9,7 @@ import java.nio.channels.NotYetConnectedException;
 
 /**
  * Created by luca on 19.12.14.
- */
+ *
 public class WebserverConnector {
     private WebSocketClient webSocketClient;
     private boolean isConnected = false;
@@ -56,4 +56,4 @@ public class WebserverConnector {
         webSocketClient.close();
     }
 }
-
+*/
