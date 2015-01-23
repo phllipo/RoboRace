@@ -29,7 +29,7 @@ describe('messageProcessor', function(){
     describe('selectRobo', function(){
         it('should set selected Robo into the connected client', function(){
             // given
-            var connectedClient = {"webSocketConnection": {send: sinon.spy()}, "data": {"clientType": "app", "name": "Sascha"}},
+            var appclient = {"webSocketConnection": {send: sinon.spy()}, "data": {"clientType": "app", "name": "Sascha"}},
                 selectedClient = {"webSocketConnection": {send: sinon.spy()}, "data": {"clientType": "robo", "name": "rob0ne"}},
                 jsonMessage = { "eventType": "selectRobo", "data": { "robo": "rob0ne"}},
                 datamodel = {
@@ -38,11 +38,11 @@ describe('messageProcessor', function(){
                     }
                 };
             // when
-            messageProccesor.processRoboSelected(connectedClient, jsonMessage, datamodel);
+            messageProccesor.processRoboSelected(appclient, jsonMessage, datamodel);
             // then
-            assert.equal("rob0ne", connectedClient.data.selectedRobo.name);
+            assert.equal("rob0ne", appclient.data.selectedRobo.name);
             assert(selectedClient.webSocketConnection.send.called);
-            assert(connectedClient.webSocketConnection.send.called);
+            assert(appclient.webSocketConnection.send.called);
         })
     })
 })

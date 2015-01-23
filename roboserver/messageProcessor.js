@@ -11,7 +11,7 @@ var processConnect = function(connectedClient, jsonMessage){
     processRoboSelected = function(appclient, jsonMessage, datamodel){
         var controlledRobot = datamodel.getClientByName(jsonMessage.data.robo);
         appclient.data.selectedRobo = controlledRobot.data;
-        controlledRobot.data.controlledBy = connectedClient.data.name;
+        controlledRobot.data.controlledBy = appclient.data.name;
         controlledRobot.webSocketConnection.send(JSON.stringify( {
             eventType: "selectedBy",
             data: {
