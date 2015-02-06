@@ -42,6 +42,9 @@ module.exports = {
             }
             else if (jsonMessage.eventType === "ready") {
               messageProcessor.processReady(connectedClient, jsonMessage);
+            }
+            else if (jsonMessage.eventType === "move") {
+              messageTransmitter.transmitMove(connectedClient, jsonMessage, datamodel);
             } else {
               ws.send(JSON.stringify({eventType: "error", data: { message: "unknownEventtype"}}));
             }

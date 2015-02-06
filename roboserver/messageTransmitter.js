@@ -24,8 +24,14 @@ var transmitClients = function(connectedClients){
 			}
 		controllingApp.webSocketConnection.send(JSON.stringify(speedData));
 	};
+	transmitMove = function(appclient, jsonMessage, datamodel) {
+		var controlledRoboName = appclient.data.selectedRobo.name,
+			controlledRobo = datamodel.getClientByName(controlledRoboName)
+		controlledRobo.webSocketConnection.send(JSON.stringify(jsonMessage));
+	}
 
 module.exports = {
     transmitClients: transmitClients,
-    transmitSpeed: transmitSpeed
+    transmitSpeed: transmitSpeed,
+    transmitMove: transmitMove
 };
