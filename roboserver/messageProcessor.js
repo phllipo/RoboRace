@@ -39,7 +39,7 @@ var processConnect = function(connectedClients, connectedClient, jsonMessage){
     },
     processReady = function(appclient, jsonMessage){
         appclient.data.ready = jsonMessage.data.ready;
-    };
+    }
 
 module.exports = {
     processConnect: processConnect,
