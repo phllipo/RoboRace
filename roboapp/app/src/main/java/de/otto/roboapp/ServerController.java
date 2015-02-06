@@ -1,6 +1,9 @@
 package de.otto.roboapp;
 
 import android.app.Activity;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.java_websocket.client.WebSocketClient;
@@ -8,6 +11,7 @@ import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -15,12 +19,22 @@ import java.net.URISyntaxException;
  * Created by luca on 09.01.15.
  */
 
-public class ServerController {
+public class ServerController implements Serializable {
     private String serverIp;
     private String serverPort;
     private boolean isConnected = false;
     private String clientName;
     private WebSocketClient wsc;
+
+    public ListView getSelectRoboList() {
+        return selectRoboList;
+    }
+
+    public void setSelectRoboList(ListView selectRoboList) {
+        this.selectRoboList = selectRoboList;
+    }
+
+    private ListView selectRoboList;
 
     public boolean isConnected() {
         return isConnected;
@@ -65,11 +79,24 @@ public class ServerController {
 
         startWebserverConnector();
     }
+    public ServerController(String serverIp, String serverPort) {
+        setServerIp(serverIp);
+        setServerPort(serverPort);
+
+        startWebserverConnector();
+    }
+    public void sendMsg(String msg) {
+        try {
+            wsc.send(msg);
+        } catch (Exception e) {
+
+        }
+    }
 
     public void processMsg(String msg) throws JSONException {
         JSONObject msgJSON = new JSONObject(msg);
         if(msgJSON.getString("eventType").equals("speed")) {
-           new SpeedMessageProcessor(speed).process(msgJSON, getUIActivity());
+            new SpeedMessageProcessor(speed).process(msgJSON, getUIActivity());
         }
     }
 
@@ -79,7 +106,12 @@ public class ServerController {
                     @Override
                     public void onOpen(ServerHandshake handshakedata) {
                         System.out.println("connected");
-                        this.send("{\"eventType\": \"connect\", \"data\": {\"clientType\": \"app\", \"name\": \"" + clientName + "\", \"ready\": \"false\" }}\"");
+                        try {
+                            this.send("test");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        //this.send("{\"eventType\": \"connect\", \"data\": {\"clientType\": \"app\", \"name\": \"" + clientName + "\", \"ready\": \"false\" }}\"");
                     }
 
                     @Override
@@ -87,7 +119,7 @@ public class ServerController {
                         try {
                             processMsg(message);
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            System.out.println("no valid JSON");
                         }
                     }
 
