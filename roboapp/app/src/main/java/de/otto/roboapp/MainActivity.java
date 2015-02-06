@@ -1,5 +1,6 @@
 package de.otto.roboapp;
 
+import android.content.Intent;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -18,8 +19,8 @@ import static android.os.SystemClock.sleep;
 public class MainActivity extends ActionBarActivity {
 
     private String playerName;
-    private String serverIP = "10.90.170.33";
-    private String serverPort = "8888";
+    private String serverIP = "10.90.164.15";
+    private String serverPort = "8887";
     private WebSocketClient wsc;
 
     public ServerController sc;
@@ -40,6 +41,10 @@ public class MainActivity extends ActionBarActivity {
                 playerName = t_playerName.getText().toString();
 
                 sc = new ServerController(serverIP, serverPort, playerName);
+
+                Intent intent = new Intent(MainActivity.this, SelectRobo.class);
+                startActivity(intent);
+
 
             }
         });
