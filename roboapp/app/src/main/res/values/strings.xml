@@ -9,5 +9,6 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="label_setName">Please type in your name:</string>
     <string name="button_submit">submit</string>
+    <string name="title_activity_select_robo">SelectRobo</string>
 
 </resources>
