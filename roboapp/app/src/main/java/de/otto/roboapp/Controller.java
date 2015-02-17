@@ -9,7 +9,7 @@ import org.java_websocket.client.WebSocketClient;
 /**
  * Created by luca on 06.02.15.
  */
-public class I_Activity extends ActionBarActivity {
+public class Controller extends ActionBarActivity {
     public ServerController sc;
     public WebSocketClient wsc;
     private String serverIp;

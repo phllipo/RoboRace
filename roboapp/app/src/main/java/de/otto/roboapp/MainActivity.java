@@ -2,26 +2,17 @@ package de.otto.roboapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.wifi.p2p.WifiP2pManager;
-import android.os.Parcelable;
-import android.provider.SyncStateContract;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import org.java_websocket.client.WebSocketClient;
-import org.java_websocket.handshake.ServerHandshake;
-
-import java.io.Serializable;
 
 import static android.os.SystemClock.sleep;
 
 
-public class MainActivity extends I_Activity {
+public class MainActivity extends Controller {
 
     private String playerName;
     private String serverIP = "10.90.164.15";
@@ -45,7 +36,7 @@ public class MainActivity extends I_Activity {
                 playerName = t_playerName.getText().toString();
 
 
-                final ProgressDialog dialog;
+               final ProgressDialog dialog;
                 dialog = ProgressDialog.show(MainActivity.this, "Loading", "Connecting to Server...", true);
 
                 new Thread(new Runnable() {
@@ -69,15 +60,8 @@ public class MainActivity extends I_Activity {
                                 // Objekte in nächste Activity übergeben
                                 // Objekte, die übergeben werden sollen, müssen "Parcelable" implentieren
                                 Intent intent = new Intent(MainActivity.this, SelectRobo.class);
-/*
-                                Bundle bundle = new Bundle();
-                                bundle.putSerializable("serverController", (Serializable) sc);
-                                intent.putExtras(bundle);
 
-                                // intent.putExtra("playerName", playerName);
-                                //intent.putExtra("serverController", (Parcelable) sc);
-                                //intent.putExtra("WebServerConnector", (Parcelable) sc.getWsc());*/
-                                startActivity(intent);
+                               startActivity(intent);
                                 dialog.dismiss();
 
                             }

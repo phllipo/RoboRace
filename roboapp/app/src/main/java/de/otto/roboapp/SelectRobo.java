@@ -1,20 +1,14 @@
 package de.otto.roboapp;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.java_websocket.client.WebSocketClient;
-
 import java.util.ArrayList;
 
 
-public class SelectRobo extends I_Activity {
+public class SelectRobo extends Controller {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
