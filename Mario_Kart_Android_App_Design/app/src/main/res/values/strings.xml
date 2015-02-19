@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Mario_Kart_Android_App</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="Control_Left_Right" />
+    <string name="Control_Button_A" />
+    <string name="Control_Button_B">Das ist der Button B</string>
+    <string name="DSCRP_Background_Menu">Background vom Start Select Bereich</string>
+    <string name="DSCRP_Start_Button">Start Button</string>
+    <string name="DSCRP_Select_Button">Select Button</string>
+    <string name="DSCRP_Menu_Gear">Menü Rädchen</string>
+    <string name="DSCRP_Tacho">Tacho</string>
+    <string name="DSCRP_tachometer">Dies ist der Tachometer der im Hintergrund die Geschwindigkeit zeigen soll</string>
+
+</resources>
