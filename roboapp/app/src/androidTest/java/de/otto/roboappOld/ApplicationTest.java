@@ -1,4 +1,4 @@
-package de.otto.roboapp;
+package de.otto.roboappOld;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

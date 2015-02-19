@@ -1,14 +1,15 @@
-package de.otto.roboapp;
+package de.otto.roboappOld;
 
 import android.os.AsyncTask;
-import android.view.View;
 
 import java.util.Arrays;
 
 /**
  * Created by luca on 23.01.15.
+ * Diese Klasse wird zur Zeit, in der App nicht verwendet, wofür wird sie benötigt ?
  */
 public class ServerConnect extends AsyncTask<String, Void, Void> {
+
 
 
     private MainActivity mainActivity;

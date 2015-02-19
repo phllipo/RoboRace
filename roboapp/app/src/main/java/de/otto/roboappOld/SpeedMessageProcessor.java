@@ -1,4 +1,4 @@
-package de.otto.roboapp;
+package de.otto.roboappOld;
 
 import android.widget.TextView;
 
@@ -7,6 +7,8 @@ import org.json.JSONObject;
 
 /**
  * Created by luca on 23.01.15.
+ * Wird zur Zeit von der App nicht verwendet, soll zum Anzeigen der Geschwindigkeit dienen
+ *
  */
 public class SpeedMessageProcessor extends MessageProcessor {
     private final TextView speedField;

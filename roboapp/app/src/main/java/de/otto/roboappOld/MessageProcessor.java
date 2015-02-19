@@ -1,11 +1,9 @@
-package de.otto.roboapp;
+package de.otto.roboappOld;
 
 import android.app.Activity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Objects;
 
 /**
  * Created by luca on 23.01.15.

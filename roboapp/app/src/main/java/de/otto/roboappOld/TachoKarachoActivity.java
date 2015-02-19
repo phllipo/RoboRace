@@ -1,4 +1,4 @@
-package de.otto.roboapp;
+package de.otto.roboappOld;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -6,7 +6,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-
+/**
+ *
+ */
 public class TachoKarachoActivity extends ActionBarActivity {
 
 
@@ -17,7 +19,7 @@ public class TachoKarachoActivity extends ActionBarActivity {
         setContentView(R.layout.activity_tacho_karacho);
         TextView text_speed = (TextView)findViewById(R.id.speed);
         System.out.println("test");
-       // ServerController sc = new ServerController("10.90.170.33", "8887", text_speed, this);
+
     }
 
 
