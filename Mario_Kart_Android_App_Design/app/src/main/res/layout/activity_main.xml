@@ -1,0 +1,79 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity"
+    android:clickable="true">
+
+
+    <ImageView
+        android:id="@+id/ID_tachometer"
+        android:contentDescription="@string/DSCRP_tachometer"
+        android:src="@drawable/tachometer"
+        android:layout_width="1000dp"
+        android:layout_height="900dp"
+        tools:ignore="RtlHardcoded" />
+
+
+    <ImageView
+        android:id="@+id/ID_Left_Right"
+        android:contentDescription="@string/Control_Left_Right"
+        android:src="@drawable/left_right"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        tools:ignore="RtlHardcoded"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:id="@+id/ID_Button_A"
+        android:contentDescription="@string/Control_Button_A"
+        android:src="@drawable/button_a"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        tools:ignore="RtlHardcoded"
+        android:layout_toStartOf="@+id/ID_Button_B"
+        android:layout_alignTop="@+id/ID_Button_B"
+        android:layout_toLeftOf="@+id/ID_Button_B"
+        android:layout_marginRight="30dp" />
+
+    <ImageView
+        android:id="@+id/ID_Button_B"
+        android:contentDescription="@string/Control_Button_B"
+        android:src="@drawable/button_b"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        tools:ignore="RtlHardcoded"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toLeftOf="@+id/ID_Background_Menu" />
+
+    <ImageView
+        android:id="@+id/ID_Background_Menu"
+        android:contentDescription="@string/DSCRP_Background_Menu"
+        android:src="@drawable/background"
+        android:layout_width="210dp"
+        android:layout_height="210dp"
+        tools:ignore="RtlHardcoded"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ID_Left_Right" />
+
+    <ImageView
+        android:id="@+id/ID_Menu_Gear"
+        android:contentDescription="@string/DSCRP_Menu_Gear"
+        android:src="@drawable/menu_gear"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        tools:ignore="RtlHardcoded"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>
