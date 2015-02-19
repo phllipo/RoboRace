@@ -7,7 +7,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 /**
- *
+ *die
  */
 public class TachoKarachoActivity extends ActionBarActivity {
 
