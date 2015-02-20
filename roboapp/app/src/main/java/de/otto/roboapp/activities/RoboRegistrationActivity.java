@@ -1,25 +1,23 @@
 package de.otto.roboapp.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.os.DropBoxManager;
 import android.view.View;
-import android.widget.Adapter;
+
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+
+
 
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
 import de.otto.roboapp.model.Player;
 import de.otto.roboapp.model.Robo;
 
-public class RoboRegistrationActivity extends Activity {
+public class RoboRegistrationActivity extends AbstractUpdatableActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +31,7 @@ public class RoboRegistrationActivity extends Activity {
         // Weitere ListView oder GridView erstellen, um die Map(Elemente) nicht clickable zu machen
 
 
-         selectRoboList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        selectRoboList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -49,7 +47,7 @@ public class RoboRegistrationActivity extends Activity {
         }
         for (HashMap.Entry<Player, Robo> map :
                 roboAppController.getDataModel().getPlayerToRoboAssignmentMap().entrySet()) {
-            adapter.add(map.getKey().getName() + " : " +  map.getValue().getName());
+            adapter.add(map.getKey().getName() + " : " + map.getValue().getName());
         }
         /* Schleife um Map Werte von RoboList Werten zu unterscheiden und diese ggf. notClickable zu machen
         eine andere Alternative ist es eine weitere ListView zu erzeugen und die Map in dieser abzuspeichern.
@@ -63,7 +61,15 @@ public class RoboRegistrationActivity extends Activity {
                     selectRoboList.setClickable(false);
                 }
 
+
             }
-        }*/
+      */
         selectRoboList.setAdapter(adapter);
-}}
+    }
+
+    @Override
+    public void updateActivity() {
+
+    }
+}
+
