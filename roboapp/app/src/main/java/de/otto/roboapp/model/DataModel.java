@@ -45,6 +45,14 @@ public class DataModel {
         return playerToRoboAssignmentMap;
     }
 
+    public void clearPlayerList () {
+        playerList.clear();
+    }
+
+    public void clearRoboList() {
+        roboList.clear();
+    }
+
     /* Füge Player dem Array hinzu */
     public void addPlayerToArray(String playername) {
         currentPlayerName = playername;

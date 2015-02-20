@@ -27,6 +27,11 @@ public class RoboAppController extends Application implements ActivityMontitor {
     public void handleClientInformationFromJson(JSONArray jsonClientInfoArray) throws JSONException {
         String type;
         String name;
+        dataModel.clearPlayerList();
+        dataModel.clearRoboList();
+
+        // For testing
+        dataModel.createTestData();
 
         for (int i = 0; i < jsonClientInfoArray.length(); i++) {
             type = jsonClientInfoArray.getJSONObject(i).getJSONObject("clientObject").getString("type");
