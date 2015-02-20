@@ -10,5 +10,14 @@
     <string name="label_setName">Please type in your name:</string>
     <string name="button_submit">submit</string>
     <string name="title_activity_select_robo">SelectRobo</string>
+    <string name="Control_Left_Right" />
+    <string name="Control_Button_A" />
+    <string name="Control_Button_B">Das ist der Button B</string>
+    <string name="DSCRP_Background_Menu">Background vom Start Select Bereich</string>
+    <string name="DSCRP_Start_Button">Start Button</string>
+    <string name="DSCRP_Select_Button">Select Button</string>
+    <string name="DSCRP_Menu_Gear">Menü Rädchen</string>
+    <string name="DSCRP_Tacho">Tacho</string>
+    <string name="DSCRP_tachometer">Dies ist der Tachometer der im Hintergrund die Geschwindigkeit zeigen soll</string>
 
 </resources>

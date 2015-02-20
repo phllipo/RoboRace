@@ -14,13 +14,18 @@
             android:name="de.otto.roboapp.activities.PlayerRegistrationActivity"
             android:label="@string/app_name" >
 
+
+        </activity>
+        <activity android:name="de.otto.roboapp.activities.RoboRegistrationActivity"
+                  android:label="@string/app_name" />
+
+        <activity android:name="de.otto.roboapp.activities.SteeringActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="de.otto.roboapp.activities.RoboRegistrationActivity"
-                  android:label="@string/app_name" />
 
     </application>
 
