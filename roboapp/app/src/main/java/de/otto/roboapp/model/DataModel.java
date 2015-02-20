@@ -47,6 +47,10 @@ public class DataModel {
 
     }
 
+    public void addRoboToArray(String roboname) {
+        roboList.add(new Robo(roboname));
+    }
+
     public void assignPlayerToRobo(String roboName){
         playerToRoboAssignmentMap.put(getPlayerfromString(currenPlayer), getRobofromString(roboName));
         System.out.println("Test" + playerToRoboAssignmentMap.isEmpty());
