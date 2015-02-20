@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import de.otto.roboapp.R;
+
 public class SelectRobo extends Controller {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import org.java_websocket.client.WebSocketClient;
 
+import de.otto.roboapp.R;
+
 import static android.os.SystemClock.sleep;
 
 public class MainActivity extends Controller {
