@@ -18,11 +18,13 @@ public class RoboAppController extends Application {
 
     public void playerNameEntered(final String playerName, final OnFinishedCallback onFinishedCallback) {
         serverController = new ServerController("10.0.2.2", "8888");
+       dataModel.addPlayerToArray(playerName);
 
         serverController.startWebserverConnector(new OnConnectionEstablished() {
             @Override
             public void connectionEstablished() {
                 serverController.sendMsg("{\"eventType\": \"connect\", \"data\": {\"clientType\": \"app\", \"name\": \"" + playerName + "\", \"ready\": \"false\" }}\"");
+
                 onFinishedCallback.onFinished();
 
             }
@@ -33,6 +35,11 @@ public class RoboAppController extends Application {
             }
         }); //langlaufend
 
+
+    }
+
+    public void assignPlayerToRobo(String roboName) {
+        dataModel.assignPlayerToRobo(roboName);
 
     }
 }

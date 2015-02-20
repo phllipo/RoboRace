@@ -3,7 +3,7 @@ package de.otto.roboapp.model;
 
 public class Robo {
 
-    String name;
+   private String name;
 
     public Robo(String name) {
         this.name = name;
