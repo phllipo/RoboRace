@@ -1,21 +1,17 @@
 package de.otto.roboapp.model;
 
-import android.support.annotation.NonNull;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.StringTokenizer;
 
 public class DataModel {
     String serverIp;
     List<Robo> roboList;
     List<Player> playerList;
-    Map<Player, Robo> mappingPlayerToRobo;
+    Map<Player, Robo> playerToRoboAssignmentMap;
     String currenPlayer;
 
 
@@ -23,16 +19,24 @@ public class DataModel {
     public DataModel() {
         roboList = new ArrayList<Robo>();
         playerList = new ArrayList<Player>();
-        mappingPlayerToRobo = new HashMap<Player, Robo>();
+        playerToRoboAssignmentMap = new HashMap<Player, Robo>();
 
-        addRoboToArray();
+        createTestData();
    }
 
     /* Füge verschiedene Roboter dem Array hinzu */
-    public void addRoboToArray() {
+    public void createTestData() {
+        Player ari = new Player("Ari");
+        playerList.add(ari);
+        Player luca = new Player("Luca");
+        playerList.add(luca);
 
-       roboList.add(new Robo("Supermaschine"));
-       roboList.add(new Robo("Hammer"));
+        Robo supermaschine = new Robo("Supermaschine");
+        roboList.add(supermaschine);
+        roboList.add(new Robo("Hammer"));
+
+        playerToRoboAssignmentMap.put(ari, supermaschine);
+
 
     }
 
@@ -44,8 +48,8 @@ public class DataModel {
     }
 
     public void assignPlayerToRobo(String roboName){
-        mappingPlayerToRobo.put(getPlayerfromString(currenPlayer), getRobofromString(roboName));
-        System.out.println("Test" + mappingPlayerToRobo.isEmpty());
+        playerToRoboAssignmentMap.put(getPlayerfromString(currenPlayer), getRobofromString(roboName));
+        System.out.println("Test" + playerToRoboAssignmentMap.isEmpty());
 
     }
     public Robo getRobofromString(String name) {

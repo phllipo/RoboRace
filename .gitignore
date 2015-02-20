@@ -2,5 +2,5 @@
 /build/**
 /test-output/**
 .idea/**
-roboapp.iml
-app/app.iml
+roboapp/roboapp.iml
+roboapp/app/app.iml
