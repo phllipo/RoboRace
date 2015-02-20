@@ -36,7 +36,7 @@ public class RoboAppController extends Application {
     }
 
     /* Eingehende Nachrichten vom Server im JSON-Format auseinander nehmen und weiter verarbeiten */
-    public void handleJsonMessage(JSONObject json) {
+    private void handleJsonMessage(JSONObject json) {
         try {
             String eventType = json.get("eventType").toString();
             System.out.println("EVENTTYPE: " + eventType);
@@ -68,7 +68,7 @@ public class RoboAppController extends Application {
         }, new  OnMessage() {
             @Override
             public void messageReceived(JSONObject message) {
-                //entsprechen model aufrufen
+                handleJsonMessage(message);
             }
         }); //langlaufend
 

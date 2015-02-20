@@ -138,7 +138,6 @@ public class ServerController {
                         System.out.println("no valid JSON: " + message);
                     }
                     System.out.println("Received Message: " + message);
-                    sendJsonMessageToController(msgJSON);
                     onMessage.messageReceived(msgJSON);
                 }
 
