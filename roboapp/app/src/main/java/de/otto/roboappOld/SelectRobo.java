@@ -13,7 +13,7 @@ public class SelectRobo extends Controller {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_robo);
+        setContentView(R.layout.activity_robo_registration);
         TextView t = (TextView) findViewById(R.id
                 .selectRobo_playerName);
         ListView selectRoboList = (ListView) findViewById(R.id.selectRobo_roboList);
