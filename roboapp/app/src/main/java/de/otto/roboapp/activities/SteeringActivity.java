@@ -14,7 +14,7 @@ import de.otto.roboapp.model.SteeringDirection;
 import static de.otto.roboapp.util.ThreadStarter.processInNewThread;
 
 
-public class SteeringActivityAbstract extends AbstractUpdatableActivity {
+public class SteeringActivity extends AbstractUpdatableActivity {
 
 
     @Override

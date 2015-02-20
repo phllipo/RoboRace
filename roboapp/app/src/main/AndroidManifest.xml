@@ -22,7 +22,7 @@
         <activity android:name=".activities.RoboRegistrationActivity"
                   android:label="@string/app_name" />
 
-        <activity android:name=".activities.SteeringActivityAbstract"
+        <activity android:name=".activities.SteeringActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden">
