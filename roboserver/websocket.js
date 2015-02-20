@@ -18,13 +18,12 @@ module.exports = {
         });
 
         ws.on('message', function incoming(message) {
-            console.log('received: %s', message);
-
+        
             try {
               var jsonMessage = JSON.parse(message);
-              console.log('received: %s', jsonMessage.eventType);
+              console.log('received: %s, Message: %s', jsonMessage.eventType, message);
             } catch (e) {
-              console.log("not a valid json message");
+              console.log("not a valid json message: " + e);
               return;
             }
 

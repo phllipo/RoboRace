@@ -23,7 +23,7 @@ public class RoboAppController extends Application {
         serverController.startWebserverConnector(new OnConnectionEstablished() {
             @Override
             public void connectionEstablished() {
-                serverController.sendMsg("{\"eventType\": \"connect\", \"data\": {\"clientType\": \"app\", \"name\": \"" + playerName + "\", \"ready\": \"false\" }}\"");
+                serverController.sendMsg("{\"eventType\": \"connect\", \"data\": {\"clientType\": \"app\", \"name\": \"" + playerName + "\", \"ready\": \"false\" }}");
 
                 onFinishedCallback.onFinished();
 

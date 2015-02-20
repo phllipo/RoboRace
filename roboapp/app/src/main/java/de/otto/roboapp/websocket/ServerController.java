@@ -138,6 +138,7 @@ public class ServerController implements Serializable {
                     } catch (JSONException e) {
                         System.out.println("no valid JSON: " + message);
                     }
+                    System.out.println("Received Message: " + message);
                     onMessage.messageReceived(msgJSON);
                 }
 
