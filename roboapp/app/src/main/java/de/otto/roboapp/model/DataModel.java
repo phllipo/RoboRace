@@ -34,10 +34,13 @@ public class DataModel {
         Robo supermaschine = new Robo("Supermaschine");
         roboList.add(supermaschine);
         roboList.add(new Robo("Hammer"));
-
         playerToRoboAssignmentMap.put(ari, supermaschine);
 
 
+    }
+
+    public Map<Player, Robo> getPlayerToRoboAssignmentMap() {
+        return playerToRoboAssignmentMap;
     }
 
     /* Füge Player dem Array hinzu */
