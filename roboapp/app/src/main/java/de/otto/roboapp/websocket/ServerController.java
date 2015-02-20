@@ -106,11 +106,7 @@ public class ServerController {
 
         }
     }
-
-    private void sendJsonMessageToController(JSONObject json) {
-        controller.handleJsonMessage(json);
-    }
-
+    
     public void startWebserverConnector(final OnConnectionEstablished onConnectionEstablished,
                                         final OnMessage onMessage) {
         try {

@@ -1,6 +1,5 @@
 package de.otto.roboapp.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,12 +8,13 @@ import android.widget.TextView;
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
 import de.otto.roboapp.model.DataModel;
+import de.otto.roboapp.model.RacingData;
 import de.otto.roboapp.model.SteeringDirection;
 
 import static de.otto.roboapp.util.ThreadStarter.processInNewThread;
 
 
-public class SteeringActivity extends Activity {
+public class SteeringActivity extends AbstractUpdatableActivity {
 
 
     @Override
@@ -55,9 +55,14 @@ public class SteeringActivity extends Activity {
 
     public void displayModel(DataModel dataModel) {
         final TextView t_textViewSpeed = (TextView) findViewById(R.id.ID_Speed);
-        int speed = 100;//dataModel.getSpeedOfCurrentPlayer()
+        RacingData racingData = dataModel.getRacingData();
+        int speed = (racingData != null) ? racingData.getCurrentSpeed() : -999;
         t_textViewSpeed.setText(String.valueOf(speed));
     }
 
 
+    @Override
+    public void updateActivity() {
+        displayModel(((RoboAppController)getApplicationContext()).getDataModel());
+    }
 }
