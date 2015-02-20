@@ -12,7 +12,9 @@ public class DataModel {
     List<Robo> roboList;
     List<Player> playerList;
     Map<Player, Robo> playerToRoboAssignmentMap;
-    String currenPlayer;
+    String currentPlayerName;
+
+    RacingData racingData;
 
 
     /* Array zum abspeichern der verfügbaren Roboter */
@@ -53,7 +55,7 @@ public class DataModel {
 
     /* Füge Player dem Array hinzu */
     public void addPlayerToArray(String playername) {
-        currenPlayer = playername;
+        currentPlayerName = playername;
         playerList.add(new Player(playername));
 
     }
@@ -63,7 +65,7 @@ public class DataModel {
     }
 
     public void assignPlayerToRobo(String roboName){
-        playerToRoboAssignmentMap.put(getPlayerfromString(currenPlayer), getRobofromString(roboName));
+        playerToRoboAssignmentMap.put(getPlayerfromString(currentPlayerName), getRobofromString(roboName));
         System.out.println("Test" + playerToRoboAssignmentMap.isEmpty());
 
     }
@@ -98,4 +100,7 @@ public class DataModel {
     }
 
 
+    public RacingData getRacingData() {
+        return racingData;
+    }
 }

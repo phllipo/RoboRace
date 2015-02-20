@@ -1,8 +1,6 @@
 package de.otto.roboapp.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.os.DropBoxManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,14 +8,13 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
 import de.otto.roboapp.model.Player;
 import de.otto.roboapp.model.Robo;
 
-public class RoboRegistrationActivity extends Activity {
+public class RoboRegistrationActivity extends AbstractUpdatableActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +46,11 @@ public class RoboRegistrationActivity extends Activity {
         }
         selectRoboList.setAdapter(adapter);
 
+
+    }
+
+    @Override
+    public void updateActivity() {
 
     }
 

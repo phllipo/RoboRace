@@ -1,6 +1,5 @@
 package de.otto.roboapp.activities;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +15,7 @@ import de.otto.roboapp.R;
 import static de.otto.roboapp.util.ThreadStarter.processInNewThread;
 
 
-public class PlayerRegistrationActivity extends Activity {
+public class PlayerRegistrationActivity extends AbstractUpdatableActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,5 +51,10 @@ public class PlayerRegistrationActivity extends Activity {
                 });
             }
         });
+    }
+
+    @Override
+    public void updateActivity() {
+
     }
 }
