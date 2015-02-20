@@ -14,11 +14,9 @@ var processConnect = function(connectedClients, connectedClient, jsonMessage){
                 }
             }
         }
-        //console.log(connectedClient.type);
     },
     processSpeed = function(roboclient, jsonMessage){
         roboclient.data.speed = jsonMessage.data.speed;
-        //console.log(connectedClient.speed);
     },
     processRoboSelected = function(appclient, jsonMessage, datamodel){
         var controlledRobot = datamodel.getClientByName(jsonMessage.data.robo);
