@@ -4,6 +4,7 @@ import android.app.Application;
 import org.json.JSONObject;
 
 import de.otto.roboapp.model.DataModel;
+import de.otto.roboapp.model.SteeringDirection;
 import de.otto.roboapp.util.OnFinishedCallback;
 import de.otto.roboapp.websocket.ServerController;
 
@@ -41,5 +42,9 @@ public class RoboAppController extends Application {
     public void assignPlayerToRobo(String roboName) {
         dataModel.assignPlayerToRobo(roboName);
 
+    }
+
+    public void steer(SteeringDirection steeringDirection) {
+        serverController.sendMsg("{\"eventType\": \"move\", \"data\": {\"direction\": \"" + steeringDirection + "\"}}");
     }
 }
