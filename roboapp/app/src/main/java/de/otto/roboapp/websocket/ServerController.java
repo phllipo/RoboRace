@@ -15,29 +15,33 @@ import java.net.URISyntaxException;
 
 import de.otto.roboapp.OnConnectionEstablished;
 import de.otto.roboapp.OnMessage;
+import de.otto.roboapp.RoboAppController;
 import de.otto.roboappOld.SpeedMessageProcessor;
 
 /**
  * Created by luca on 09.01.15.
  */
 
-public class ServerController implements Serializable {
+public class ServerController {
+    private RoboAppController controller;
     private String serverIp;
     private String serverPort;
     private String clientName;
     private WebSocketClient wsc;
 
     /* Konstruktor ServerController */
-    public ServerController(String serverIp, String serverPort, String clientName) {
+    public ServerController(String serverIp, String serverPort, String clientName, RoboAppController rap) {
         setServerIp(serverIp);
         setServerPort(serverPort);
         this.clientName = clientName;
+        controller = rap;
 
     }
     /* Konstruktor ServerController ohne ClientName */
-    public ServerController(String serverIp, String serverPort) {
+    public ServerController(String serverIp, String serverPort, RoboAppController rap) {
         setServerIp(serverIp);
         setServerPort(serverPort);
+        controller = rap;
 
         //startWebserverConnector();
     }
@@ -103,12 +107,8 @@ public class ServerController implements Serializable {
         }
     }
 
-    /* Was macht diese Methode ? */
-    public void processMsg(String msg) throws JSONException {
-        JSONObject msgJSON = new JSONObject(msg);
-        if (msgJSON.getString("eventType").equals("speed")) {
-            new SpeedMessageProcessor(speed).process(msgJSON, getUIActivity());
-        }
+    private void sendJsonMessageToController(JSONObject json) {
+        controller.handleJsonMessage(json);
     }
 
     public void startWebserverConnector(final OnConnectionEstablished onConnectionEstablished,
@@ -128,16 +128,16 @@ public class ServerController implements Serializable {
                     }
                 }
 
-                /* App benutz onMessage nicht*/
                 @Override
                 public void onMessage(String message) {
                     JSONObject msgJSON = null;
                     try {
-                        //processMsg(message);
+
                         msgJSON = new JSONObject(message);
                     } catch (JSONException e) {
                         System.out.println("no valid JSON: " + message);
                     }
+                    System.out.println("Received Message: " + message);
                     onMessage.messageReceived(msgJSON);
                 }
 

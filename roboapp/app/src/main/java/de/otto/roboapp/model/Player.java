@@ -2,7 +2,7 @@ package de.otto.roboapp.model;
 
 
 public class Player {
-    String name;
+   private String name;
 
   public Player () {
 

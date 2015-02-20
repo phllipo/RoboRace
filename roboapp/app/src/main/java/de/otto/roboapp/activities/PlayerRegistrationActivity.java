@@ -2,7 +2,6 @@ package de.otto.roboapp.activities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +12,8 @@ import android.widget.TextView;
 import de.otto.roboapp.RoboAppController;
 import de.otto.roboapp.util.OnFinishedCallback;
 import de.otto.roboapp.R;
+
+import static de.otto.roboapp.util.ThreadStarter.processInNewThread;
 
 
 public class PlayerRegistrationActivity extends Activity {
@@ -31,19 +32,24 @@ public class PlayerRegistrationActivity extends Activity {
                 final String playerName = t_playerName.getText().toString();
 
                 final ProgressDialog dialog = ProgressDialog.show(PlayerRegistrationActivity.this, "Loading", "Connecting to Server...", true);
-                new Thread(new Runnable() {
+                processInNewThread(new Runnable() {
                     @Override
                     public void run() {
                         roboAppController.playerNameEntered(playerName, new OnFinishedCallback() {
                             @Override
                             public void onFinished() {
-                                Intent intent = new Intent(PlayerRegistrationActivity.this, RoboRegistrationActivity.class);
-                                startActivity(intent);
-                                dialog.dismiss();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Intent intent = new Intent(PlayerRegistrationActivity.this, RoboRegistrationActivity.class);
+                                        startActivity(intent);
+                                        dialog.dismiss();
+                                    }
+                                });
                             }
                         });
                     }
-                }).start();
+                });
             }
         });
     }
