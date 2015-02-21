@@ -9,7 +9,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.Map;
 
 
 import de.otto.roboapp.R;
@@ -23,36 +23,37 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_robo_registration);
-
+          /* TODO
+         
+            roboPlayerListAdapter wird noch nicht angezeigt, Layout Problematik.
+         */
 
         final RoboAppController roboAppController = (RoboAppController) getApplicationContext();
-        final ListView selectRoboList = (ListView) findViewById(R.id.selectRobo_roboList);
-        //TODO
-        // Weitere ListView oder GridView erstellen, um die Map(Elemente) nicht clickable zu machen
+        final ListView roboSelectList = (ListView) findViewById(R.id.selectRobo_roboList);
+        final ListView  roboPlayerMapList = (ListView) findViewById(R.id.roboRegistration_mapList);
 
-
-        selectRoboList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        roboSelectList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                roboAppController.assignPlayerToRobo(selectRoboList.getItemAtPosition(position).toString());
+                roboAppController.assignPlayerToRobo(roboSelectList.getItemAtPosition(position).toString());
 
 
             }
+
         });
         ArrayAdapter<String> adapter;
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
         for (Robo robo : roboAppController.getDataModel().getRoboList()) {
             adapter.add(robo.getName());
         }
+        ArrayAdapter<String> mapArrayAdapter;
+        mapArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
         for (HashMap.Entry<Player, Robo> map :
                 roboAppController.getDataModel().getPlayerToRoboAssignmentMap().entrySet()) {
-            adapter.add(map.getKey().getName() + " : " + map.getValue().getName());
+            mapArrayAdapter.add(map.getKey().getName() + " : " + map.getValue().getName());
         }
-        /* Schleife um Map Werte von RoboList Werten zu unterscheiden und diese ggf. notClickable zu machen
-        eine andere Alternative ist es eine weitere ListView zu erzeugen und die Map in dieser abzuspeichern.
-        Um diese eigenständig nicht clickable zu machen
-         */
+
        /* for(int i = 0; i < adapter.getCount(); i++) {
             Object obj = adapter.getItem(i);
 
@@ -64,7 +65,8 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
 
             }
       */
-        selectRoboList.setAdapter(adapter);
+        roboSelectList.setAdapter(adapter);
+        roboPlayerMapList.setAdapter(mapArrayAdapter);
     }
 
     @Override

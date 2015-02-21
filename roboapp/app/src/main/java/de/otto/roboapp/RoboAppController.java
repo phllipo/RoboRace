@@ -78,7 +78,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
 
 
     public void playerNameEntered(final String playerName, final OnFinishedCallback onFinishedCallback) {
-        serverController = new ServerController("10.90.162.171", "8888", this);
+        serverController = new ServerController("10.0.2.1", "8888", this);
         dataModel.addPlayerToArray(playerName);
 
         serverController.startWebserverConnector(new OnConnectionEstablished() {
