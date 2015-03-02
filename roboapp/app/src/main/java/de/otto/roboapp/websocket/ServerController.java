@@ -1,110 +1,40 @@
 package de.otto.roboapp.websocket;
 
-import android.app.Activity;
-import android.widget.ListView;
-import android.widget.TextView;
-
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.channels.NotYetConnectedException;
 
 import de.otto.roboapp.OnConnectionEstablished;
 import de.otto.roboapp.OnMessage;
-import de.otto.roboapp.RoboAppController;
-import de.otto.roboappOld.SpeedMessageProcessor;
-
-/**
- * Created by luca on 09.01.15.
- */
 
 public class ServerController {
-    private RoboAppController controller;
     private String serverIp;
     private String serverPort;
-    private String clientName;
     private WebSocketClient wsc;
 
-    /* Konstruktor ServerController */
-    public ServerController(String serverIp, String serverPort, String clientName, RoboAppController rap) {
-        setServerIp(serverIp);
-        setServerPort(serverPort);
-        this.clientName = clientName;
-        controller = rap;
-
-    }
     /* Konstruktor ServerController ohne ClientName */
-    public ServerController(String serverIp, String serverPort, RoboAppController rap) {
-        setServerIp(serverIp);
-        setServerPort(serverPort);
-        controller = rap;
+    public ServerController(String serverIp, String serverPort) {
+        this.serverIp = serverIp;
+        this.serverPort = serverPort;
 
-        //startWebserverConnector();
     }
-        /* Initialisieren einer ListView für die Roboter-Liste,
-         die an den Server gegebene wird
-          */
-    private ListView selectRoboList;
-
-    /* Setter für RoboList
-     */
-    public void setSelectRoboList(ListView selectRoboList) {
-        this.selectRoboList = selectRoboList;
-    }
-
-    private Activity UIActivity;
-
-    public static TextView speed;
-
-    /* Getter UIActivity */
-    public Activity getUIActivity() {
-        return UIActivity;
-    }
-
-    /* Setter UIActivity */
-    public void setUIActivity(Activity UIActivity) {
-        this.UIActivity = UIActivity;
-    }
-
 
     /* Getter ServerPort */
     public String getServerPort() {
         return serverPort;
     }
-    /* Setter ServerPort */
-    public void setServerPort(String serverPort) {
-        this.serverPort = serverPort;
-    }
-
         /* Getter ServerIP */
     public String getServerIp() {
         return serverIp;
     }
-        /* Setter ServerIP */
-    public void setServerIp(String serverIp) {
-        this.serverIp = serverIp;
-    }
-        /* getter ClientName */
-    public String getClientName() {
-        return clientName;
-    }
-        /*Setter ClientName */
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
 
-    /* Wofür wird das benötigt ??? */
-
-    public void sendMsg(String msg) {
-        try {
-            wsc.send(msg);
-        } catch (Exception e) {
-
-        }
+    public void sendMsg(String msg) throws NotYetConnectedException {
+        wsc.send(msg);
     }
     
     public void startWebserverConnector(final OnConnectionEstablished onConnectionEstablished,
@@ -114,7 +44,6 @@ public class ServerController {
             System.out.println("connect to " + serverURI.toString());
             wsc = new WebSocketClient(serverURI) {
                 @Override
-                    /* App benutz onOpen nicht*/
                 public void onOpen(ServerHandshake handshakedata) {
                     try {
                         System.out.println("connection established");
