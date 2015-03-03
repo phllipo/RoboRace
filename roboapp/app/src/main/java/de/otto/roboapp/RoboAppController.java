@@ -13,6 +13,7 @@ import de.otto.roboapp.model.RacingData;
 import de.otto.roboapp.model.SteeringDirection;
 import de.otto.roboapp.util.OnFinishedCallback;
 import de.otto.roboapp.websocket.ServerController;
+import de.otto.roboapp.websocket.WebSocketListener;
 
 public class RoboAppController extends Application implements ActivityMontitor {
     DataModel dataModel = new DataModel();
@@ -81,7 +82,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
         serverController = new ServerController("10.0.2.1", "8888");
         dataModel.addPlayerToArray(playerName);
 
-        serverController.startWebserverConnector(new OnConnectionEstablished() {
+        serverController.connect(new WebSocketListener() {
             @Override
             public void connectionEstablished() {
                 serverController.sendMsg("{\"eventType\": \"connect\", \"data\": {\"clientType\": \"app\", \"name\": \"" + playerName + "\", \"ready\": \"false\" }}");
@@ -89,12 +90,22 @@ public class RoboAppController extends Application implements ActivityMontitor {
                 onFinishedCallback.onFinished();
 
             }
-        }, new OnMessage() {
+
+            @Override
+            public void connectionEstablishmentFailed(String reason) {
+                onFinishedCallback.onFailed(reason);
+            }
+
             @Override
             public void messageReceived(JSONObject message) {
                 handleJsonMessage(message);
             }
-        }); //langlaufend
+
+            @Override
+            public void connectionClosed(String reason) {
+                //show message and jump to first activity;
+            }
+        });
 
 
     }

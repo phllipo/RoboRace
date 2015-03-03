@@ -9,13 +9,11 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.channels.NotYetConnectedException;
 
-import de.otto.roboapp.OnConnectionEstablished;
-import de.otto.roboapp.OnMessage;
-
 public class ServerController {
     private String serverIp;
     private String serverPort;
     private WebSocketClient wsc;
+    private ConnectionState connectionState = ConnectionState.NOT_CONNECTED;
 
     /* Konstruktor ServerController ohne ClientName */
     public ServerController(String serverIp, String serverPort) {
@@ -37,52 +35,68 @@ public class ServerController {
         wsc.send(msg);
     }
     
-    public void startWebserverConnector(final OnConnectionEstablished onConnectionEstablished,
-                                        final OnMessage onMessage) {
-        try {
-            URI serverURI = new URI("ws://" + getServerIp() + ":" + getServerPort());
-            System.out.println("connect to " + serverURI.toString());
-            wsc = new WebSocketClient(serverURI) {
-                @Override
-                public void onOpen(ServerHandshake handshakedata) {
-                    try {
-                        System.out.println("connection established");
-                        onConnectionEstablished.connectionEstablished();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onMessage(String message) {
-                    JSONObject msgJSON = null;
-                    try {
-
-                        msgJSON = new JSONObject(message);
-                    } catch (JSONException e) {
-                        System.out.println("no valid JSON: " + message);
-                    }
-                    System.out.println("Received Message: " + message);
-                    onMessage.messageReceived(msgJSON);
-                }
-
-                @Override
-                public void onClose(int code, String reason, boolean remote) {
-                    System.out.println("onClose Reason: " + reason);
-                }
-
-                @Override
-                public void onError(Exception ex) {
-                    ex.printStackTrace();
-                }
-            };
-            wsc.connect();
-
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
+    public void connect(final WebSocketListener listener) {
+        URI serverURI = createUri();
+        if(connectionState != ConnectionState.NOT_CONNECTED) {
+            throw new IllegalStateException("Connection cant be opened. Connection is currently in state: " + connectionState);
         }
+        connectionState = ConnectionState.CONNECTING;
+
+        System.out.println("ServerController: Trying to connect to " + serverURI.toString());
+        wsc = new WebSocketClient(serverURI) {
+            @Override
+            public void onOpen(ServerHandshake handshakedata) {
+                connectionState = ConnectionState.CONNECTED;
+                System.out.println("ServerController: Connection established");
+                listener.connectionEstablished();
+            }
+
+            @Override
+            public void onMessage(String message) {
+                JSONObject msgJSON;
+                try {
+                    msgJSON = new JSONObject(message);
+                    System.out.println("ServerController: Message received: " + message);
+                    listener.messageReceived(msgJSON);
+                } catch (JSONException e) {
+                    System.out.println("ServerController: Message received and discarded, because it contained no valid JSON: " + message);
+                }
+            }
+
+            @Override
+            public void onClose(int code, String reason, boolean remote) {
+                String closeReason = "Reason: " + reason + ", code: " + code + ", remote: " + remote;
+                if (connectionState == ConnectionState.CONNECTING) {
+                    listener.connectionEstablishmentFailed(closeReason);
+                } else {
+                   listener.connectionClosed(closeReason);
+                }
+                connectionState = ConnectionState.NOT_CONNECTED;
+                wsc.close();
+                wsc = null;
+                System.out.println("ServerController: Connection closed. Reason: " + reason + ", code: " + code + ", remote: " + remote);
+            }
+
+            @Override
+            public void onError(Exception ex) {
+                System.out.println("ServerController: Error received: " + ex.getMessage());
+                ex.printStackTrace();
+            }
+        };
+        wsc.connect();
     }
 
+    private URI createUri() {
+        URI serverURI;
+        String uriString = null;
+        try {
+            uriString = "ws://" + getServerIp() + ":" + getServerPort();
+            serverURI = new URI(uriString);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException("ServerController: Not a valid URI: " + uriString);
+        }
+        return serverURI;
+    }
 
 
 }
