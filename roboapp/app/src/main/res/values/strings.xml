@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">RoboRace</string>
-    <string name="welcome">Welcome, please select your Robo</string>
+    <string name="welcome">Welcome NAMESPLACEHOLDER, please select your Robo</string>
 
     <string name="action_settings">Settings</string>
     <string name="speed">0</string>

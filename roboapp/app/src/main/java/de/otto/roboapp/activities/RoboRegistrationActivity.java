@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
@@ -21,6 +22,10 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
         final RoboAppController roboAppController = (RoboAppController) getApplicationContext();
 
         final ListView roboSelectList = (ListView) findViewById(R.id.selectRobo_roboList);
+        String welcomeMessage = getResources().getString(R.string.welcome);
+        welcomeMessage.replace("NAMEPLACEHOLDER", "test");
+        ((TextView) findViewById(R.id.selectRobo_playerName)).setText(welcomeMessage);
+
         final ListView unassignedPlayer = (ListView) findViewById(R.id.unassignedRoboList);
         RoboListAdapter roboListAdapter = new RoboListAdapter(this);
         PlayerListAdapter playerListAdapter = new PlayerListAdapter(this);
