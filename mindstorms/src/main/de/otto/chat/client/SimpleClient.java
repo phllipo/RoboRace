@@ -1,4 +1,4 @@
-package de.otto.roborace.network.client;
+package de.otto.chat.client;
 
 import java.awt.Container;
 import java.awt.GridLayout;
