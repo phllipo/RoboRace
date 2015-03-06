@@ -1,4 +1,4 @@
-package de.otto.roborace.network.server;
+package de.otto.chat.server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,7 +8,6 @@ import java.net.UnknownHostException;
 import java.util.Collection;
 import org.java_websocket.WebSocket;
 import org.java_websocket.WebSocketImpl;
-import org.java_websocket.framing.Framedata;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 /**
