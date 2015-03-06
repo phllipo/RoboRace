@@ -1,0 +1,240 @@
+Index: app/src/main/res/layout/grid_single.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/grid_single.xml	(revision )
++++ app/src/main/res/layout/grid_single.xml	(revision )
+@@ -0,0 +1,13 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:orientation="vertical" android:layout_width="match_parent"
++    android:layout_height="match_parent">
++    <TextView
++        android:id="@+id/grid_text"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginTop="15dp"
++        android:textSize="9sp" >
++    </TextView>
++
++</LinearLayout>
+\ No newline at end of file
+Index: app/src/main/java/de/otto/roboapp/model/DataModel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/de/otto/roboapp/model/DataModel.java	(revision a28d08956f7eb3745fb59e3843002c735585656a)
++++ app/src/main/java/de/otto/roboapp/model/DataModel.java	(revision )
+@@ -38,10 +38,7 @@
+         roboList.add(new Robo("Hammer"));
+         playerToRoboAssignmentMap.put(ari, supermaschine);
+ 
+-
+     }
+-
+-
+ 
+     public Map<Player, Robo> getPlayerToRoboAssignmentMap() {
+         return playerToRoboAssignmentMap;
+Index: app/src/main/res/layout/activity_robo_registration.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_robo_registration.xml	(revision a28d08956f7eb3745fb59e3843002c735585656a)
++++ app/src/main/res/layout/activity_robo_registration.xml	(revision )
+@@ -23,11 +23,15 @@
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentStart="true" />
+ 
+-     <ListView
+-         android:layout_width="wrap_content"
+-         android:layout_height="wrap_content"
++        <GridView
++            android:numColumns="auto_fit"
++            android:gravity="center"
++            android:columnWidth="100dp"
++            android:stretchMode="columnWidth"
++            android:layout_width="fill_parent"
++            android:layout_height="fill_parent"
+-         android:id="@+id/roboRegistration_mapList"
++            android:id="@+id/roboRegistration_mapList"
+-         android:layout_alignParentLeft="true"/>
++            />
+ 
+ 
+     </LinearLayout>
+\ No newline at end of file
+Index: ../roboserver/server.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ../roboserver/server.js	(revision a28d08956f7eb3745fb59e3843002c735585656a)
++++ ../roboserver/server.js	(revision )
+@@ -1,0 +1,0 @@
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main.xml	(revision a28d08956f7eb3745fb59e3843002c735585656a)
++++ app/src/main/res/layout/activity_main.xml	(revision )
+@@ -29,5 +29,16 @@
+         android:id="@+id/btn_submit_playerName"
+         android:layout_below="@+id/playerName"
+         android:layout_centerHorizontal="true" />
++    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
++        android:id="@+id/roboRegistration_mapList"
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:columnWidth="90dp"
++        android:numColumns="auto_fit"
++        android:verticalSpacing="10dp"
++        android:horizontalSpacing="10dp"
++        android:stretchMode="columnWidth"
++        android:gravity="center"
++        />
+ 
+ </RelativeLayout>
+Index: app/src/main/java/de/otto/roboapp/model/RoboListAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/de/otto/roboapp/model/RoboListAdapter.java	(revision )
++++ app/src/main/java/de/otto/roboapp/model/RoboListAdapter.java	(revision )
+@@ -0,0 +1,67 @@
++package de.otto.roboapp.model;
++
++import android.app.Activity;
++import android.content.Context;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.BaseAdapter;
++import android.widget.ImageView;
++import android.widget.LinearLayout;
++import android.widget.TextView;
++
++import org.w3c.dom.Text;
++
++import java.util.List;
++
++import de.otto.roboapp.R;
++import de.otto.roboapp.RoboAppController;
++import de.otto.roboapp.activities.RoboRegistrationActivity;
++import de.otto.roboapp.activities.UpdatableActivity;
++
++/**
++ * Created by ariga on 04.03.15.
++ */
++public class RoboListAdapter extends BaseAdapter {
++    private Activity activity;
++    private RoboAppController roboAppController;
++
++    public RoboListAdapter(Activity activity) {
++        this.activity = activity;
++        roboAppController  = (RoboAppController) activity.getApplicationContext();
++
++    }
++
++    @Override
++    public int getCount() {
++        return  roboAppController.getDataModel().getRoboList().size();
++    }
++
++    @Override
++    public Object getItem(int position) {
++        return null;
++    }
++
++    @Override
++    public long getItemId(int position) {
++        return 0;
++    }
++
++    @Override
++    public View getView(int position, View convertView, ViewGroup parent) {
++
++        LinearLayout linearLayout = new LinearLayout(activity);
++        linearLayout.s
++
++        TextView textViewSpieler = new TextView(activity);
++        TextView textViewRobo = new TextView(activity);
++
++        String nameDesRobo = roboAppController.getDataModel().getRoboList().get(position).getName();
++        textViewRobo.setText(nameDesRobo);
++        textViewSpieler.setText("Name des Spielers");
++
++
++        return linearLayout;
++
++    }
++}
+Index: app/src/main/java/de/otto/roboapp/activities/RoboRegistrationActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/de/otto/roboapp/activities/RoboRegistrationActivity.java	(revision a28d08956f7eb3745fb59e3843002c735585656a)
++++ app/src/main/java/de/otto/roboapp/activities/RoboRegistrationActivity.java	(revision )
+@@ -9,11 +9,11 @@
+ 
+ import java.util.ArrayList;
+ import java.util.HashMap;
+-import java.util.Map;
+ 
+ 
+ import de.otto.roboapp.R;
+ import de.otto.roboapp.RoboAppController;
++import de.otto.roboapp.model.RoboListAdapter;
+ import de.otto.roboapp.model.Player;
+ import de.otto.roboapp.model.Robo;
+ 
+@@ -24,14 +24,14 @@
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_robo_registration);
+           /* TODO
+-         
+-            roboPlayerListAdapter wird noch nicht angezeigt, Layout Problematik.
++             roboPlayerListAdapter wird noch nicht angezeigt, Layout Problematik.
+          */
+ 
+         final RoboAppController roboAppController = (RoboAppController) getApplicationContext();
+         final ListView roboSelectList = (ListView) findViewById(R.id.selectRobo_roboList);
+-        final ListView  roboPlayerMapList = (ListView) findViewById(R.id.roboRegistration_mapList);
++        RoboListAdapter roboListAdapter = new RoboListAdapter(this);
+ 
++
+         roboSelectList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+             @Override
+             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+@@ -42,11 +42,9 @@
+             }
+ 
+         });
+-        ArrayAdapter<String> adapter;
+-        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
+-        for (Robo robo : roboAppController.getDataModel().getRoboList()) {
+-            adapter.add(robo.getName());
+-        }
++
++
++
+         ArrayAdapter<String> mapArrayAdapter;
+         mapArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
+         for (HashMap.Entry<Player, Robo> map :
+@@ -65,8 +63,8 @@
+ 
+             }
+       */
+-        roboSelectList.setAdapter(adapter);
+-        roboPlayerMapList.setAdapter(mapArrayAdapter);
++        roboSelectList.setAdapter(roboListAdapter);
++        // roboPlayerMapList.setAdapter(mapArrayAdapter);
+     }
+ 
+     @Override

@@ -3,21 +3,14 @@ package de.otto.roboapp.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
 
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
 import de.otto.roboapp.model.PlayerListAdapter;
-import de.otto.roboapp.model.RoboListAdapter;
-import de.otto.roboapp.model.Player;
 import de.otto.roboapp.model.Robo;
+import de.otto.roboapp.model.RoboListAdapter;
 
 public class RoboRegistrationActivity extends AbstractUpdatableActivity {
 
@@ -25,11 +18,8 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_robo_registration);
-          /* TODO
-             unassignedPlayer Liste wird noch nicht angezeigt
-         */
-
         final RoboAppController roboAppController = (RoboAppController) getApplicationContext();
+
         final ListView roboSelectList = (ListView) findViewById(R.id.selectRobo_roboList);
         final ListView unassignedPlayer = (ListView) findViewById(R.id.unassignedRoboList);
         RoboListAdapter roboListAdapter = new RoboListAdapter(this);
