@@ -38,10 +38,7 @@ public class DataModel {
         roboList.add(new Robo("Hammer"));
         playerToRoboAssignmentMap.put(ari, supermaschine);
 
-
     }
-
-
 
     public Map<Player, Robo> getPlayerToRoboAssignmentMap() {
         return playerToRoboAssignmentMap;
@@ -99,6 +96,10 @@ public class DataModel {
     public List<Robo> getRoboList() {
 
         return roboList;
+    }
+
+    public  List<Player> getPlayerList() {
+        return  playerList;
     }
 
 

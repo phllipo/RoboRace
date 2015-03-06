@@ -9,11 +9,11 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
+import de.otto.roboapp.model.RoboListAdapter;
 import de.otto.roboapp.model.Player;
 import de.otto.roboapp.model.Robo;
 
@@ -24,13 +24,13 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_robo_registration);
           /* TODO
-         
-            roboPlayerListAdapter wird noch nicht angezeigt, Layout Problematik.
+             roboPlayerListAdapter wird noch nicht angezeigt, Layout Problematik.
          */
 
         final RoboAppController roboAppController = (RoboAppController) getApplicationContext();
         final ListView roboSelectList = (ListView) findViewById(R.id.selectRobo_roboList);
-        final ListView  roboPlayerMapList = (ListView) findViewById(R.id.roboRegistration_mapList);
+        RoboListAdapter roboListAdapter = new RoboListAdapter(this);
+
 
         roboSelectList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -42,11 +42,9 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
             }
 
         });
-        ArrayAdapter<String> adapter;
-        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
-        for (Robo robo : roboAppController.getDataModel().getRoboList()) {
-            adapter.add(robo.getName());
-        }
+
+
+
         ArrayAdapter<String> mapArrayAdapter;
         mapArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
         for (HashMap.Entry<Player, Robo> map :
@@ -65,8 +63,8 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
 
             }
       */
-        roboSelectList.setAdapter(adapter);
-        roboPlayerMapList.setAdapter(mapArrayAdapter);
+        roboSelectList.setAdapter(roboListAdapter);
+        // roboPlayerMapList.setAdapter(mapArrayAdapter);
     }
 
     @Override

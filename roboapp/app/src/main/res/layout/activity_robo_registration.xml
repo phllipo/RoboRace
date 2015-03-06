@@ -23,11 +23,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-     <ListView
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:id="@+id/roboRegistration_mapList"
-         android:layout_alignParentLeft="true"/>
+        <GridView
+            android:numColumns="auto_fit"
+            android:gravity="center"
+            android:columnWidth="100dp"
+            android:stretchMode="columnWidth"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/roboRegistration_mapList"
+            />
 
 
     </LinearLayout>
