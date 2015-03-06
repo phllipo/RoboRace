@@ -1,5 +1,6 @@
 package de.otto.roboapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -37,8 +38,12 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Robo clickedRobo = (Robo)roboSelectList.getItemAtPosition(position);
-                roboAppController.assignPlayerToRobo("bubu", clickedRobo.getName());
+                roboAppController.roboSelected(clickedRobo.getName());
                 System.out.println("clicked robo " + clickedRobo.getName());
+
+                Intent intent = new Intent(RoboRegistrationActivity.this, SteeringActivity.class);
+                startActivity(intent);
+
 
             }
 

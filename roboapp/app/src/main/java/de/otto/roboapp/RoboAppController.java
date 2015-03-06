@@ -25,9 +25,6 @@ public class RoboAppController extends Application implements ActivityMontitor {
         return dataModel;
     }
 
-    public void sendLocalPlayerToRoboAssignment(String roboName){
-
-    }
 
 
     public void handleClientInformationFromJson(JSONArray jsonClientInfoArray) throws JSONException {
@@ -37,7 +34,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
         dataModel.clearRoboList();
 
         // For testing
-        dataModel.createTestData();
+        // dataModel.createTestData();
 
         for (int i = 0; i < jsonClientInfoArray.length(); i++) {
             type = jsonClientInfoArray.getJSONObject(i).getJSONObject("clientObject").getString("type");
@@ -47,7 +44,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
                 dataModel.addPlayerToArray(name);
                 if(jsonClientInfoArray.getJSONObject(i).getJSONObject("clientObject").getString("selectedRobo") != null){
                     JSONObject selectedRoboObject = jsonClientInfoArray.getJSONObject(i).getJSONObject("clientObject").getJSONObject("selectedRobo");
-                    assignPlayerToRobo(name, selectedRoboObject.getString("name"));
+                    dataModel.assignPlayerToRobo(name, selectedRoboObject.getString("name"));
                     System.out.println("IFAEOIFAOIFAIFAOINFWOIAON " +name+" " +selectedRoboObject.getString("name"));
                 }
             } else if (type.equals("robo")) {
@@ -92,7 +89,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
 
 
     public void playerNameEntered(final String playerName, final OnFinishedCallback onFinishedCallback) {
-        serverController = new ServerController("10.0.2.1", "8888");
+        serverController = new ServerController("10.90.160.41", "8888");
         dataModel.addPlayerToArray(playerName);
 
         serverController.connect(new WebSocketListener() {
@@ -123,9 +120,11 @@ public class RoboAppController extends Application implements ActivityMontitor {
 
     }
 
-    public void assignPlayerToRobo(String playerName, String roboName) {
-        dataModel.assignPlayerToRobo(playerName, roboName);
+    public void roboSelected(String roboName) {
+        serverController.sendMsg("{ \"eventType\": \"selectRobo\", \"data\": { \"robo\": \"" + roboName + "\" }}");
 
+        //testing:
+        dataModel.assignPlayerToRobo(dataModel.currentPlayerName, roboName);
     }
 
     public void steer(SteeringDirection steeringDirection) {

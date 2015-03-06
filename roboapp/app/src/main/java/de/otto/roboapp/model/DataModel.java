@@ -12,7 +12,7 @@ public class DataModel {
     List<Robo> roboList;
     List<Player> playerList;
     Map<Player, Robo> playerToRoboAssignmentMap;
-    String currentPlayerName;
+    public String currentPlayerName;
 
     RacingData racingData;
 
@@ -23,7 +23,7 @@ public class DataModel {
         playerList = new ArrayList<Player>();
         playerToRoboAssignmentMap = new HashMap<Player, Robo>();
 
-        createTestData();
+        //createTestData();
    }
 
     /* Füge verschiedene Roboter dem Array hinzu */

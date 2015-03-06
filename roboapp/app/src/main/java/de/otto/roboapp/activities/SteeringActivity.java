@@ -37,7 +37,7 @@ public class SteeringActivity extends AbstractUpdatableActivity {
             }
         });
 
-        final ImageView t_imageViewRight = (ImageView) findViewById(R.id.ID_Left);
+        final ImageView t_imageViewRight = (ImageView) findViewById(R.id.ID_Rigth);
         t_imageViewRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
