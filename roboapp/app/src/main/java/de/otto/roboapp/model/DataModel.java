@@ -14,7 +14,7 @@ public class DataModel {
     Map<Player, Robo> playerToRoboAssignmentMap;
     public String currentPlayerName;
 
-    RacingData racingData;
+    RacingData racingData = new RacingData();
 
 
     /* Array zum abspeichern der verfügbaren Roboter */

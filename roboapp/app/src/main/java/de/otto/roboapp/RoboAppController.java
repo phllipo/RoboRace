@@ -62,6 +62,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
             racingData.setCurrentSpeed(speed);
         }
 
+        System.out.println(currentActiveActivity.getClass());
         currentActiveActivity.updateActivityFromBgThread();
     }
 
