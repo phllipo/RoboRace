@@ -3,8 +3,18 @@ package de.otto.roboapp.model;
 
 public class Player {
    private String name;
+   private boolean assigned;
 
-  public Player () {
+    public boolean isAssigned() {
+        return assigned;
+    }
+
+    public void setAssigned(boolean assigned) {
+        this.assigned = assigned;
+    }
+
+    public Player () {
+      assigned = false;
 
   }
 
