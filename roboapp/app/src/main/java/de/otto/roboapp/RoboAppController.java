@@ -40,13 +40,14 @@ public class RoboAppController extends Application implements ActivityMontitor {
         dataModel.createTestData();
 
         for (int i = 0; i < jsonClientInfoArray.length(); i++) {
-            type = jsonClientInfoArray.getJSONObject(i).getJSONObject("clientObject").getString("type");
-            name = jsonClientInfoArray.getJSONObject(i).getJSONObject("clientObject").getString("name");
+            JSONObject clientObject = jsonClientInfoArray.getJSONObject(i).getJSONObject("clientObject");
+            type = clientObject.getString("type");
+            name = clientObject.getString("name");
 
             if (type.equals("app")) {
                 dataModel.addPlayerToArray(name);
-                if(jsonClientInfoArray.getJSONObject(i).getJSONObject("clientObject").getString("selectedRobo") != null){
-                    JSONObject selectedRoboObject = jsonClientInfoArray.getJSONObject(i).getJSONObject("clientObject").getJSONObject("selectedRobo");
+                if(clientObject.has("selectedRobo")){
+                    JSONObject selectedRoboObject = clientObject.getJSONObject("selectedRobo");
                     assignPlayerToRobo(name, selectedRoboObject.getString("name"));
                     System.out.println("IFAEOIFAOIFAIFAOINFWOIAON " +name+" " +selectedRoboObject.getString("name"));
                 }
