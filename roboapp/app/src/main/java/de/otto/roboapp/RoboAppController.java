@@ -25,6 +25,11 @@ public class RoboAppController extends Application implements ActivityMontitor {
         return dataModel;
     }
 
+    public void sendLocalPlayerToRoboAssignment(String roboName){
+
+    }
+
+
     public void handleClientInformationFromJson(JSONArray jsonClientInfoArray) throws JSONException {
         String type;
         String name;
@@ -40,6 +45,11 @@ public class RoboAppController extends Application implements ActivityMontitor {
 
             if (type.equals("app")) {
                 dataModel.addPlayerToArray(name);
+                if(jsonClientInfoArray.getJSONObject(i).getJSONObject("clientObject").getString("selectedRobo") != null){
+                    JSONObject selectedRoboObject = jsonClientInfoArray.getJSONObject(i).getJSONObject("clientObject").getJSONObject("selectedRobo");
+                    assignPlayerToRobo(name, selectedRoboObject.getString("name"));
+                    System.out.println("IFAEOIFAOIFAIFAOINFWOIAON " +name+" " +selectedRoboObject.getString("name"));
+                }
             } else if (type.equals("robo")) {
                 dataModel.addRoboToArray(name);
             }
@@ -56,6 +66,8 @@ public class RoboAppController extends Application implements ActivityMontitor {
         currentActiveActivity.updateActivityFromBgThread();
     }
 
+
+
     /* Eingehende Nachrichten vom Server im JSON-Format auseinander nehmen und weiter verarbeiten */
     private void handleJsonMessage(JSONObject json) {
         try {
@@ -67,7 +79,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
                     handleClientInformationFromJson(json.getJSONArray("data"));
                     break;
                 case "speed":
-                    handleSpeedFromJson((JSONObject) json.get("data"));
+                    handleSpeedFromJson(json.getJSONObject("data"));
                     break;
                 default:
                     System.out.println("no valid eventType: " + eventType);
@@ -76,6 +88,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
             e.printStackTrace();
         }
     }
+
 
 
     public void playerNameEntered(final String playerName, final OnFinishedCallback onFinishedCallback) {
@@ -110,8 +123,8 @@ public class RoboAppController extends Application implements ActivityMontitor {
 
     }
 
-    public void assignPlayerToRobo(String roboName) {
-        dataModel.assignPlayerToRobo(roboName);
+    public void assignPlayerToRobo(String playerName, String roboName) {
+        dataModel.assignPlayerToRobo(playerName, roboName);
 
     }
 

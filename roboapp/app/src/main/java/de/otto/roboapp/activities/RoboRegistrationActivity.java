@@ -36,7 +36,7 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                roboAppController.assignPlayerToRobo(roboSelectList.getItemAtPosition(position).toString());
+                roboAppController.sendLocalPlayerToRoboAssignment(roboSelectList.getItemAtPosition(position).toString());
 
 
             }
