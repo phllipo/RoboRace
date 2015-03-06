@@ -15,7 +15,9 @@ public abstract class AbstractUpdatableActivity extends Activity implements Upda
     @Override
     protected void onStop() {
         ActivityMontitor app = (ActivityMontitor)getApplication();
-        // app.setActiveActivity(null);
+        if(app.getActiveActivity() != null && app.getActiveActivity().equals(this)) {
+            app.setActiveActivity(null);
+        }
         super.onStop();
         System.out.println("onStop " + this.getLocalClassName());
     }
