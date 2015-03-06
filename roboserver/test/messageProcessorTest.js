@@ -41,8 +41,6 @@ describe('messageProcessor', function(){
             messageProccesor.processRoboSelected(appclient, jsonMessage, datamodel);
             // then
             assert.equal("rob0ne", appclient.data.selectedRobo.name);
-            assert(selectedClient.webSocketConnection.send.called);
-            assert(appclient.webSocketConnection.send.called);
         })
     })
 })
