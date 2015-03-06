@@ -1,4 +1,5 @@
 var processConnect = function(connectedClients, connectedClient, jsonMessage){
+console.log("jsonMessage " + JSON.stringify(jsonMessage));
         connectedClient.data.name = jsonMessage.data.name;
         connectedClient.data.type = jsonMessage.data.clientType;
         connectedClient.data.ready = jsonMessage.data.ready;
@@ -21,19 +22,7 @@ var processConnect = function(connectedClients, connectedClient, jsonMessage){
     processRoboSelected = function(appclient, jsonMessage, datamodel){
         var controlledRobot = datamodel.getClientByName(jsonMessage.data.robo);
         appclient.data.selectedRobo = controlledRobot.data;
-        controlledRobot.data.controlledBy = appclient.data.name;
-        controlledRobot.webSocketConnection.send(JSON.stringify( {
-            eventType: "selectedBy",
-            data: {
-                playerName: appclient.name 
-            }
-        }));  
-        appclient.webSocketConnection.send(JSON.stringify( {
-            eventType: "assignment",
-            data: {
-               roboName: controlledRobot.name 
-           } 
-        })); 
+        controlledRobot.data.controlledBy = appclient.data.name;        
     },
     processReady = function(appclient, jsonMessage){
         appclient.data.ready = jsonMessage.data.ready;
