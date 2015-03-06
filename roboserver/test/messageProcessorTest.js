@@ -3,7 +3,7 @@ var assert = require('assert'),
     messageProccesor = require('../messageProcessor.js');
 
 describe('messageProcessor', function(){
-    describe('connect', function(){     
+    describe('connect', function(){
         it('should takeover the values into the client connection', function(){
             // given
             var connectedClient = {"data": {}},
@@ -31,7 +31,7 @@ describe('messageProcessor', function(){
             // given
             var appclient = {"webSocketConnection": {send: sinon.spy()}, "data": {"clientType": "app", "name": "Sascha"}},
                 selectedClient = {"webSocketConnection": {send: sinon.spy()}, "data": {"clientType": "robo", "name": "rob0ne"}},
-                jsonMessage = { "eventType": "selectRobo", "data": { "robo": "rob0ne"}},
+                jsonMessage = { "eventType": "selectRobo", "data": { "playerName": "steffen", "roboName": "rob0ne" }},
                 datamodel = {
                     getClientByName: function(){
                         return selectedClient;
@@ -41,8 +41,6 @@ describe('messageProcessor', function(){
             messageProccesor.processRoboSelected(appclient, jsonMessage, datamodel);
             // then
             assert.equal("rob0ne", appclient.data.selectedRobo.name);
-            assert(selectedClient.webSocketConnection.send.called);
-            assert(appclient.webSocketConnection.send.called);
         })
     })
 })

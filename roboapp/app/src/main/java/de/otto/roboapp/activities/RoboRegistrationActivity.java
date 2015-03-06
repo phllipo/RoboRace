@@ -1,5 +1,6 @@
 package de.otto.roboapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -37,8 +38,14 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
         roboSelectList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        roboAppController.sendLocalPlayerToRoboAssignment(roboSelectList.getItemAtPosition(position).toString());
-            }
+                Robo clickedRobo = (Robo)roboSelectList.getItemAtPosition(position);
+                roboAppController.roboSelected(clickedRobo.getName());
+                System.out.println("clicked robo " + clickedRobo.getName());
+
+                Intent intent = new Intent(RoboRegistrationActivity.this, SteeringActivity.class);
+                startActivity(intent);
+
+           }
 
         });
 

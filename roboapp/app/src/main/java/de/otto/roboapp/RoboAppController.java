@@ -25,9 +25,6 @@ public class RoboAppController extends Application implements ActivityMontitor {
         return dataModel;
     }
 
-    public void sendLocalPlayerToRoboAssignment(String roboName){
-
-    }
 
 
     public void handleClientInformationFromJson(JSONArray jsonClientInfoArray) throws JSONException {
@@ -37,17 +34,19 @@ public class RoboAppController extends Application implements ActivityMontitor {
         dataModel.clearRoboList();
 
         // For testing
-        dataModel.createTestData();
+        // dataModel.createTestData();
 
         for (int i = 0; i < jsonClientInfoArray.length(); i++) {
-            type = jsonClientInfoArray.getJSONObject(i).getJSONObject("clientObject").getString("type");
-            name = jsonClientInfoArray.getJSONObject(i).getJSONObject("clientObject").getString("name");
+            JSONObject clientObject = jsonClientInfoArray.getJSONObject(i).getJSONObject("clientObject");
+            type = clientObject.getString("type");
+            name = clientObject.getString("name");
 
             if (type.equals("app")) {
                 dataModel.addPlayerToArray(name);
-                if(jsonClientInfoArray.getJSONObject(i).getJSONObject("clientObject").getString("selectedRobo") != null){
-                    JSONObject selectedRoboObject = jsonClientInfoArray.getJSONObject(i).getJSONObject("clientObject").getJSONObject("selectedRobo");
-                    assignPlayerToRobo(name, selectedRoboObject.getString("name"));
+
+                if(clientObject.has("selectedRobo")){
+                    JSONObject selectedRoboObject = clientObject.getJSONObject("selectedRobo");
+                    dataModel.assignPlayerToRobo(name, selectedRoboObject.getString("name"));
                     System.out.println("IFAEOIFAOIFAIFAOINFWOIAON " +name+" " +selectedRoboObject.getString("name"));
                 }
             } else if (type.equals("robo")) {
@@ -63,6 +62,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
             racingData.setCurrentSpeed(speed);
         }
 
+        System.out.println(currentActiveActivity.getClass());
         currentActiveActivity.updateActivityFromBgThread();
     }
 
@@ -123,9 +123,11 @@ public class RoboAppController extends Application implements ActivityMontitor {
 
     }
 
-    public void assignPlayerToRobo(String playerName, String roboName) {
-        dataModel.assignPlayerToRobo(playerName, roboName);
+    public void roboSelected(String roboName) {
+        serverController.sendMsg("{ \"eventType\": \"selectRobo\", \"data\": { \"robo\": \"" + roboName + "\" }}");
 
+        //testing:
+        dataModel.assignPlayerToRobo(dataModel.currentPlayerName, roboName);
     }
 
     public void steer(SteeringDirection steeringDirection) {
@@ -133,8 +135,13 @@ public class RoboAppController extends Application implements ActivityMontitor {
     }
 
     @Override
-    public void setActiveActivity(AbstractUpdatableActivity activity) {
+    public void setActiveActivity(UpdatableActivity activity) {
         currentActiveActivity = activity;
+    }
+
+    @Override
+    public UpdatableActivity getActiveActivity() {
+        return currentActiveActivity;
     }
 
 

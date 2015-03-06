@@ -39,7 +39,7 @@ public class RoboListAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return roboAppController.getDataModel().getRoboList().get(position);
     }
 
     @Override
@@ -57,9 +57,9 @@ public class RoboListAdapter extends BaseAdapter {
         TextView textViewRobo = new TextView(activity);
 
         String nameDesRobo = roboAppController.getDataModel().getRoboList().get(position).getName();
-        String nameDesSpielers = roboAppController.getDataModel().getPlayerList().get(position).getName();
+        //String nameDesSpielers = roboAppController.getDataModel().getPlayerList().get(position).getName();
         textViewRobo.setText(nameDesRobo);
-        textViewSpieler.setText(nameDesSpielers);
+        textViewSpieler.setText("test");
 
         linearLayout.addView(textViewRobo);
         linearLayout.addView(textViewSpieler);

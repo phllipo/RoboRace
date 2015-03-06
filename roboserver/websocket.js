@@ -38,6 +38,7 @@ module.exports = {
             }
             else if (jsonMessage.eventType === "selectRobo") {
               messageProcessor.processRoboSelected(connectedClient, jsonMessage, datamodel);
+              messageTransmitter.transmitClients(connectedClients);
             }
             else if (jsonMessage.eventType === "ready") {
               messageProcessor.processReady(connectedClient, jsonMessage);
