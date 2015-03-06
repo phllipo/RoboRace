@@ -66,8 +66,8 @@ public class DataModel {
         roboList.add(new Robo(roboname));
     }
 
-    public void assignPlayerToRobo(String roboName){
-        playerToRoboAssignmentMap.put(getPlayerfromString(currentPlayerName), getRobofromString(roboName));
+    public void assignPlayerToRobo(String playerName, String roboName){
+        playerToRoboAssignmentMap.put(getPlayerfromString(playerName), getRobofromString(roboName));
         System.out.println("Test" + playerToRoboAssignmentMap.isEmpty());
 
     }
