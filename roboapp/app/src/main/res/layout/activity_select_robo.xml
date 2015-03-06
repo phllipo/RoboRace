@@ -10,11 +10,9 @@
 
     tools:context="de.otto.roboapp.RoboRegistrationActivity.java">
 
-
-
     <TextView
         android:id="@+id/selectRobo_playerName"
-        android:text="@string/hello_world"
+        android:text="@string/welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -25,18 +23,9 @@
 
         android:layout_below="@+id/selectRobo_playerName"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignTop="@+id/selectRobo_roboList"
-        android:layout_alignRight="@+id/selectRobo_roboList"
-        android:layout_alignEnd="@+id/selectRobo_roboList"
-        android:layout_marginRight="127dp"
-        android:layout_marginEnd="127dp">
-
-        </LinearLayout>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:background="@color/abc_primary_text_material_dark" />
 
 </RelativeLayout>

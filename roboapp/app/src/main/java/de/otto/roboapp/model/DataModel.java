@@ -41,6 +41,7 @@ public class DataModel {
     }
 
     public Map<Player, Robo> getPlayerToRoboAssignmentMap() {
+
         return playerToRoboAssignmentMap;
     }
 
@@ -58,19 +59,20 @@ public class DataModel {
         playerList.add(new Player(playername));
 
     }
-
     public void addRoboToArray(String roboname) {
         roboList.add(new Robo(roboname));
     }
 
     public void assignPlayerToRobo(String playerName, String roboName){
+        getPlayerfromString(playerName).setAssigned(true);
         playerToRoboAssignmentMap.put(getPlayerfromString(playerName), getRobofromString(roboName));
         System.out.println("Test" + playerToRoboAssignmentMap.isEmpty());
+
+
 
     }
     public Robo getRobofromString(String name) {
         for (Robo robo : roboList) {
-
             if (name.equals(robo.getName())) {
 
                 return robo;
@@ -86,6 +88,16 @@ public class DataModel {
             }
         }
         return null;
+    }
+
+    public List<Player> getUnassignedPlayer() {
+        ArrayList<Player> unassignedPlayerList = new ArrayList<>();
+            for (Player player : playerList) {
+                 if(!playerToRoboAssignmentMap.containsKey(player)) {
+                  unassignedPlayerList.add(player);
+            }
+        }
+        return unassignedPlayerList;
     }
 
     /* Robolist Setter */

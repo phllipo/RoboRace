@@ -92,7 +92,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
 
 
     public void playerNameEntered(final String playerName, final OnFinishedCallback onFinishedCallback) {
-        serverController = new ServerController("10.90.160.41", "8888");
+        serverController = new ServerController("10.0.2.1", "8888");
         dataModel.addPlayerToArray(playerName);
 
         serverController.connect(new WebSocketListener() {
@@ -135,8 +135,13 @@ public class RoboAppController extends Application implements ActivityMontitor {
     }
 
     @Override
-    public void setActiveActivity(AbstractUpdatableActivity activity) {
+    public void setActiveActivity(UpdatableActivity activity) {
         currentActiveActivity = activity;
+    }
+
+    @Override
+    public UpdatableActivity getActiveActivity() {
+        return currentActiveActivity;
     }
 
 
