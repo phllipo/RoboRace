@@ -57,10 +57,11 @@ module.exports = {
           var disconnectedClient = getClientByWsConnection(ws);
           if(disconnectedClient.data.type === "robo") {
             console.log("robo losing connection");
-            var App = datamodel.getClientByName(disconnectedClient.data.controlledBy);
-            App.data.selectedRobo.name = App.data.selectedRobo.name + "(dc)";
-            App.data.selectedRobo.speed = 0;
-            App.data.ready = "waiting";
+            if (disconnectedClient.data.controlledBy) {
+	            var app = datamodel.getClientByName(disconnectedClient.data.controlledBy);
+	            app.data.selectedRobo = null;
+	            app.data.ready = "waiting";
+	        }
           }
           connectedClients.splice(connectedClients.indexOf(disconnectedClient), 1);
           messageTransmitter.transmitClients(connectedClients);
