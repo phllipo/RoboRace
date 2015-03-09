@@ -6,7 +6,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import de.otto.roboapp.activities.ActivityMontitor;
-import de.otto.roboapp.activities.AbstractUpdatableActivity;
 import de.otto.roboapp.activities.UpdatableActivity;
 import de.otto.roboapp.model.DataModel;
 import de.otto.roboapp.model.RacingData;
@@ -64,6 +63,9 @@ public class RoboAppController extends Application implements ActivityMontitor {
                 dataModel.addRoboToArray(name);
             }
         }
+        if (currentActiveActivity != null) {
+            currentActiveActivity.updateActivityFromBgThread();
+        }
     }
 
     private void handleSpeedFromJson(JSONObject data) throws JSONException {
@@ -73,8 +75,9 @@ public class RoboAppController extends Application implements ActivityMontitor {
             racingData.setCurrentSpeed(speed);
         }
 
-        System.out.println(currentActiveActivity.getClass());
-        currentActiveActivity.updateActivityFromBgThread();
+        if (currentActiveActivity != null) {
+            currentActiveActivity.updateActivityFromBgThread();
+        }
     }
 
 

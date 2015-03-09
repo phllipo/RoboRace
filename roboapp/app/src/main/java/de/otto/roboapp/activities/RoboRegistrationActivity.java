@@ -13,6 +13,9 @@ import de.otto.roboapp.model.Robo;
 
 public class RoboRegistrationActivity extends AbstractUpdatableActivity {
 
+    private RoboListAdapter roboListAdapter;
+    private PlayerListAdapter playerListAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +28,8 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
         ((TextView) findViewById(R.id.selectRobo_playerName)).setText(welcomeMessage);
 
         final ListView unassignedPlayer = (ListView) findViewById(R.id.unassignedRoboList);
-        RoboListAdapter roboListAdapter = new RoboListAdapter(this);
-        PlayerListAdapter playerListAdapter = new PlayerListAdapter(this);
+        roboListAdapter = new RoboListAdapter(this);
+        playerListAdapter = new PlayerListAdapter(this);
 
         roboSelectList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -48,7 +51,8 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
 
     @Override
     public void updateActivity() {
-
+        roboListAdapter.notifyDataSetChanged();
+        playerListAdapter.notifyDataSetChanged();
     }
 }
 
