@@ -25,7 +25,18 @@ public class RoboAppController extends Application implements ActivityMontitor {
         return dataModel;
     }
 
+    @Override
+    public void setActiveActivity(UpdatableActivity activity) {
+        currentActiveActivity = activity;
+    }
 
+    @Override
+    public UpdatableActivity getActiveActivity() {
+        return currentActiveActivity;
+    }
+
+
+    //-----------------------  Methods for processing events from backend -------------------//
 
     public void handleClientInformationFromJson(JSONArray jsonClientInfoArray) throws JSONException {
         String type;
@@ -90,6 +101,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
     }
 
 
+    //-----------------------  Methods for processing events from user -------------------//
 
     public void playerNameEntered(final String playerName, final OnFinishedCallback onFinishedCallback) {
         serverController = new ServerController("10.0.2.1", "8888");
@@ -134,15 +146,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
         serverController.sendMsg("{\"eventType\": \"move\", \"data\": {\"direction\": \"" + steeringDirection + "\"}}");
     }
 
-    @Override
-    public void setActiveActivity(UpdatableActivity activity) {
-        currentActiveActivity = activity;
-    }
 
-    @Override
-    public UpdatableActivity getActiveActivity() {
-        return currentActiveActivity;
-    }
 
 
 }
