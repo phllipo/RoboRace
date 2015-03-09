@@ -2,6 +2,7 @@ package de.otto.roborace.connection;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.channels.NotYetConnectedException;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
@@ -29,7 +30,7 @@ public class ServerController {
 		}
 		connectionState = ConnectionState.CONNECTING;
 
-		System.out.println("ServerController: Trying to connect to nothing");
+		System.out.println("ServerController: Trying to connect to server");
 
 		wsc = new WebSocketClient(serverURI) {
 			@Override
@@ -56,8 +57,13 @@ public class ServerController {
 				listener.connectionEstablishmentFailed(e.toString());
 			}
 		};
+		wsc.connect();
 
 
+	}
+
+	public void sendMsg(String msg) throws NotYetConnectedException {
+		wsc.send(msg);
 	}
 	private URI createUri() {
 		URI serverURI;
