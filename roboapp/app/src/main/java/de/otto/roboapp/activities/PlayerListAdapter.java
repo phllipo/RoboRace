@@ -1,4 +1,4 @@
-package de.otto.roboapp.model;
+package de.otto.roboapp.activities;
 
 import android.app.Activity;
 import android.view.View;

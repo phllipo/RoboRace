@@ -9,9 +9,7 @@ import android.widget.TextView;
 
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
-import de.otto.roboapp.model.PlayerListAdapter;
 import de.otto.roboapp.model.Robo;
-import de.otto.roboapp.model.RoboListAdapter;
 
 public class RoboRegistrationActivity extends AbstractUpdatableActivity {
 
