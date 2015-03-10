@@ -35,6 +35,7 @@ public class MotorController {
                     Motor.D.forward();
                     Motor.D.setSpeed((vel_t > 0) ? vel_t : vel_t * (-1));
                 }
+                //CF: Müsste hier nicht noch resetVelocity stehen?
             }
 
             // detect steering change
