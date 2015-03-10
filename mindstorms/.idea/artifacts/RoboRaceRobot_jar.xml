@@ -8,6 +8,7 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/lib-compile/testng-6.8.8.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib-compile/ev3classes.jar" path-in-jar="/" />
       <element id="library" level="project" name="java-json" />
+      <element id="library" level="module" name="java_websocket.jar" module-name="RoboRaceRobot" />
     </root>
   </artifact>
 </component>

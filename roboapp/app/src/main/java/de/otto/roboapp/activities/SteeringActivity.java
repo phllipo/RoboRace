@@ -31,6 +31,7 @@ public class SteeringActivity extends AbstractUpdatableActivity {
                 processInNewThread(new Runnable() {
                     @Override
                     public void run() {
+                        System.out.println("clicked left");
                         roboAppController.steer(SteeringDirection.LEFT);
                     }
                 });
@@ -44,7 +45,36 @@ public class SteeringActivity extends AbstractUpdatableActivity {
                 processInNewThread(new Runnable() {
                     @Override
                     public void run() {
+                        System.out.println("clicked right");
                         roboAppController.steer(SteeringDirection.RIGHT);
+                    }
+                });
+            }
+        });
+
+        final ImageView t_imageViewA = (ImageView) findViewById(R.id.ID_Button_A);
+        t_imageViewA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                processInNewThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        System.out.println("clicked a");
+                        roboAppController.steer(SteeringDirection.FORWARD);
+                    }
+                });
+            }
+        });
+
+        final ImageView t_imageViewB = (ImageView) findViewById(R.id.ID_Button_B);
+        t_imageViewB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                processInNewThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        System.out.println("clicked b");
+                        roboAppController.steer(SteeringDirection.BACKWARD);
                     }
                 });
             }

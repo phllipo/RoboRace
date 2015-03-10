@@ -23,8 +23,6 @@ public class ServerController {
 
 	public void connect(final WebSocketListener listener) {
 		URI serverURI = createUri();
-		System.out.println("Try to connect");
-
 		if(connectionState != ConnectionState.NOT_CONNECTED) {
 			throw new IllegalStateException("Connection cant be opened. Connection is currently in state: " + connectionState);
 		}
@@ -35,7 +33,9 @@ public class ServerController {
 		wsc = new WebSocketClient(serverURI) {
 			@Override
 			public void onOpen(ServerHandshake serverHandshake) {
+				connectionState = ConnectionState.CONNECTED;
 				listener.connectionEstablished();
+				// wsc.send("{\"eventType\": \"connect\", \"data\": {\"clientType\": \"robo\", \"name\": \"\" + roboName + \"\", \"ready\": \"false\" }}");
 			}
 
 			@Override
@@ -55,6 +55,7 @@ public class ServerController {
 			@Override
 			public void onError(Exception e) {
 				listener.connectionEstablishmentFailed(e.toString());
+				e.printStackTrace();
 			}
 		};
 		wsc.connect();
