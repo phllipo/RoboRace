@@ -18,7 +18,6 @@ public class MotorController {
                 controlMotors();
             }
         }).start();
-//        controlMotors();
     }
     private void controlMotors() {
         while (true) {
@@ -35,8 +34,7 @@ public class MotorController {
                     Motor.D.forward();
                     Motor.D.setSpeed((vel_t > 0) ? vel_t : vel_t * (-1));
                 }
-                //CF: M�sste hier nicht noch resetVelocity stehen?
-                //LB: Ja, da hast du recht
+                dataModel.resetVelocityChange();
             }
 
             // detect steering change
