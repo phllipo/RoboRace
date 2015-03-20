@@ -4,6 +4,7 @@ package de.otto.roboapp.model;
 public class Player {
    private String name;
    private boolean assigned;
+   private boolean status;
 
     public boolean isAssigned() {
         return assigned;
@@ -25,5 +26,13 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

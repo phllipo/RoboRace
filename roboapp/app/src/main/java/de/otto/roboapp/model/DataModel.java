@@ -12,10 +12,10 @@ public class DataModel {
     List<Robo> roboList;
     List<Player> playerList;
     Map<Player, Robo> playerToRoboAssignmentMap;
+
     public String currentPlayerName;
 
     RacingData racingData = new RacingData();
-
 
     /* Array zum abspeichern der verfügbaren Roboter */
     public DataModel() {
@@ -25,6 +25,7 @@ public class DataModel {
 
         //createTestData();
    }
+
 
     /* Füge verschiedene Roboter dem Array hinzu */
     public void createTestData() {
@@ -59,19 +60,20 @@ public class DataModel {
         playerList.add(new Player(playername));
 
     }
+
     public void addRoboToArray(String roboname) {
         roboList.add(new Robo(roboname));
     }
-
     public void assignPlayerToRobo(String playerName, String roboName){
-        getPlayerfromString(playerName).setAssigned(true);
-        playerToRoboAssignmentMap.put(getPlayerfromString(playerName), getRobofromString(roboName));
+        getPlayerByName(playerName).setAssigned(true);
+        playerToRoboAssignmentMap.put(getPlayerByName(playerName), getRoboByName(roboName));
         System.out.println("Test" + playerToRoboAssignmentMap.isEmpty());
 
 
 
     }
-    public Robo getRobofromString(String name) {
+
+    public Robo getRoboByName(String name) {
         for (Robo robo : roboList) {
             if (name.equals(robo.getName())) {
 
@@ -81,7 +83,7 @@ public class DataModel {
         return null;
 
     }
-    public Player getPlayerfromString(String name) {
+    public Player getPlayerByName(String name) {
         for (Player player : playerList) {
             if (name.equals(player.getName())) {
                 return player;
@@ -89,7 +91,6 @@ public class DataModel {
         }
         return null;
     }
-
     public List<Player> getUnassignedPlayer() {
         ArrayList<Player> unassignedPlayerList = new ArrayList<>();
             for (Player player : playerList) {
@@ -104,22 +105,24 @@ public class DataModel {
     public void setRoboList(ListView selectRoboList) {
 
     }
+
     /* RoboList Getter */
     public List<Robo> getRoboList() {
 
         return roboList;
     }
-
     public  List<Player> getPlayerList() {
         return  playerList;
     }
-
 
     public RacingData getRacingData() {
         return racingData;
     }
 
+
     public String getCurrentPlayerName() {
         return currentPlayerName;
     }
+
+
 }

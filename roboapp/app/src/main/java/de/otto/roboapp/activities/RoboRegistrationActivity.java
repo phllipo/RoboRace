@@ -30,6 +30,7 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
 
         final ListView roboSelectList = (ListView) findViewById(R.id.selectRobo_roboList);
         final ListView unassignedPlayer = (ListView) findViewById(R.id.unassignedRoboList);
+
         roboListAdapter = new RoboListAdapter(this);
         playerListAdapter = new PlayerListAdapter(this);
 
@@ -40,11 +41,16 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
                 roboAppController.roboSelected(clickedRobo.getName());
                 System.out.println("clicked robo " + clickedRobo.getName());
 
-                Intent intent = new Intent(RoboRegistrationActivity.this, SteeringActivity.class);
-                startActivity(intent);
-
+                //TODO
+                if((roboAppController.getDataModel().getPlayerByName(roboAppController.getDataModel().getCurrentPlayerName()).isStatus()) == true){
+                    //if alle ready:
+                    Intent intent = new Intent(RoboRegistrationActivity.this, SteeringActivity.class);
+                    startActivity(intent);
+                } else {
+                    //Placeholder
+                    System.out.println("unready");
+                }
            }
-
         });
 
         roboSelectList.setAdapter(roboListAdapter);
