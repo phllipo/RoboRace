@@ -1,8 +1,13 @@
-var processConnect = function(connectedClients, connectedClient, jsonMessage){
+var processConnect = function(connectedClient, jsonMessage){
 console.log("jsonMessage " + JSON.stringify(jsonMessage));
         connectedClient.data.name = jsonMessage.data.name;
         connectedClient.data.type = jsonMessage.data.clientType;
         connectedClient.data.ready = jsonMessage.data.ready;
+/*     
+        Code mit dem reconnectende Robos gefunden werden können
+        Damit dieser funktioniert muss der disconnect Code in websocket.js entsprechend angepasst werden
+        und connectedClients muss wieder in diese function übergeben werden.
+
         for(i in connectedClients) {
             var roboDCName = connectedClient.data.name + "(dc)";
             if(connectedClients.length > 1 && connectedClients[i].data.selectedRobo != undefined) {
@@ -14,7 +19,7 @@ console.log("jsonMessage " + JSON.stringify(jsonMessage));
                     connectedClients[i].data.ready = "true";
                 }
             }
-        }
+        }*/
     },
     processSpeed = function(roboclient, jsonMessage){
         roboclient.data.speed = jsonMessage.data.speed;

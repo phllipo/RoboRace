@@ -29,7 +29,7 @@ module.exports = {
 
             var connectedClient = getClientByWsConnection(ws);
             if (jsonMessage.eventType === "connect") {
-              messageProcessor.processConnect(connectedClients, connectedClient, jsonMessage);
+              messageProcessor.processConnect(connectedClient, jsonMessage);
               messageTransmitter.transmitClients(connectedClients);
             }
             else if (jsonMessage.eventType === "speed") {
