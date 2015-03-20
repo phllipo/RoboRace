@@ -25,9 +25,13 @@ var transmitClients = function(connectedClients){
 		controllingApp.webSocketConnection.send(JSON.stringify(speedData));
 	};
 	transmitMove = function(appclient, jsonMessage, datamodel) {
-		var controlledRoboName = appclient.data.selectedRobo.name,
-			controlledRobo = datamodel.getClientByName(controlledRoboName)
-		controlledRobo.webSocketConnection.send(JSON.stringify(jsonMessage));
+		if(appclient.data.selectedRobo) {
+			var controlledRoboName = appclient.data.selectedRobo.name,
+				controlledRobo = datamodel.getClientByName(controlledRoboName)
+			controlledRobo.webSocketConnection.send(JSON.stringify(jsonMessage));
+		} else {
+			console.log("Die sendende App hat zurzeit keinen Robo");
+		}
 	}
 
 module.exports = {
