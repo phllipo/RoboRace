@@ -1,12 +1,16 @@
 package de.otto.roborace.controller;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import de.otto.roborace.connection.ServerController;
 import de.otto.roborace.connection.WebSocketListener;
 import de.otto.roborace.model.DataModel;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static java.lang.Thread.sleep;
 
 /**
  * Created by luca on 06.03.15.
@@ -15,24 +19,33 @@ public class Controller {
     DataModel dataModel;
     ServerController serverController;
     MotorController motorController;
-    private String serverIp = "192.168.137.155";
-    private String serverPort = "8888";
-    private String roboName = "rob0ne";
+	private Properties properties;
 
     public Controller() {
+    	properties = loadProperties();
         dataModel = new DataModel();
-        establishConnection(roboName);
+        establishConnection();
         // motorController = new MotorController(dataModel);
     }
 
-    private void establishConnection(final String roboName) {
-        serverController = new ServerController(serverIp, serverPort);
+    private Properties loadProperties() {
+    	Properties properties = new Properties();
+		try {
+			properties.load(new FileInputStream("racerRobo.properties"));
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		return properties;
+	}
+
+	private void establishConnection() {
+        serverController = new ServerController(properties.getProperty("serverIp"), properties.getProperty("serverPort", "8888"));
 
         serverController.connect(new WebSocketListener() {
             @Override
             public void connectionEstablished() {
                 System.out.println("connected");
-                String connectMessage = "{\"eventType\": \"connect\", \"data\": {\"clientType\": \"robo\", \"name\": \"" + roboName + "\", \"ready\": \"false\" }}";
+                String connectMessage = "{\"eventType\": \"connect\", \"data\": {\"clientType\": \"robo\", \"name\": \"" + properties.getProperty("roboName") + "\", \"ready\": \"false\" }}";
 
                 System.out.println("sending conntect message: " + connectMessage);
                 serverController.sendMsg(connectMessage);

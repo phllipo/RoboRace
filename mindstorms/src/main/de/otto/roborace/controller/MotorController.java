@@ -20,6 +20,7 @@ public class MotorController {
         }).start();
     }
     private void controlMotors() {
+    	Motor.D.stop();//heat up motor code
         while (true) {
             // if velocityChange != 0, change velocity
             if(dataModel.getVelocityChange() != 0) {
@@ -41,6 +42,7 @@ public class MotorController {
             if(dataModel.getSteeringChange() != 0) {
                 System.out.println("steering change detected: " + dataModel.getSteeringChange());
                 Motor.C.rotate(-dataModel.getSteeringChange());
+                System.out.println("Motor.C.getPosition(): " + Motor.C.getPosition());
                 dataModel.resetSteeringChange();
             }
         }
