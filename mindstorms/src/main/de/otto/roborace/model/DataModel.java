@@ -5,34 +5,17 @@ package de.otto.roborace.model;
  */
 public class DataModel {
 	private static final int STEERING_MAX = 40;
-	private static final int VELOCITY_MIN = -300;
-	private static final int VELOCITY_MAX = 1500;
 
-	private int velocityChange;
-
-	public int getVelocityTotal() {
-		return velocityTotal;
-	}
-
-	private int velocityTotal;
 
 	private int steeringChange;
 	private int steeringTotal;
+	private int targetSpeed;
 
 	public DataModel() {
-		velocityChange = 0;
-		velocityTotal = 0;
 		steeringChange = 0;
 		steeringTotal = 0;
 	}
 
-	public void addVelocity(int v) {
-		if (velocityTotal + v >= VELOCITY_MIN && velocityTotal + v <= VELOCITY_MAX) {
-			velocityChange += v;
-			velocityTotal += v;
-		}
-		System.out.println("vel total: " + velocityTotal);
-	}
 
 	public void addSteering(int s) {
 		System.out.println("steeringTotal: " + steeringTotal + "s: " + s);
@@ -41,19 +24,22 @@ public class DataModel {
 		
 	}
 
-	public int getVelocityChange() {
-		return velocityChange;
-	}
 
 	public int getSteeringChange() {
 		return steeringChange;
 	}
-
-	public void resetVelocityChange() {
-		velocityChange = 0;
+	
+	public int getTargetSpeed() {
+		return targetSpeed;
 	}
+
 
 	public void resetSteeringChange() {
 		steeringChange = 0;
+	}
+
+	public void setTargetSpeed(int targetSpeed) {
+		this.targetSpeed = targetSpeed * 15;
+		
 	}
 }

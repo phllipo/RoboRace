@@ -97,34 +97,31 @@ public class Controller {
 
     }
 
-    private void changeVelocity(int v) {
-        // d < 1 --> slower, d > 1 --> faster
-        if(v >= 1) {
-            dataModel.addVelocity(-50);
-        } else {
-            dataModel.addVelocity(50);
-        }
-    }
 
+    private void changeSpeed(int speed) {
+    	dataModel.setTargetSpeed(speed);
+		
+	}
 
     private void moveMessageReceived(JSONObject data) throws JSONException {
-        String direction = data.getString("direction");
-
-        switch (direction) {
-            case "LEFT":
-                changeSteerDirection(0);
-                break;
-            case "RIGHT":
-                changeSteerDirection(1);
-                break;
-            case "FORWARD":
-                changeVelocity(1);
-                break;
-            case "BACKWARD":
-                changeVelocity(0);
-                break;
-            default:
-                System.out.println("no viable direction detected");
-        }
+    	if(data.has("speed")) {
+    		String speedString = data.getString("speed");
+    		changeSpeed(Integer.parseInt(speedString));
+    	} else {
+	        String direction = data.getString("direction");
+	
+	        switch (direction) {
+	            case "LEFT":
+	                changeSteerDirection(0);
+	                break;
+	            case "RIGHT":
+	                changeSteerDirection(1);
+	                break;
+	            default:
+	                System.out.println("no viable direction detected");
+	        }
+    	}
     }
+
+	
 }

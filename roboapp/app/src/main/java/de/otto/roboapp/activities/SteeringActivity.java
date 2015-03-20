@@ -3,6 +3,7 @@ package de.otto.roboapp.activities;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import de.otto.roboapp.R;
@@ -23,6 +24,33 @@ public class SteeringActivity extends AbstractUpdatableActivity {
         setContentView(R.layout.activity_steering);
 
         final RoboAppController roboAppController = (RoboAppController)getApplicationContext();
+
+        SeekBar speedSlider = (SeekBar) findViewById(R.id.ID_Speed_Slider);
+
+
+        speedSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, final int progress, boolean fromUser) {
+                processInNewThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        long targetSpeed = Math.round((progress - 20) * 1.25);
+                        System.out.println("slided to " + targetSpeed);
+                        roboAppController.steer(targetSpeed);
+                    }
+                });
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
         final ImageView t_imageViewLeft = (ImageView) findViewById(R.id.ID_Left);
         t_imageViewLeft.setOnClickListener(new View.OnClickListener() {

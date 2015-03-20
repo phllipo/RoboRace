@@ -7,7 +7,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".MainActivity"
-    android:clickable="true">
+    android:clickable="true"
+    android:background="@color/background_floating_material_dark">
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,7 +33,7 @@
         android:layout_width="90dp"
         android:layout_height="90dp"
         tools:ignore="RtlHardcoded"
-        android:layout_alignBottom="@+id/ID_Speed"
+        android:layout_above="@+id/ID_Left_Right"
         android:layout_alignRight="@+id/ID_Left_Right"
         android:layout_alignEnd="@+id/ID_Left_Right" />
 
@@ -66,9 +67,11 @@
         android:layout_width="90dp"
         android:layout_height="90dp"
         tools:ignore="RtlHardcoded"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/ID_Button_B"
-        android:layout_toStartOf="@+id/ID_Button_B" />
+        android:layout_above="@+id/ID_Button_B"
+        android:layout_toRightOf="@+id/ID_Speed"
+        android:layout_toEndOf="@+id/ID_Speed"
+        android:layout_marginLeft="41dp"
+        android:layout_marginStart="41dp" />
 
     <ImageView
         android:id="@+id/ID_Button_B"
@@ -78,9 +81,8 @@
         android:layout_height="90dp"
         tools:ignore="RtlHardcoded"
         android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toLeftOf="@+id/ID_Background_Menu" />
+        android:layout_alignLeft="@+id/ID_Button_A"
+        android:layout_alignStart="@+id/ID_Button_A" />
 
     <ImageView
         android:id="@+id/ID_Background_Menu"
@@ -102,6 +104,17 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <de.otto.roboapp.activities.VerticalSeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:id="@+id/ID_Speed_Slider"
+        android:progress="20"
+        android:layout_toStartOf="@+id/ID_Menu_Gear"
+        android:layout_alignTop="@+id/ID_Rigth"
+        android:layout_toLeftOf="@+id/ID_Menu_Gear"
+        android:background="@color/background_floating_material_dark"
+        android:splitTrack="false" />
 
 
 </RelativeLayout>

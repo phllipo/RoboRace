@@ -150,6 +150,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
     }
 
 
-
-
+    public void steer(long progress) {
+        serverController.sendMsg("{\"eventType\": \"move\", \"data\": {\"speed\": \"" + progress + "\"}}");
+    }
 }
