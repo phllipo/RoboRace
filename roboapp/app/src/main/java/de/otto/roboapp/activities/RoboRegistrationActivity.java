@@ -20,13 +20,15 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_robo_registration);
+
         final RoboAppController roboAppController = (RoboAppController) getApplicationContext();
+        String pname = roboAppController.getDataModel().getCurrentPlayerName();
+
+        String welcomeMessage = ((TextView) findViewById(R.id.selectRobo_playerName)).getText().toString();
+        String test = welcomeMessage.replace("NAMEPLACEHOLDER", pname);
+        ((TextView) findViewById(R.id.selectRobo_playerName)).setText(test);
 
         final ListView roboSelectList = (ListView) findViewById(R.id.selectRobo_roboList);
-        String welcomeMessage = getResources().getString(R.string.welcome);
-        welcomeMessage.replace("NAMEPLACEHOLDER", "test");
-        ((TextView) findViewById(R.id.selectRobo_playerName)).setText(welcomeMessage);
-
         final ListView unassignedPlayer = (ListView) findViewById(R.id.unassignedRoboList);
         roboListAdapter = new RoboListAdapter(this);
         playerListAdapter = new PlayerListAdapter(this);

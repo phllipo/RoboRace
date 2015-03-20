@@ -118,4 +118,8 @@ public class DataModel {
     public RacingData getRacingData() {
         return racingData;
     }
+
+    public String getCurrentPlayerName() {
+        return currentPlayerName;
+    }
 }
