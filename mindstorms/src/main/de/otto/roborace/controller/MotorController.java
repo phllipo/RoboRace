@@ -22,21 +22,6 @@ public class MotorController {
     private void controlMotors() {
     	Motor.D.stop();//heat up motor code
         while (true) {
-            // if velocityChange != 0, change velocity
-            /*if(dataModel.getVelocityChange() != 0) {
-                int vel_t = dataModel.getVelocityTotal();
-                System.out.println("velocity change detected: " + dataModel.getVelocityChange());
-                if(dataModel.getVelocityTotal() == 0) {
-                    Motor.D.stop();
-                } else if (dataModel.getVelocityTotal() > 0){
-                    Motor.D.backward();
-                    Motor.D.setSpeed((vel_t > 0) ? vel_t : vel_t * (-1));
-                } else if (dataModel.getVelocityTotal() < 0) {
-                    Motor.D.forward();
-                    Motor.D.setSpeed((vel_t > 0) ? vel_t : vel_t * (-1));
-                }
-                dataModel.resetVelocityChange();
-            }*/
         	if(dataModel.getTargetSpeed() > 0 ) {
         		Motor.D.forward();
         		Motor.D.setSpeed(dataModel.getTargetSpeed());
