@@ -1,27 +1,14 @@
-package de.otto.roboapp.activities;
+package de.otto.roboapp.ui.util;
 
 import android.app.Activity;
-import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.List;
-
-import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
-import de.otto.roboapp.activities.RoboRegistrationActivity;
-import de.otto.roboapp.activities.UpdatableActivity;
 
-/**
- * Created by ariga on 04.03.15.
- */
 public class RoboListAdapter extends BaseAdapter {
     private Activity activity;
     private RoboAppController roboAppController;

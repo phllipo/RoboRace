@@ -5,8 +5,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import de.otto.roboapp.activities.ActivityMontitor;
-import de.otto.roboapp.activities.UpdatableActivity;
+import de.otto.roboapp.ui.activities.base.ActivityMontitor;
+import de.otto.roboapp.ui.activities.base.UpdatableActivity;
 import de.otto.roboapp.model.DataModel;
 import de.otto.roboapp.model.RacingData;
 import de.otto.roboapp.model.SteeringDirection;
@@ -107,7 +107,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
     //-----------------------  Methods for processing events from user -------------------//
 
     public void playerNameEntered(final String playerName, final OnFinishedCallback onFinishedCallback) {
-        serverController = new ServerController("10.0.2.1", "8888");
+        serverController = new ServerController("192.168.178.29", "8888");
         dataModel.addPlayerToArray(playerName);
 
         serverController.connect(new WebSocketListener() {

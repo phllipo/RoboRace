@@ -1,4 +1,4 @@
-package de.otto.roboapp.activities;
+package de.otto.roboapp.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
 import de.otto.roboapp.model.Robo;
+import de.otto.roboapp.ui.activities.base.AbstractUpdatableActivity;
+import de.otto.roboapp.ui.util.PlayerListAdapter;
+import de.otto.roboapp.ui.util.RoboListAdapter;
 
 public class RoboRegistrationActivity extends AbstractUpdatableActivity {
 
@@ -25,7 +28,7 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
         String pname = roboAppController.getDataModel().getCurrentPlayerName();
 
         String welcomeMessage = ((TextView) findViewById(R.id.selectRobo_playerName)).getText().toString();
-        String test = welcomeMessage.replace("NAMEPLACEHOLDER", pname);
+        String test = welcomeMessage.replace("NAMEPLACEHOLDER", pname);//TODO: test ist aber ein interessanter name. was bedeutet er?
         ((TextView) findViewById(R.id.selectRobo_playerName)).setText(test);
 
         final ListView roboSelectList = (ListView) findViewById(R.id.selectRobo_roboList);

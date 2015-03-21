@@ -1,4 +1,4 @@
-package de.otto.roboapp.activities;
+package de.otto.roboapp.ui.activities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +11,7 @@ import de.otto.roboapp.RoboAppController;
 import de.otto.roboapp.model.DataModel;
 import de.otto.roboapp.model.RacingData;
 import de.otto.roboapp.model.SteeringDirection;
+import de.otto.roboapp.ui.activities.base.AbstractUpdatableActivity;
 
 import static de.otto.roboapp.util.ThreadStarter.processInNewThread;
 

@@ -1,4 +1,4 @@
-package de.otto.roboapp.activities;
+package de.otto.roboapp.ui.util;
 
 import android.app.Activity;
 import android.view.View;
@@ -9,9 +9,6 @@ import android.widget.TextView;
 
 import de.otto.roboapp.RoboAppController;
 
-/**
- * Created by ariga on 06.03.15.
- */
 public class PlayerListAdapter extends BaseAdapter {
     private Activity activity;
     private RoboAppController roboAppController;
