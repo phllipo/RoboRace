@@ -1,0 +1,13 @@
+{"eventType": "connect", "data": {"clientType": "app", "name": "TestApp", "ready": "false" }}
+
+{"eventType": "connect", "data": {"clientType": "robo", "name": "TestRobo", "ready": "true" }}
+
+{"eventType": "selectRobo", "data": { "robo": "TestRobo"}}
+
+{"eventType": "ready", "data": { "ready": "true"}}
+
+{"eventType": "speed", "data": {"speed": "800"}}
+
+{"eventType": "move", "data": {"direction": "left"}}
+
+{"eventType": "deselectRobo"}
