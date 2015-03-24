@@ -25,9 +25,15 @@ console.log("jsonMessage " + JSON.stringify(jsonMessage));
         roboclient.data.speed = jsonMessage.data.speed;
     },
     processRoboSelected = function(appclient, jsonMessage, datamodel){
-        var controlledRobot = datamodel.getClientByName(jsonMessage.data.robo);
-        appclient.data.selectedRobo = controlledRobot.data;
-        controlledRobot.data.controlledBy = appclient.data.name;        
+        var controlledRobo = datamodel.getClientByName(jsonMessage.data.robo);
+        appclient.data.selectedRobo = controlledRobo.data;
+        controlledRobo.data.controlledBy = appclient.data.name;        
+    },
+    processRoboDeselect = function(appclient, datamodel){
+        var roboToDeselect = datamodel.getClientByName(appclient.data.selectedRobo.name);
+        appclient.data.selectedRobo = null;
+        appclient.data.ready = false;
+        roboToDeselect.data.controlledBy = null;
     },
     processReady = function(appclient, jsonMessage){
         appclient.data.ready = jsonMessage.data.ready;
@@ -37,5 +43,6 @@ module.exports = {
     processConnect: processConnect,
     processSpeed: processSpeed,
     processRoboSelected: processRoboSelected,
+    processRoboDeselect: processRoboDeselect,
     processReady: processReady
 };

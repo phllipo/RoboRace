@@ -40,6 +40,10 @@ module.exports = {
               messageProcessor.processRoboSelected(connectedClient, jsonMessage, datamodel);
               messageTransmitter.transmitClients(connectedClients);
             }
+            else if (jsonMessage.eventType === "deselectRobo") {
+              messageProcessor.processRoboDeselect(connectedClient, datamodel);
+              messageTransmitter.transmitClients(connectedClients);
+            }
             else if (jsonMessage.eventType === "ready") {
               messageProcessor.processReady(connectedClient, jsonMessage);
             }
