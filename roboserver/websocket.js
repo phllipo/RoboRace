@@ -18,7 +18,7 @@ module.exports = {
         });
 
         ws.on('message', function incoming(message) {
-        
+
             try {
               var jsonMessage = JSON.parse(message);
               console.log('received: %s, Message: %s', jsonMessage.eventType, message);
@@ -51,6 +51,9 @@ module.exports = {
               messageTransmitter.transmitMove(connectedClient, jsonMessage, datamodel);
             } else {
               ws.send(JSON.stringify({eventType: "error", data: { message: "unknownEventtype"}}));
+            }
+            else if (jsonMessage.eventType === "deselectRobo") {
+              //TODO
             }
           for (i in connectedClients) {
               //console.log(connectedClients[i]);
