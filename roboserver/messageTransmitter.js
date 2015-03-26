@@ -23,7 +23,7 @@ var transmitClients = function(connectedClients){
 				}
 			}
 		controllingApp.webSocketConnection.send(JSON.stringify(speedData));
-	};
+	},
 	transmitMove = function(appclient, jsonMessage, datamodel) {
 		if(appclient.data.selectedRobo) {
 			var controlledRoboName = appclient.data.selectedRobo.name,
@@ -32,10 +32,20 @@ var transmitClients = function(connectedClients){
 		} else {
 			console.log("Die sendende App hat zurzeit keinen Robo");
 		}
+	},
+	transmitStart = function(connectedClients) {
+		for (i in connectedClients) {
+			var startMessage = {
+				eventType: "countdownStart"
+			};
+			connectedClients[i].webSocketConnection.send(JSON.stringify(startMessage));
+		}
 	}
+
 
 module.exports = {
     transmitClients: transmitClients,
     transmitSpeed: transmitSpeed,
-    transmitMove: transmitMove
+    transmitMove: transmitMove,
+    transmitStart: transmitStart
 };

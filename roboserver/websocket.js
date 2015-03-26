@@ -45,16 +45,13 @@ module.exports = {
               messageTransmitter.transmitClients(connectedClients);
             }
             else if (jsonMessage.eventType === "ready") {
-              messageProcessor.processReady(connectedClient, jsonMessage);
+              messageProcessor.processReady(connectedClient, jsonMessage, connectedClients);
             }
             else if (jsonMessage.eventType === "move") {
               messageTransmitter.transmitMove(connectedClient, jsonMessage, datamodel);
             } else {
               ws.send(JSON.stringify({eventType: "error", data: { message: "unknownEventtype"}}));
             }
-          for (i in connectedClients) {
-              //console.log(connectedClients[i]);
-          };
         });
 
         ws.on('close', function(errorcode) {
@@ -63,8 +60,10 @@ module.exports = {
             console.log("robo losing connection");
             if (disconnectedClient.data.controlledBy) {
 	            var app = datamodel.getClientByName(disconnectedClient.data.controlledBy);
-	            app.data.selectedRobo = null;
-	            app.data.ready = "waiting";
+              if(app != null) {
+  	            app.data.selectedRobo = null;
+  	            app.data.ready = "waiting";
+              }
 	        }
           }
           connectedClients.splice(connectedClients.indexOf(disconnectedClient), 1);

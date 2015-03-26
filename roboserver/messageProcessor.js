@@ -1,3 +1,5 @@
+var messageTransmitter = require('./messageTransmitter.js');
+
 var processConnect = function(connectedClient, jsonMessage){
 console.log("jsonMessage " + JSON.stringify(jsonMessage));
         connectedClient.data.name = jsonMessage.data.name;
@@ -35,8 +37,19 @@ console.log("jsonMessage " + JSON.stringify(jsonMessage));
         appclient.data.ready = false;
         roboToDeselect.data.controlledBy = null;
     },
-    processReady = function(appclient, jsonMessage){
+    processReady = function(appclient, jsonMessage, connectedClients){
         appclient.data.ready = jsonMessage.data.ready;
+        var readyClients = 0;
+        if (connectedClients.length == 4) {
+            for (i in connectedClients) {
+                if (connectedClients[i].data.ready == "true") {
+                    readyClients+=1;
+                }
+            }
+            if (readyClients == 4) {
+                messageTransmitter.transmitStart(connectedClients);
+            }
+        }
     }
 
 module.exports = {
