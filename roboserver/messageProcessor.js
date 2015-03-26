@@ -47,7 +47,8 @@ console.log("jsonMessage " + JSON.stringify(jsonMessage));
                 }
             }
             if (readyClients == 4) {
-                messageTransmitter.transmitStart(connectedClients);
+                messageTransmitter.transmitCountdownStart(connectedClients);
+                setTimeout(function() {messageTransmitter.transmitStart(connectedClients)}, 3000);
             }
         }
     }

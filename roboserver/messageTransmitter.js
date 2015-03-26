@@ -33,10 +33,18 @@ var transmitClients = function(connectedClients){
 			console.log("Die sendende App hat zurzeit keinen Robo");
 		}
 	},
+	transmitCountdownStart = function(connectedClients) {
+		for (i in connectedClients) {
+			var countdownMessage = {
+				eventType: "countdownStart"
+			};
+			connectedClients[i].webSocketConnection.send(JSON.stringify(countdownMessage));
+		}
+	},
 	transmitStart = function(connectedClients) {
 		for (i in connectedClients) {
 			var startMessage = {
-				eventType: "countdownStart"
+				eventType: "startRace"
 			};
 			connectedClients[i].webSocketConnection.send(JSON.stringify(startMessage));
 		}
@@ -47,5 +55,6 @@ module.exports = {
     transmitClients: transmitClients,
     transmitSpeed: transmitSpeed,
     transmitMove: transmitMove,
+    transmitCountdownStart: transmitCountdownStart,
     transmitStart: transmitStart
 };
