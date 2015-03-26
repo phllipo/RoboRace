@@ -11,3 +11,7 @@
 {"eventType": "move", "data": {"direction": "left"}}
 
 {"eventType": "deselectRobo"}
+
+{eventType: "countdownStart"}
+
+{eventType: "startRace"}
