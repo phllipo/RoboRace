@@ -18,7 +18,7 @@ module.exports = {
         });
 
         ws.on('message', function incoming(message) {
-        
+
             try {
               var jsonMessage = JSON.parse(message);
               console.log('received: %s, Message: %s', jsonMessage.eventType, message);

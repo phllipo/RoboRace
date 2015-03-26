@@ -26,7 +26,6 @@ public class DataModel {
         //createTestData();
    }
 
-
     /* Füge verschiedene Roboter dem Array hinzu */
     public void createTestData() {
         Player ari = new Player("Ari");
@@ -42,7 +41,6 @@ public class DataModel {
     }
 
     public Map<Player, Robo> getPlayerToRoboAssignmentMap() {
-
         return playerToRoboAssignmentMap;
     }
 
@@ -58,7 +56,6 @@ public class DataModel {
     public void addPlayerToArray(String playername) {
         currentPlayerName = playername;
         playerList.add(new Player(playername));
-
     }
 
     public void addRoboToArray(String roboname) {
@@ -66,17 +63,14 @@ public class DataModel {
     }
     public void assignPlayerToRobo(String playerName, String roboName){
         getPlayerByName(playerName).setAssigned(true);
+        getRoboByName(roboName).setAssigned(true);
         playerToRoboAssignmentMap.put(getPlayerByName(playerName), getRoboByName(roboName));
         System.out.println("Test" + playerToRoboAssignmentMap.isEmpty());
-
-
-
     }
 
     public Robo getRoboByName(String name) {
         for (Robo robo : roboList) {
             if (name.equals(robo.getName())) {
-
                 return robo;
             }
         }
@@ -101,6 +95,15 @@ public class DataModel {
         return unassignedPlayerList;
     }
 
+    public List<Player> getAssignedPlayer() {
+        ArrayList<Player> assignedPlayerList = new ArrayList<>();
+        for (Player player : playerList) {
+            if(playerToRoboAssignmentMap.containsKey(player)) {
+                assignedPlayerList.add(player);
+            }
+        }
+        return assignedPlayerList;
+    }
     /* Robolist Setter */
     public void setRoboList(ListView selectRoboList) {
 
@@ -108,7 +111,6 @@ public class DataModel {
 
     /* RoboList Getter */
     public List<Robo> getRoboList() {
-
         return roboList;
     }
     public  List<Player> getPlayerList() {
@@ -123,6 +125,4 @@ public class DataModel {
     public String getCurrentPlayerName() {
         return currentPlayerName;
     }
-
-
 }
