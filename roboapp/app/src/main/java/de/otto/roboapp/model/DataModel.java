@@ -104,6 +104,17 @@ public class DataModel {
         }
         return assignedPlayerList;
     }
+
+    public List<Robo> getAssignedRobo() {
+        ArrayList<Robo> assignedRoboList = new ArrayList<>();
+        for (Robo robo : roboList) {
+            if(playerToRoboAssignmentMap.containsValue(robo)) {
+                assignedRoboList.add(robo);
+            }
+        }
+        return assignedRoboList;
+    }
+
     /* Robolist Setter */
     public void setRoboList(ListView selectRoboList) {
 
