@@ -3,16 +3,15 @@ package de.otto.roboapp.model;
 
 public class Player {
    private String name;
-   private boolean assigned;
-   private boolean status;
+   private boolean isReady;
 
     public Player () {
-      assigned = false;
 
   }
 
-  public Player(String name) {
+  public Player(String name, boolean isReady) {
       this.name = name;
+      this.isReady = isReady;
 
   }
 
@@ -20,19 +19,11 @@ public class Player {
         return name;
     }
 
-    public boolean isAssigned() {
-        return assigned;
+    public boolean isReady() {
+        return isReady;
     }
 
-    public void setAssigned(boolean assigned) {
-        this.assigned = assigned;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setReady(boolean ready) {
+        this.isReady = ready;
     }
 }

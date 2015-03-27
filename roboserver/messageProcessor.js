@@ -5,7 +5,7 @@ var processConnect = function(connectedClient, jsonMessage){
         connectedClient.data.name = jsonMessage.data.name;
         connectedClient.data.type = jsonMessage.data.clientType;
         connectedClient.data.ready = jsonMessage.data.ready;
-/*     
+/*
         Code mit dem reconnectende Robos gefunden werden können
         Damit dieser funktioniert muss der disconnect Code in websocket.js entsprechend angepasst werden
         und connectedClients muss wieder in diese function übergeben werden.
@@ -29,15 +29,15 @@ var processConnect = function(connectedClient, jsonMessage){
     processRoboSelected = function(appclient, jsonMessage, datamodel){
         var controlledRobo = datamodel.getClientByName(jsonMessage.data.robo);
         appclient.data.selectedRobo = controlledRobo.data;
-        controlledRobo.data.controlledBy = appclient.data.name;        
+        controlledRobo.data.controlledBy = appclient.data.name;
     },
     processRoboDeselect = function(appclient, datamodel){
         if(appclient.data.selectedRobo != null) {
             var roboToDeselect = datamodel.getClientByName(appclient.data.selectedRobo.name);
         }
-        appclient.data.selectedRobo = null;
-        appclient.data.ready = false;
-        roboToDeselect.data.controlledBy = null;
+        delete appclient.data.selectedRobo;
+        appclient.data.ready = "false";
+        delete roboToDeselect.data.controlledBy;
     },
     processReady = function(appclient, jsonMessage, connectedClients){
         appclient.data.ready = jsonMessage.data.ready;

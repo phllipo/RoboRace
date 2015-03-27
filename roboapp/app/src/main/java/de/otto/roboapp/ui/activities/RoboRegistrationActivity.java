@@ -58,15 +58,15 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
                 System.out.println("clicked robo " + clickedRobo.getName());
 
                 //TODO
-                //if((roboAppController.getDataModel().getPlayerByName(roboAppController.getDataModel().getCurrentPlayerName()).isStatus()) == true){
+                if((roboAppController.getDataModel().getPlayerByName(roboAppController.getDataModel().getCurrentPlayerName()).isReady()) == true){
 
                     //if alle ready:
                     Intent intent = new Intent(RoboRegistrationActivity.this, SteeringActivity.class);
                     startActivity(intent);
-               // } else {
+                } else {
                     //Placeholder
-                  //  System.out.println("unready");
-               // }
+                    System.out.println("unready");
+                }
            }
         });
 

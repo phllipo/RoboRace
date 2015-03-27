@@ -23,22 +23,7 @@ public class DataModel {
         playerList = new ArrayList<Player>();
         playerToRoboAssignmentMap = new HashMap<Player, Robo>();
 
-        //createTestData();
    }
-
-    /* Füge verschiedene Roboter dem Array hinzu */
-    public void createTestData() {
-        Player ari = new Player("Ari");
-        playerList.add(ari);
-        Player luca = new Player("Luca");
-        playerList.add(luca);
-
-        Robo supermaschine = new Robo("Supermaschine");
-        roboList.add(supermaschine);
-        roboList.add(new Robo("Hammer"));
-        playerToRoboAssignmentMap.put(ari, supermaschine);
-
-    }
 
     public Map<Player, Robo> getPlayerToRoboAssignmentMap() {
         return playerToRoboAssignmentMap;
@@ -52,26 +37,21 @@ public class DataModel {
         roboList.clear();
     }
 
+    public void clearAssignmentMap() {
+        playerToRoboAssignmentMap.clear();
+    }
+
     /* Füge Player dem Array hinzu */
-    public void addPlayerToArray(String playername) {
+    public void addPlayerToArray(String playername, boolean isReady) {
         currentPlayerName = playername;
-        playerList.add(new Player(playername));
+        playerList.add(new Player(playername, isReady));
     }
 
     public void addRoboToArray(String roboname) {
         roboList.add(new Robo(roboname));
     }
     public void assignPlayerToRobo(String playerName, String roboName){
-        getPlayerByName(playerName).setAssigned(true);
-        getRoboByName(roboName).setAssigned(true);
         playerToRoboAssignmentMap.put(getPlayerByName(playerName), getRoboByName(roboName));
-        System.out.println("Test" + playerToRoboAssignmentMap.isEmpty());
-    }
-
-    public void deselectPlayerFromRobo(String playerName, String roboName){
-        getPlayerByName(playerName).setAssigned(false);
-        getRoboByName(roboName).setAssigned(false);
-        playerToRoboAssignmentMap.remove(this);
         System.out.println("Test" + playerToRoboAssignmentMap.isEmpty());
     }
 
@@ -122,6 +102,17 @@ public class DataModel {
         return assignedRoboList;
     }
 
+    public List<Robo> getUnassignedRobo() {
+        ArrayList<Robo> unassignedRoboList = new ArrayList<>();
+        for (Robo robo : roboList) {
+            if(!playerToRoboAssignmentMap.containsValue(robo)) {
+                unassignedRoboList.add(robo);
+            }
+        }
+        return unassignedRoboList;
+    }
+
+
     /* Robolist Setter */
     public void setRoboList(ListView selectRoboList) {
 
@@ -131,7 +122,7 @@ public class DataModel {
     public List<Robo> getRoboList() {
         return roboList;
     }
-    public  List<Player> getPlayerList() {
+    public List<Player> getPlayerList() {
         return  playerList;
     }
 

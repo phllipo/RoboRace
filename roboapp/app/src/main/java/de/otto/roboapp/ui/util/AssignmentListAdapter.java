@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
+import de.otto.roboapp.model.DataModel;
 import de.otto.roboapp.model.Robo;
 
 /**
@@ -48,8 +49,8 @@ public class AssignmentListAdapter extends BaseAdapter {
         TextView assignedPlayer = new TextView(activity);
         TextView assignedRobo = new TextView(activity);
         TextView seperatorView = new TextView(activity);
-        Button deselectRobo = new Button(activity);
-        Button ready = new Button(activity);
+        final Button deselectRoboButton = new Button(activity);
+        Button readyButton = new Button(activity);
 
         final String assignedPlayerName = roboAppController.getDataModel().getAssignedPlayer().get(position).getName();
         final String assignedRoboName = roboAppController.getDataModel().getAssignedRobo().get(position).getName();
@@ -58,23 +59,33 @@ public class AssignmentListAdapter extends BaseAdapter {
         assignedPlayer.setText(assignedPlayerName);
         assignedRobo.setText(assignedRoboName);
         seperatorView.setText(seperatror);
-        deselectRobo.setText("x");
-        ready.setBackgroundResource(R.drawable.ready_button);
-        // ready.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        deselectRoboButton.setText("x");
 
-        deselectRobo.setOnClickListener(new View.OnClickListener() {
+        if (roboAppController.getDataModel().getAssignedPlayer().get(position).isReady()) {
+            readyButton.setBackgroundResource(R.drawable.ready);
+        } else {
+            readyButton.setBackgroundResource(R.drawable.unready);
+        }
+
+        deselectRoboButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 roboAppController.deselect();
-                roboAppController.getDataModel().deselectPlayerFromRobo(assignedPlayerName, assignedRoboName);
+            }
+        });
+
+        readyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                roboAppController.readyStateChange(!roboAppController.getDataModel().getPlayerByName(roboAppController.getDataModel().getCurrentPlayerName()).isReady());
             }
         });
 
         linearLayout.addView(assignedPlayer);
         linearLayout.addView(seperatorView);
         linearLayout.addView(assignedRobo);
-        linearLayout.addView(ready);
-        linearLayout.addView(deselectRobo);
+        linearLayout.addView(readyButton);
+        linearLayout.addView(deselectRoboButton);
 
 
         return linearLayout;

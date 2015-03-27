@@ -4,3 +4,6 @@
 .idea/**
 roboapp/roboapp.iml
 roboapp/app/app.iml
+roboserver/.idea/**
+roboserver/RoboRaceServer.iml
+

@@ -39,30 +39,40 @@ public class RoboAppController extends Application implements ActivityMontitor {
     public void handleClientInformationFromJson(JSONArray jsonClientInfoArray) throws JSONException {
         String type;
         String name;
+        boolean ready;
         dataModel.clearRoboList();
         dataModel.clearPlayerList();
-
-        // For testing
-        // dataModel.createTestData();
+        dataModel.clearAssignmentMap();
 
         for (int i = 0; i < jsonClientInfoArray.length(); i++) {
             JSONObject clientObject = jsonClientInfoArray.getJSONObject(i).getJSONObject("clientObject");
             type = clientObject.getString("type");
             name = clientObject.getString("name");
+            ready = clientObject.getBoolean("ready");
 
             if (type.equals("app")) {
-                dataModel.addPlayerToArray(name);
+                dataModel.addPlayerToArray(name, ready);
+
+            } else if (type.equals("robo")) {
+                    dataModel.addRoboToArray(name);
+            }
+        }
+
+        for (int i = 0; i < jsonClientInfoArray.length(); i++) {
+            JSONObject clientObject = jsonClientInfoArray.getJSONObject(i).getJSONObject("clientObject");
+            type = clientObject.getString("type");
+            name = clientObject.getString("name");
+            if (type.equals("app")) {
 
                 if(clientObject.has("selectedRobo")){
                     JSONObject selectedRoboObject = clientObject.getJSONObject("selectedRobo");
-                    if(selectedRoboObject != null) {
-                        dataModel.assignPlayerToRobo(name, selectedRoboObject.getString("name"));
-                    }
+                    dataModel.assignPlayerToRobo(name, selectedRoboObject.getString("name"));
                 }
-            } else if (type.equals("robo")) {
-                dataModel.addRoboToArray(name);
             }
         }
+
+
+
         if (currentActiveActivity != null) {
             currentActiveActivity.updateActivityFromBgThread();
         }
@@ -79,8 +89,6 @@ public class RoboAppController extends Application implements ActivityMontitor {
             currentActiveActivity.updateActivityFromBgThread();
         }
     }
-
-
 
     /* Eingehende Nachrichten vom Server im JSON-Format auseinander nehmen und weiter verarbeiten */
     private void handleJsonMessage(JSONObject json) {
@@ -103,12 +111,11 @@ public class RoboAppController extends Application implements ActivityMontitor {
         }
     }
 
-
     //-----------------------  Methods for processing events from user -------------------//
 
     public void playerNameEntered(final String playerName, final OnFinishedCallback onFinishedCallback) {
         serverController = new ServerController("10.90.151.135", "8888");
-        dataModel.addPlayerToArray(playerName);
+        dataModel.addPlayerToArray(playerName, false);
 
         serverController.connect(new WebSocketListener() {
             @Override
@@ -134,15 +141,13 @@ public class RoboAppController extends Application implements ActivityMontitor {
                 //show message and jump to first activity;
             }
         });
-
-
     }
 
     public void roboSelected(String roboName) {
         serverController.sendMsg("{ \"eventType\": \"selectRobo\", \"data\": { \"robo\": \"" + roboName + "\" }}");
 
         //testing:
-        dataModel.assignPlayerToRobo(dataModel.currentPlayerName, roboName);
+        //dataModel.assignPlayerToRobo(dataModel.currentPlayerName, roboName);
     }
 
     public void steer(SteeringDirection steeringDirection) {
@@ -156,5 +161,9 @@ public class RoboAppController extends Application implements ActivityMontitor {
 
     public void deselect() {
         serverController.sendMsg("{\"eventType\": \"deselectRobo\"}");
+    }
+
+    public void readyStateChange(boolean readyState) {
+        serverController.sendMsg("{\"eventType\": \"ready\", \"data\": { \"ready\": " + readyState + "}}");
     }
 }

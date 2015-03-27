@@ -16,12 +16,11 @@ public class RoboListAdapter extends BaseAdapter {
     public RoboListAdapter(Activity activity) {
         this.activity = activity;
         roboAppController  = (RoboAppController) activity.getApplicationContext();
-
     }
 
     @Override
     public int getCount() {
-        return  roboAppController.getDataModel().getRoboList().size();
+        return  roboAppController.getDataModel().getUnassignedRobo().size();
     }
 
     @Override
@@ -39,13 +38,12 @@ public class RoboListAdapter extends BaseAdapter {
 
         LinearLayout linearLayout = new LinearLayout(activity);
 
-        TextView textViewRobo = new TextView(activity);
+        TextView unassignedRobo = new TextView(activity);
 
-        String roboName = roboAppController.getDataModel().getRoboList().get(position).getName();
-        //String nameDesSpielers = roboAppController.getDataModel().getPlayerList().get(position).getName();
-        textViewRobo.setText(roboName);
+        String unassignedRoboName = roboAppController.getDataModel().getUnassignedRobo().get(position).getName();
+        unassignedRobo.setText(unassignedRoboName);
 
-        linearLayout.addView(textViewRobo);
+        linearLayout.addView(unassignedRobo);
 
         return linearLayout;
     }
