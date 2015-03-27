@@ -1,7 +1,6 @@
 package de.otto.roborace.controller;
 
 import de.otto.roborace.model.DataModel;
-import de.otto.roborace.model.Steering;
 import lejos.hardware.motor.Motor;
 
 import static java.lang.Thread.sleep;
@@ -43,9 +42,9 @@ public class MotorController {
         	}
 
             // detect steering change
-            if(dataModel.getSteeringDirection() != Steering.NONE) {
-                System.out.println("process steering direction: " + dataModel.getSteeringDirection());
-                steeringController.turn(dataModel.getSteeringDirection());
+            if(dataModel.getDesiredSteeringDirection() != null) {
+                System.out.println("process steering direction: " + dataModel.getDesiredSteeringDirection());
+                steeringController.turn(dataModel.getDesiredSteeringDirection());
                 dataModel.resetSteering();
 
             }

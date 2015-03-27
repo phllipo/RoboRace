@@ -8,14 +8,14 @@ public class DataModel {
 
 	private int targetSpeed;
 
-	private Steering steeringDirection = Steering.NONE;
+	private Steering desiredSteeringDirection = Steering.NONE;
 
-	public Steering getSteeringDirection() {
-		return steeringDirection;
+	public Steering getDesiredSteeringDirection() {
+		return desiredSteeringDirection;
 	}
 
-	public void setSteeringDirection(Steering steeringDirection) {
-		this.steeringDirection = steeringDirection;
+	public void setDesiredSteeringDirection(Steering desiredSteeringDirection) {
+		this.desiredSteeringDirection = desiredSteeringDirection;
 	}
 
 	public int getTargetSpeed() {
@@ -23,7 +23,7 @@ public class DataModel {
 	}
 
 	public void resetSteering() {
-		steeringDirection = Steering.NONE;
+		desiredSteeringDirection = null;
 	}
 
 	public void setTargetSpeed(int targetSpeed) {

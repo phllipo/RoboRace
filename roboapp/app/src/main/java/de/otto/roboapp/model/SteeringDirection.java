@@ -5,5 +5,6 @@ public enum SteeringDirection {
     LEFT,
     RIGHT,
     FORWARD,
-    BACKWARD
+    BACKWARD,
+    NONE
 }

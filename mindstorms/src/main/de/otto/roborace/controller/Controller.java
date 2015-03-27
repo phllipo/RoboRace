@@ -90,7 +90,7 @@ public class Controller {
 
     private void changeSteerDirection(Steering direction) {
         // d < 1 --> left, d > 1 --> right
-        dataModel.setSteeringDirection(direction);
+        dataModel.setDesiredSteeringDirection(direction);
     }
 
     private void changeSpeed(int speed) {
@@ -112,6 +112,9 @@ public class Controller {
 	            case "RIGHT":
 	                changeSteerDirection(Steering.RIGHT);
 	                break;
+                case "NONE":
+                    changeSteerDirection(Steering.NONE);
+                    break;
 	            default:
 	                System.out.println("no viable direction detected");
 	        }
