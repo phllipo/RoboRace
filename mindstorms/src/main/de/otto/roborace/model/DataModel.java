@@ -6,36 +6,24 @@ package de.otto.roborace.model;
 public class DataModel {
 	private static final int STEERING_MAX = 40;
 
-
-	private int steeringChange;
-	private int steeringTotal;
 	private int targetSpeed;
 
-	public DataModel() {
-		steeringChange = 0;
-		steeringTotal = 0;
+	private Steering steeringDirection = Steering.NONE;
+
+	public Steering getSteeringDirection() {
+		return steeringDirection;
 	}
 
-
-	public void addSteering(int s) {
-		System.out.println("steeringTotal: " + steeringTotal + "s: " + s);
-		steeringChange += s;
-		steeringTotal += s;
-		
+	public void setSteeringDirection(Steering steeringDirection) {
+		this.steeringDirection = steeringDirection;
 	}
 
-
-	public int getSteeringChange() {
-		return steeringChange;
-	}
-	
 	public int getTargetSpeed() {
 		return targetSpeed;
 	}
 
-
-	public void resetSteeringChange() {
-		steeringChange = 0;
+	public void resetSteering() {
+		steeringDirection = Steering.NONE;
 	}
 
 	public void setTargetSpeed(int targetSpeed) {
