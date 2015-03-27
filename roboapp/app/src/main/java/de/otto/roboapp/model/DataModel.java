@@ -68,6 +68,13 @@ public class DataModel {
         System.out.println("Test" + playerToRoboAssignmentMap.isEmpty());
     }
 
+    public void deselectPlayerFromRobo(String playerName, String roboName){
+        getPlayerByName(playerName).setAssigned(false);
+        getRoboByName(roboName).setAssigned(false);
+        playerToRoboAssignmentMap.remove(this);
+        System.out.println("Test" + playerToRoboAssignmentMap.isEmpty());
+    }
+
     public Robo getRoboByName(String name) {
         for (Robo robo : roboList) {
             if (name.equals(robo.getName())) {

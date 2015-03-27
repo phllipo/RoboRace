@@ -1,26 +1,18 @@
-package de.otto.roboapp.activities;
+package de.otto.roboapp.ui.util;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.TextView;
-import android.graphics.Color;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
+import de.otto.roboapp.model.Robo;
 
 /**
  * Created by samaeder on 23.03.15.
@@ -59,17 +51,24 @@ public class AssignmentListAdapter extends BaseAdapter {
         Button deselectRobo = new Button(activity);
         Button ready = new Button(activity);
 
-        //ready.setBackground(ready_button);
-
-        String assignedPlayerName = roboAppController.getDataModel().getAssignedPlayer().get(position).getName();
-        String assignedRoboName = roboAppController.getDataModel().getAssignedRobo().get(position).getName();
+        final String assignedPlayerName = roboAppController.getDataModel().getAssignedPlayer().get(position).getName();
+        final String assignedRoboName = roboAppController.getDataModel().getAssignedRobo().get(position).getName();
         String seperatror = " @ ";
 
         assignedPlayer.setText(assignedPlayerName);
         assignedRobo.setText(assignedRoboName);
         seperatorView.setText(seperatror);
         deselectRobo.setText("x");
-        ready.setBackgroundColor(Color.GREEN);
+        ready.setBackgroundResource(R.drawable.ready_button);
+        // ready.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+
+        deselectRobo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                roboAppController.deselect();
+                roboAppController.getDataModel().deselectPlayerFromRobo(assignedPlayerName, assignedRoboName);
+            }
+        });
 
         linearLayout.addView(assignedPlayer);
         linearLayout.addView(seperatorView);

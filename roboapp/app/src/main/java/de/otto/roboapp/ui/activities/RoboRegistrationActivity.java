@@ -4,17 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridLayout;
-import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.List;
-
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
-import de.otto.roboapp.activities.AssignmentListAdapter;
-import de.otto.roboapp.model.Player;
+import de.otto.roboapp.ui.util.AssignmentListAdapter;
 import de.otto.roboapp.model.Robo;
 import de.otto.roboapp.ui.activities.base.AbstractUpdatableActivity;
 import de.otto.roboapp.ui.util.PlayerListAdapter;

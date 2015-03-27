@@ -4,4 +4,3 @@
     <item android:drawable="@drawable/unready"
         android:state_enabled="true"/>
 </selector>
-
