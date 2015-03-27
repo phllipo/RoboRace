@@ -8,6 +8,7 @@ import de.otto.roborace.connection.ServerController;
 import de.otto.roborace.connection.WebSocketListener;
 import de.otto.roborace.model.DataModel;
 
+import de.otto.roborace.model.Steering;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -87,16 +88,10 @@ public class Controller {
 
     }
 
-    private void changeSteerDirection(int d) {
+    private void changeSteerDirection(Steering direction) {
         // d < 1 --> left, d > 1 --> right
-        if(d >= 1) {
-            dataModel.addSteering(10);
-        } else {
-            dataModel.addSteering(-10);
-        }
-
+        dataModel.setSteeringDirection(direction);
     }
-
 
     private void changeSpeed(int speed) {
     	dataModel.setTargetSpeed(speed);
@@ -112,10 +107,10 @@ public class Controller {
 	
 	        switch (direction) {
 	            case "LEFT":
-	                changeSteerDirection(0);
+	                changeSteerDirection(Steering.LEFT);
 	                break;
 	            case "RIGHT":
-	                changeSteerDirection(1);
+	                changeSteerDirection(Steering.RIGHT);
 	                break;
 	            default:
 	                System.out.println("no viable direction detected");

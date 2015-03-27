@@ -13,6 +13,7 @@ import java.util.List;
 
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
+import de.otto.roboapp.activities.AssignmentListAdapter;
 import de.otto.roboapp.model.Player;
 import de.otto.roboapp.model.Robo;
 import de.otto.roboapp.ui.activities.base.AbstractUpdatableActivity;
@@ -62,15 +63,15 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
                 System.out.println("clicked robo " + clickedRobo.getName());
 
                 //TODO
-                if((roboAppController.getDataModel().getPlayerByName(roboAppController.getDataModel().getCurrentPlayerName()).isStatus()) == true){
+                //if((roboAppController.getDataModel().getPlayerByName(roboAppController.getDataModel().getCurrentPlayerName()).isStatus()) == true){
 
                     //if alle ready:
                     Intent intent = new Intent(RoboRegistrationActivity.this, SteeringActivity.class);
                     startActivity(intent);
-                } else {
+               // } else {
                     //Placeholder
-                    System.out.println("unready");
-                }
+                  //  System.out.println("unready");
+               // }
            }
         });
 
