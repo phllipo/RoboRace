@@ -6,14 +6,6 @@ public class Player {
    private boolean assigned;
    private boolean status;
 
-    public boolean isAssigned() {
-        return assigned;
-    }
-
-    public void setAssigned(boolean assigned) {
-        this.assigned = assigned;
-    }
-
     public Player () {
       assigned = false;
 
@@ -26,6 +18,14 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public boolean isAssigned() {
+        return assigned;
+    }
+
+    public void setAssigned(boolean assigned) {
+        this.assigned = assigned;
     }
 
     public boolean isStatus() {

@@ -5,30 +5,82 @@
     android:layout_height="match_parent"
     android:weightSum="2"
     android:padding="5dp"
-    android:background="@color/background_material_light"><!-- to show what the parent is -->
+    android:background="@color/background_material_dark"><!-- to show what the parent is -->
     <TextView
-        android:id="@+id/selectRobo_playerName"
+        android:id="@+id/welcomeMessage"
+        android:textColor="#FFFFFF"
         android:text="@string/welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.15" />
 
-       <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="223dp"
-        android:id="@+id/selectRobo_roboList"
-        android:layout_below="@+id/selectRobo_playerName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-    <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="168dp"
-            android:id="@+id/unassignedRoboList"
-            android:layout_below="@+id/selectRobo_roboList"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
-        android:layout_weight="0.40" />
+        <TextView
+            android:id="@+id/unassignedPlayerHeadline"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Unassigned player(s)"
+            android:layout_weight="0.00"
+            android:textColor="#33b5e5" />
+
+        <TextView
+            android:id="@+id/unassignedRoboHeadline"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Unassigned robo(s)"
+            android:textColor="#33b5e5" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="220dp">
+
+        <ListView
+                android:layout_width="175dp"
+                android:layout_height="220dp"
+                android:id="@+id/unassignedPlayerList"
+                android:layout_below="@+id/unassignedRoboList"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+
+            android:layout_gravity="right" />
+
+        <ListView
+            android:layout_width="175dp"
+            android:layout_height="220dp"
+            android:id="@+id/unassignedRoboList"
+            android:layout_below="@+id/welcomeMessage"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Assigned player(s)"
+            android:id="@+id/assignmentListHeadline"
+            android:textColor="#01a9d4" />
+
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/assignmentList" />
+
+    </LinearLayout>
 
 
 </LinearLayout>

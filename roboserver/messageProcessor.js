@@ -1,3 +1,5 @@
+var messageTransmitter = require('./messageTransmitter.js');
+
 var processConnect = function(connectedClient, jsonMessage){
 console.log("jsonMessage " + JSON.stringify(jsonMessage));
         connectedClient.data.name = jsonMessage.data.name;
@@ -25,17 +27,36 @@ console.log("jsonMessage " + JSON.stringify(jsonMessage));
         roboclient.data.speed = jsonMessage.data.speed;
     },
     processRoboSelected = function(appclient, jsonMessage, datamodel){
-        var controlledRobot = datamodel.getClientByName(jsonMessage.data.robo);
-        appclient.data.selectedRobo = controlledRobot.data;
-        controlledRobot.data.controlledBy = appclient.data.name;        
+        var controlledRobo = datamodel.getClientByName(jsonMessage.data.robo);
+        appclient.data.selectedRobo = controlledRobo.data;
+        controlledRobo.data.controlledBy = appclient.data.name;        
     },
-    processReady = function(appclient, jsonMessage){
+    processRoboDeselect = function(appclient, datamodel){
+        var roboToDeselect = datamodel.getClientByName(appclient.data.selectedRobo.name);
+        appclient.data.selectedRobo = null;
+        appclient.data.ready = false;
+        roboToDeselect.data.controlledBy = null;
+    },
+    processReady = function(appclient, jsonMessage, connectedClients){
         appclient.data.ready = jsonMessage.data.ready;
+        var readyClients = 0;
+        if (connectedClients.length == 4) {
+            for (i in connectedClients) {
+                if (connectedClients[i].data.ready == "true") {
+                    readyClients+=1;
+                }
+            }
+            if (readyClients == 4) {
+                messageTransmitter.transmitCountdownStart(connectedClients);
+                setTimeout(function() {messageTransmitter.transmitStart(connectedClients)}, 3000);
+            }
+        }
     }
 
 module.exports = {
     processConnect: processConnect,
     processSpeed: processSpeed,
     processRoboSelected: processRoboSelected,
+    processRoboDeselect: processRoboDeselect,
     processReady: processReady
 };

@@ -20,7 +20,6 @@ public class RoboAppController extends Application implements ActivityMontitor {
     private UpdatableActivity currentActiveActivity;
 
     public DataModel getDataModel() {
-
         return dataModel;
     }
 
@@ -40,8 +39,8 @@ public class RoboAppController extends Application implements ActivityMontitor {
     public void handleClientInformationFromJson(JSONArray jsonClientInfoArray) throws JSONException {
         String type;
         String name;
-        dataModel.clearPlayerList();
         dataModel.clearRoboList();
+        dataModel.clearPlayerList();
 
         // For testing
         // dataModel.createTestData();

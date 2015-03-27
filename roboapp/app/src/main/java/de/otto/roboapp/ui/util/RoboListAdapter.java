@@ -39,20 +39,14 @@ public class RoboListAdapter extends BaseAdapter {
 
         LinearLayout linearLayout = new LinearLayout(activity);
 
-
-        TextView textViewSpieler = new TextView(activity);
         TextView textViewRobo = new TextView(activity);
 
-        String nameDesRobo = roboAppController.getDataModel().getRoboList().get(position).getName();
+        String roboName = roboAppController.getDataModel().getRoboList().get(position).getName();
         //String nameDesSpielers = roboAppController.getDataModel().getPlayerList().get(position).getName();
-        textViewRobo.setText(nameDesRobo);
-        textViewSpieler.setText("test");
+        textViewRobo.setText(roboName);
 
         linearLayout.addView(textViewRobo);
-        linearLayout.addView(textViewSpieler);
-
 
         return linearLayout;
-
     }
 }

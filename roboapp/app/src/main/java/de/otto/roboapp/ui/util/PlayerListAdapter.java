@@ -38,12 +38,12 @@ public class PlayerListAdapter extends BaseAdapter {
 
         LinearLayout linearLayout = new LinearLayout(activity);
 
-        TextView spielerNameOhneRobo = new TextView(activity);
+        TextView unassignedPlayer = new TextView(activity);
 
-        String nichtZugeordneteSpieler = roboAppController.getDataModel().getUnassignedPlayer().get(position).getName();
-        spielerNameOhneRobo.setText(nichtZugeordneteSpieler);
+        String unassignedPlayerName = roboAppController.getDataModel().getUnassignedPlayer().get(position).getName();
+        unassignedPlayer.setText(unassignedPlayerName);
 
-        linearLayout.addView(spielerNameOhneRobo);
+        linearLayout.addView(unassignedPlayer);
 
         return linearLayout;
     }

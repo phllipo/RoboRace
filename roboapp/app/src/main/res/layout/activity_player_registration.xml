@@ -17,6 +17,7 @@
         android:id="@+id/label_playerName" />
     <EditText
         android:singleLine="true"
+        android:textColor="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_below="@+id/label_playerName"
