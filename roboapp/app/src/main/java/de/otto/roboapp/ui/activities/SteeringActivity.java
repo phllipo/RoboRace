@@ -1,6 +1,7 @@
 package de.otto.roboapp.ui.activities;
 
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -54,7 +55,7 @@ public class SteeringActivity extends AbstractUpdatableActivity {
         });
 
         final ImageView t_imageViewLeft = (ImageView) findViewById(R.id.ID_Left);
-        t_imageViewLeft.setOnClickListener(new View.OnClickListener() {
+        /*t_imageViewLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 processInNewThread(new Runnable() {
@@ -65,10 +66,10 @@ public class SteeringActivity extends AbstractUpdatableActivity {
                     }
                 });
             }
-        });
+        });*/
 
         final ImageView t_imageViewRight = (ImageView) findViewById(R.id.ID_Rigth);
-        t_imageViewRight.setOnClickListener(new View.OnClickListener() {
+        /*t_imageViewRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 processInNewThread(new Runnable() {
@@ -79,8 +80,61 @@ public class SteeringActivity extends AbstractUpdatableActivity {
                     }
                 });
             }
+        });*/
+
+        t_imageViewLeft.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getX() >= 0 && event.getY() >= 0 && event.getX() < v.getWidth() && event.getY() < v.getHeight()) {
+                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                        processInNewThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                System.out.println("pressed left");
+                                roboAppController.steer(SteeringDirection.LEFT);
+                            }
+                        });
+                    } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                        processInNewThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                System.out.println("released left");
+                                roboAppController.steer(SteeringDirection.NONE);
+                            }
+                        });
+                    }
+                }
+                return true;
+            }
         });
 
+        t_imageViewRight.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getX() >= 0 && event.getY() >= 0 && event.getX() < v.getWidth() && event.getY() < v.getHeight()) {
+                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                        processInNewThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                System.out.println("pressed right");
+                                roboAppController.steer(SteeringDirection.RIGHT);
+                            }
+                        });
+                    } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                        processInNewThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                System.out.println("released right");
+                                roboAppController.steer(SteeringDirection.NONE);
+                            }
+                        });
+                    }
+                }
+
+                return true;
+            }
+        });
 
         displayModel(roboAppController.getDataModel());
     }

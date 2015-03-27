@@ -18,6 +18,7 @@ public class SteeringController {
 
     public SteeringController(NXTRegulatedMotor motor) {
         this.motor = motor;
+        motor.setSpeed(75);
     }
 
     public void startSteering() {
@@ -26,10 +27,10 @@ public class SteeringController {
             public void run() {
                 while(true) {
                     Long now = System.currentTimeMillis();
-                    if(now - timeOfLastSteering > 20) {
+                    if(now - timeOfLastSteering > 2000) {
                         motor.flt();
                     } else {
-                        System.out.println("Steering change detected");
+                        System.out.println("Steering change detected: " + steering);
                        switch(steering) {
                            case LEFT:
                                motor.forward();
@@ -37,8 +38,11 @@ public class SteeringController {
                            case RIGHT:
                                motor.backward();
                                break;
+                           case NONE:
+                               motor.stop();
+                               break;
                            default:
-                               motor.flt();
+                               motor.stop();
                        }
                     }
                     try {

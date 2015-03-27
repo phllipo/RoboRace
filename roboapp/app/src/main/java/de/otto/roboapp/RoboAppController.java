@@ -71,8 +71,6 @@ public class RoboAppController extends Application implements ActivityMontitor {
             }
         }
 
-
-
         if (currentActiveActivity != null) {
             currentActiveActivity.updateActivityFromBgThread();
         }
