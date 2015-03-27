@@ -1,3 +1,5 @@
+var datamodel = require('./datamodel.js');
+
 var transmitClients = function(connectedClients){
 	    for (i in connectedClients) {
 	    	if (connectedClients[i].data.type == 'app') {
@@ -7,7 +9,7 @@ var transmitClients = function(connectedClients){
 		    	for (j in connectedClients) {
 		    		clientData.data.push({clientObject: connectedClients[j].data});
 			    }
-			    console.log(JSON.stringify(clientData));
+			    console.log(datamodel.displayTime() + " Send Client Array: " + JSON.stringify(clientData) + "\n");
 			    connectedClients[i].webSocketConnection.send(JSON.stringify(clientData));
 	    	}
 		}

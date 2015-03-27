@@ -1,7 +1,7 @@
 var messageTransmitter = require('./messageTransmitter.js');
 
 var processConnect = function(connectedClient, jsonMessage){
-console.log("jsonMessage " + JSON.stringify(jsonMessage));
+//console.log("jsonMessage " + JSON.stringify(jsonMessage));
         connectedClient.data.name = jsonMessage.data.name;
         connectedClient.data.type = jsonMessage.data.clientType;
         connectedClient.data.ready = jsonMessage.data.ready;

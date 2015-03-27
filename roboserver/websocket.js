@@ -1,6 +1,7 @@
 var WebSocketServer = require('ws').Server
 var messageProcessor = require('./messageProcessor.js');
 var messageTransmitter = require('./messageTransmitter.js');
+var datamodel = require('./datamodel.js');
 var port = 8888;
 var wss = new WebSocketServer({port: port});
 console.log("server startet on port " +  port);
@@ -21,7 +22,8 @@ module.exports = {
 
             try {
               var jsonMessage = JSON.parse(message);
-              console.log('received: %s, Message: %s', jsonMessage.eventType, message);
+
+              console.log(datamodel.displayTime() +' received: %s, Message: %s', jsonMessage.eventType, message + "\n");
             } catch (e) {
               console.log("not a valid json message: " + e);
               return;
