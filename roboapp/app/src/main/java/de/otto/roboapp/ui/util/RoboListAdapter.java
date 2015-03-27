@@ -1,4 +1,4 @@
-package de.otto.roboapp.activities;
+package de.otto.roboapp.ui.util;
 
 import android.app.Activity;
 import android.view.View;
@@ -9,26 +9,24 @@ import android.widget.TextView;
 
 import de.otto.roboapp.RoboAppController;
 
-/**
- * Created by ariga on 06.03.15.
- */
-public class PlayerListAdapter extends BaseAdapter {
+public class RoboListAdapter extends BaseAdapter {
     private Activity activity;
     private RoboAppController roboAppController;
 
-    public PlayerListAdapter(Activity activity) {
+    public RoboListAdapter(Activity activity) {
         this.activity = activity;
         roboAppController  = (RoboAppController) activity.getApplicationContext();
+
     }
 
     @Override
     public int getCount() {
-        return  roboAppController.getDataModel().getUnassignedPlayer().size();
+        return  roboAppController.getDataModel().getRoboList().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return roboAppController.getDataModel().getRoboList().get(position);
     }
 
     @Override
@@ -41,12 +39,13 @@ public class PlayerListAdapter extends BaseAdapter {
 
         LinearLayout linearLayout = new LinearLayout(activity);
 
-        TextView unassignedPlayer = new TextView(activity);
+        TextView textViewRobo = new TextView(activity);
 
-        String unassignedPlayerName = roboAppController.getDataModel().getUnassignedPlayer().get(position).getName();
-        unassignedPlayer.setText(unassignedPlayerName);
+        String roboName = roboAppController.getDataModel().getRoboList().get(position).getName();
+        //String nameDesSpielers = roboAppController.getDataModel().getPlayerList().get(position).getName();
+        textViewRobo.setText(roboName);
 
-        linearLayout.addView(unassignedPlayer);
+        linearLayout.addView(textViewRobo);
 
         return linearLayout;
     }

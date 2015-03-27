@@ -1,4 +1,4 @@
-package de.otto.roboapp.activities;
+package de.otto.roboapp.ui.activities.base;
 
 
 public interface ActivityMontitor {

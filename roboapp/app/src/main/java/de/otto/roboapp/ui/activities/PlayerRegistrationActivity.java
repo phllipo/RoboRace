@@ -1,4 +1,4 @@
-package de.otto.roboapp.activities;
+package de.otto.roboapp.ui.activities;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
+import de.otto.roboapp.ui.activities.base.AbstractUpdatableActivity;
 import de.otto.roboapp.util.OnFinishedCallback;
 
 import static de.otto.roboapp.util.ThreadStarter.processInNewThread;

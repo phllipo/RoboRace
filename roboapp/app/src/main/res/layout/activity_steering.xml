@@ -73,7 +73,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <de.otto.roboapp.activities.VerticalSeekBar
+    <de.otto.roboapp.ui.components.VerticalSeekBar
         android:layout_width="wrap_content"
         android:layout_height="250dp"
         android:id="@+id/ID_Speed_Slider"
