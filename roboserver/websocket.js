@@ -58,6 +58,8 @@ module.exports = {
           var disconnectedClient = getClientByWsConnection(ws);
           if(disconnectedClient.data.type === "robo") {
             console.log("robo losing connection");
+            disconnectedClient.data.speed = 0;
+            console.log(disconnectedClient.data.speed);
             if (disconnectedClient.data.controlledBy) {
 	            var app = datamodel.getClientByName(disconnectedClient.data.controlledBy);
               if(app != null) {

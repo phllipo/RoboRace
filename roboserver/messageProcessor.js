@@ -40,13 +40,13 @@ console.log("jsonMessage " + JSON.stringify(jsonMessage));
     processReady = function(appclient, jsonMessage, connectedClients){
         appclient.data.ready = jsonMessage.data.ready;
         var readyClients = 0;
-        if (connectedClients.length == 4) {
+        if (connectedClients.length >= 4 && connectedClients.length %2 == 0) {
             for (i in connectedClients) {
                 if (connectedClients[i].data.ready == "true") {
                     readyClients+=1;
                 }
             }
-            if (readyClients == 4) {
+            if (readyClients == connectedClients.length) {
                 messageTransmitter.transmitCountdownStart(connectedClients);
                 setTimeout(function() {messageTransmitter.transmitStart(connectedClients)}, 3000);
             }
