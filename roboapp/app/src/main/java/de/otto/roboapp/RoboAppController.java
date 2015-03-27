@@ -55,8 +55,9 @@ public class RoboAppController extends Application implements ActivityMontitor {
 
                 if(clientObject.has("selectedRobo")){
                     JSONObject selectedRoboObject = clientObject.getJSONObject("selectedRobo");
-                    dataModel.assignPlayerToRobo(name, selectedRoboObject.getString("name"));
-                    System.out.println("IFAEOIFAOIFAIFAOINFWOIAON " +name+" " +selectedRoboObject.getString("name"));
+                    if(selectedRoboObject != null) {
+                        dataModel.assignPlayerToRobo(name, selectedRoboObject.getString("name"));
+                    }
                 }
             } else if (type.equals("robo")) {
                 dataModel.addRoboToArray(name);
@@ -106,7 +107,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
     //-----------------------  Methods for processing events from user -------------------//
 
     public void playerNameEntered(final String playerName, final OnFinishedCallback onFinishedCallback) {
-        serverController = new ServerController("192.168.178.29", "8888");
+        serverController = new ServerController("10.90.151.135", "8888");
         dataModel.addPlayerToArray(playerName);
 
         serverController.connect(new WebSocketListener() {
@@ -151,5 +152,9 @@ public class RoboAppController extends Application implements ActivityMontitor {
 
     public void steer(long progress) {
         serverController.sendMsg("{\"eventType\": \"move\", \"data\": {\"speed\": \"" + progress + "\"}}");
+    }
+
+    public void deselect() {
+        serverController.sendMsg("{\"eventType\": \"deselectRobo\"}");
     }
 }
