@@ -32,7 +32,9 @@ console.log("jsonMessage " + JSON.stringify(jsonMessage));
         controlledRobo.data.controlledBy = appclient.data.name;        
     },
     processRoboDeselect = function(appclient, datamodel){
-        var roboToDeselect = datamodel.getClientByName(appclient.data.selectedRobo.name);
+        if(appclient.data.selectedRobo != null) {
+            var roboToDeselect = datamodel.getClientByName(appclient.data.selectedRobo.name);
+        }
         appclient.data.selectedRobo = null;
         appclient.data.ready = false;
         roboToDeselect.data.controlledBy = null;

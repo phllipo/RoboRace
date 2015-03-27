@@ -22,7 +22,7 @@ app.use(function(req,res,next){
 app.use('/', routes);
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.listen(80);
+app.listen(3000);
 
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
