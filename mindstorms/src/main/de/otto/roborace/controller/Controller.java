@@ -20,6 +20,7 @@ public class Controller {
     DataModel dataModel;
     ServerController serverController;
     MotorController motorController;
+    CourseController courseController;
 	private Properties properties;
 
     public Controller() {
@@ -27,6 +28,7 @@ public class Controller {
         dataModel = new DataModel();
         establishConnection();
         // motorController = new MotorController(dataModel);
+        // courseController = new CourseController(dataModel);
     }
 
     private Properties loadProperties() {
@@ -53,6 +55,7 @@ public class Controller {
 
                 System.out.println("trying to start motorController");
                 motorController = new MotorController(dataModel);
+                courseController = new CourseController(dataModel);
             }
 
             @Override
@@ -89,7 +92,6 @@ public class Controller {
     }
 
     private void changeSteerDirection(Steering direction) {
-        // d < 1 --> left, d > 1 --> right
         dataModel.setDesiredSteeringDirection(direction);
     }
 
