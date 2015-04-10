@@ -1,6 +1,8 @@
 package de.otto.roboapp.ui.activities;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -119,7 +121,17 @@ public class SteeringActivity extends AbstractUpdatableActivity {
         switch (dataModel.getRacingData().getRacingState()) {
             case COUNTDOWN_RUNNING: {
                 final TextView t_textViewTimer = (TextView) findViewById(R.id.CountdownTimer);
-                t_textViewTimer.setText(String.valueOf(dataModel.getRacingData().getCountdownRemainingTime()));
+                new CountDownTimer(3000, 1000) {
+
+                    public void onTick(long millisUntilFinished) {
+                        t_textViewTimer.setText(String.valueOf((millisUntilFinished+500)/1000));
+                        // String.valueOf(dataModel.getRacingData().getCountdownRemainingTime())
+                    }
+
+                    public void onFinish() {
+                        t_textViewTimer.setText("GO!");
+                    }
+                }.start();
                 break;
             }
             case STARTED: {
@@ -133,7 +145,6 @@ public class SteeringActivity extends AbstractUpdatableActivity {
             }
         }
     }
-
 
     @Override
     public void updateActivity() {
