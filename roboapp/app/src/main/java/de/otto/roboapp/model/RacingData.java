@@ -7,7 +7,7 @@ public class RacingData {
     private int currentSpeed;
     private Date startTime;
     private Gadget ActiveGadget;
-    private RacingState racingState;
+    private RacingState racingState = RacingState.NOT_STARTED;
     private long countdownStartTime;
 
     public int getCurrentSpeed() {
