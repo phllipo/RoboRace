@@ -20,6 +20,7 @@ import static de.otto.roboapp.util.ThreadStarter.processInNewThread;
 
 public class SteeringActivity extends AbstractUpdatableActivity {
 
+    TextView speedText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,8 @@ public class SteeringActivity extends AbstractUpdatableActivity {
         final RoboAppController roboAppController = (RoboAppController)getApplicationContext();
 
         SeekBar speedSlider = (SeekBar) findViewById(R.id.ID_Speed_Slider);
+        speedText = (TextView) findViewById(R.id.ID_Speed);
+        speedText.setText("0");
 
 
         speedSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -115,6 +118,14 @@ public class SteeringActivity extends AbstractUpdatableActivity {
     }
 
     public void displayModel(DataModel dataModel) {
+
+        try {
+            speedText.setText(Integer.toString(dataModel.getRacingData().getCurrentSpeed()));
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+
 
         switch (dataModel.getRacingData().getRacingState()) {
             case COUNTDOWN_RUNNING: {

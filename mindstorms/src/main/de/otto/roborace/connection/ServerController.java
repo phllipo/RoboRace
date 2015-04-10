@@ -63,6 +63,10 @@ public class ServerController {
 
 	}
 
+	public void sendSpeedMessage(int speed) {
+		sendMsg("{\"eventType\": \"speed\", \"data\": {\"speed\": \"" + speed + "\"}}");
+	}
+
 	public void sendBoundaryReachedMessage() {
 		sendMsg("{\"eventType\": \"leftTrack\"}");
 	}

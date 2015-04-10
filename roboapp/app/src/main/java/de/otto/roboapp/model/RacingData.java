@@ -4,13 +4,14 @@ import java.util.Date;
 
 public class RacingData {
     final static long COUNTDOWN_TIME = 3000;
-    private int currentSpeed;
+    private int currentSpeed = 0;
     private Date startTime;
     private Gadget ActiveGadget;
     private RacingState racingState = RacingState.NOT_STARTED;
     private long countdownStartTime;
 
     public int getCurrentSpeed() {
+        System.out.println("GET CURRNET SPEED: " + currentSpeed);
         return currentSpeed;
     }
 
