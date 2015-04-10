@@ -56,6 +56,8 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
                 Robo clickedRobo = (Robo) unassignedRobos.getItemAtPosition(position);
                 roboAppController.roboSelected(clickedRobo.getName());
                 System.out.println("clicked robo " + clickedRobo.getName());
+
+
             }
         });
 
