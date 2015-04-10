@@ -112,7 +112,6 @@ public class DataModel {
         return unassignedRoboList;
     }
 
-
     /* Robolist Setter */
     public void setRoboList(ListView selectRoboList) {
 

@@ -1,5 +1,6 @@
 package de.otto.roboapp;
 import android.app.Application;
+import android.content.Intent;
 import android.content.Context;
 import android.os.Vibrator;
 
@@ -7,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import de.otto.roboapp.ui.activities.SteeringActivity;
 import de.otto.roboapp.ui.activities.base.ActivityMontitor;
 import de.otto.roboapp.ui.activities.base.UpdatableActivity;
 import de.otto.roboapp.model.DataModel;
@@ -90,6 +92,11 @@ public class RoboAppController extends Application implements ActivityMontitor {
         }
     }
 
+    private void handleCountdownStart() throws JSONException {
+        dataModel.getRacingData().initiatedCountdown();
+        Intent intent = new Intent(this, SteeringActivity.class);
+        startActivity(intent);
+    }
     private void leftTrackVibration() {
         Vibrator v = (Vibrator) this.getBaseContext().getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(1000);
@@ -108,6 +115,9 @@ public class RoboAppController extends Application implements ActivityMontitor {
                 case "speed":
                     handleSpeedFromJson(json.getJSONObject("data"));
                     break;
+                case "countdownStart":
+                    handleCountdownStart();
+                    break;
                 case "leftTrack":
                     leftTrackVibration();
                     break;
@@ -122,7 +132,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
     //-----------------------  Methods for processing events from user -------------------//
 
     public void playerNameEntered(final String playerName, final OnFinishedCallback onFinishedCallback) {
-        serverController = new ServerController("10.90.162.6", "8888");
+        serverController = new ServerController("10.90.158.229", "8888");
         dataModel.addPlayerToArray(playerName, false);
 
         serverController.connect(new WebSocketListener() {

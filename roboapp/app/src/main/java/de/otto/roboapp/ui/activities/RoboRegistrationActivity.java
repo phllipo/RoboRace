@@ -60,7 +60,11 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
                 //TODO
                 if((roboAppController.getDataModel().getPlayerByName(roboAppController.getDataModel().getCurrentPlayerName()).isReady()) == true){
 
-                    //if alle ready:
+                    int numberOfPlayers = roboAppController.getDataModel().getAssignedPlayer().size();
+                    if (numberOfPlayers >= 2) {
+                        //countdown starten
+                    }
+
                     Intent intent = new Intent(RoboRegistrationActivity.this, SteeringActivity.class);
                     startActivity(intent);
                 } else {
