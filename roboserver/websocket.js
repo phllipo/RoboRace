@@ -76,7 +76,15 @@ module.exports = {
               var robo = datamodel.getClientByName(disconnectedClient.data.selectedRobo.name);
               if(robo) {
                 delete robo.data.controlledBy;
-                robo.data.speed = 0;
+                robo.data.speed = "0";
+                var speedMessage = { 
+                  eventType: "move",
+                  data: {
+                    speed: "0"
+                  }
+                }
+                console.log(datamodel.displayTime() + " Send to " + robo.name + JSON.stringify(speedMessage) + "\n"); 
+                robo.webSocketConnection.send(JSON.stringify(speedMessage));
               }
             }
           }
