@@ -63,6 +63,10 @@ public class ServerController {
 
 	}
 
+	public void sendBoundaryReachedMessage() {
+		sendMsg("{\"eventtype\": \"leftTrack\"}");
+	}
+
 	public void sendMsg(String msg) throws NotYetConnectedException {
 		wsc.send(msg);
 	}

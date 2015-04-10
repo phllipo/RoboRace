@@ -6,6 +6,8 @@ package de.otto.roborace.model;
 public class DataModel {
 	private static final int STEERING_MAX = 40;
 
+	private final int SLOW_TIME_MILLIS = 2000;
+
 	private int targetSpeed;
 	private Steering desiredSteeringDirection = Steering.NONE;
 
@@ -38,10 +40,12 @@ public class DataModel {
 	}
 
 	public boolean isBoundaryReached() {
-		return System.currentTimeMillis() - boundaryReachedTime < 2000;
+		return System.currentTimeMillis() - boundaryReachedTime < SLOW_TIME_MILLIS;
 	}
 
 	public void courseBoundaryReached() {
-		boundaryReachedTime = System.currentTimeMillis();
+		if(!isBoundaryReached()) {
+			boundaryReachedTime = System.currentTimeMillis();
+		}
 	}
 }
