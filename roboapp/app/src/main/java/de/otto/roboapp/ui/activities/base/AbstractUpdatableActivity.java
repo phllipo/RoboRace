@@ -1,6 +1,7 @@
 package de.otto.roboapp.ui.activities.base;
 
 import android.app.Activity;
+import android.content.Intent;
 
 public abstract class AbstractUpdatableActivity extends Activity implements UpdatableActivity {
 
@@ -28,5 +29,11 @@ public abstract class AbstractUpdatableActivity extends Activity implements Upda
             public void run() {
                 updateActivity();
             }});
+    }
+
+    @Override
+    public void switchActivity(Class<? extends Activity> activityClass) {
+        Intent intent = new Intent(this, activityClass);
+        startActivity(intent);
     }
 }
