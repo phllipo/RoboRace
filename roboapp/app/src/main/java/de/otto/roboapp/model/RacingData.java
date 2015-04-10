@@ -31,6 +31,13 @@ public class RacingData {
         countdownStartTime = System.currentTimeMillis();
     }
 
+    public long getCountdownRemainingTime(){
+        long actualTime = System.currentTimeMillis();
+        long passingTime = actualTime - countdownStartTime;
+
+        return COUNTDOWN_TIME - passingTime;
+    }
+
     public RacingState getRacingState() {
         return racingState;
     }

@@ -9,15 +9,21 @@ import static java.lang.Thread.sleep;
  * Created by luca on 06.03.15.
  */
 public class MotorController {
-    DataModel dataModel;
+    private DataModel dataModel;
+    private Controller controller;
     private final SteeringController steeringController;
 
-    public MotorController(DataModel dataModel) {
+    private int lastSpeed;
+
+    public MotorController(DataModel dataModel, Controller controller) {
         this.dataModel = dataModel;
+        this.controller = controller;
         System.out.println("started motorController.");
 
         steeringController = new SteeringController(Motor.C);
         steeringController.startSteering();
+
+        lastSpeed = 0;
 
         new Thread(new Runnable() {
             @Override
@@ -40,6 +46,11 @@ public class MotorController {
         		Motor.D.setSpeed(-dataModel.getTargetSpeed());
                 Motor.A.setSpeed(-dataModel.getTargetSpeed());
         	}
+
+            if(lastSpeed != Motor.A.getSpeed()) {
+                controller.speedChangeDetected();
+            }
+            lastSpeed = Motor.A.getSpeed();
 
             // detect steering change
             if(dataModel.getDesiredSteeringDirection() != null) {

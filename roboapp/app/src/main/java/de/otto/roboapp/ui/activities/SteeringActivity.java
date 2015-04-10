@@ -1,5 +1,7 @@
 package de.otto.roboapp.ui.activities;
 
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -8,6 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
@@ -22,9 +26,12 @@ import static de.otto.roboapp.util.ThreadStarter.processInNewThread;
 
 public class SteeringActivity extends AbstractUpdatableActivity {
 
+    TextView speedText;
+    ArrayList <ImageView> imageViews = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_steering);
 
