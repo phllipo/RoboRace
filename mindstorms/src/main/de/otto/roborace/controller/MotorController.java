@@ -43,7 +43,7 @@ public class MotorController {
 
             // detect steering change
             if(dataModel.getDesiredSteeringDirection() != null) {
-                System.out.println("process steering direction: " + dataModel.getDesiredSteeringDirection());
+                //System.out.println("process steering direction: " + dataModel.getDesiredSteeringDirection());
                 steeringController.turn(dataModel.getDesiredSteeringDirection());
                 dataModel.resetSteering();
 

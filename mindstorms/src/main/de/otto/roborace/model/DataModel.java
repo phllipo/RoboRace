@@ -21,7 +21,6 @@ public class DataModel {
 
 	public int getTargetSpeed() {
 		if(isBoundaryReached()) {
-			System.out.println("Target Speed: " + targetSpeed + " Slow Target Speed: " + ((int)Math.ceil(targetSpeed * 0.2)));
 			return (int)Math.ceil(targetSpeed * 0.2);
 		} else {
 			return targetSpeed;

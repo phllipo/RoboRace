@@ -33,7 +33,6 @@ public class CourseController {
 
 
                     if(isCourseBoundary(lastSample[0])) {
-                        System.out.println(Arrays.toString(lastSample));
                         dataModel.courseBoundaryReached();
                     }
                 }

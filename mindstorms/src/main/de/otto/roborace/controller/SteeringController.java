@@ -30,7 +30,6 @@ public class SteeringController {
                     if(now - timeOfLastSteering > 2000) {
                         motor.flt();
                     } else {
-                        System.out.println("Steering change detected: " + steering);
                        switch(steering) {
                            case LEFT:
                                motor.forward();
