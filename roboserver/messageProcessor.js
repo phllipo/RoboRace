@@ -37,21 +37,26 @@ var processConnect = function(connectedClient, jsonMessage){
         }
         delete appclient.data.selectedRobo;
         appclient.data.ready = "false";
-        delete roboToDeselect.data.controlledBy;
+        if(roboToDeselect) {
+            delete roboToDeselect.data.controlledBy;
+        }
     },
     processReady = function(appclient, jsonMessage, connectedClients){
         appclient.data.ready = jsonMessage.data.ready;
-        var readyClients = 0;
-        if (connectedClients.length >= 4 && connectedClients.length %2 == 0) {
-            for (i in connectedClients) {
-                if (connectedClients[i].data.ready == "true") {
-                    readyClients+=1;
-                }
+        var readyClients = 0,
+            countRobos = 0
+
+        for (i in connectedClients) {
+            if (connectedClients[i].data.type == "robo" && connectedClients[i].data.controlledBy) {
+                countRobos+=1;
+            } else if (connectedClients[i].data.type == "app" && connectedClients[i].data.selectedRobo && connectedClients[i].data.ready == "true") {
+                readyClients+=1;
             }
-            if (readyClients == connectedClients.length) {
-                messageTransmitter.transmitCountdownStart(connectedClients);
-                setTimeout(function() {messageTransmitter.transmitStart(connectedClients)}, 3000);
-            }
+        }
+
+        if(countRobos == readyClients) {
+            messageTransmitter.transmitCountdownStart(connectedClients);
+            setTimeout(function() {messageTransmitter.transmitStart(connectedClients)}, 3000);
         }
     }
 
