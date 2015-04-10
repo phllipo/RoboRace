@@ -118,11 +118,13 @@ public class SteeringActivity extends AbstractUpdatableActivity {
 
         switch (dataModel.getRacingData().getRacingState()) {
             case COUNTDOWN_RUNNING: {
-                //textfeld einblenden
+                final TextView t_textViewTimer = (TextView) findViewById(R.id.CountdownTimer);
+                t_textViewTimer.setText(String.valueOf(dataModel.getRacingData().getCountdownRemainingTime()));
                 break;
             }
             case STARTED: {
-                //textfeld ausblenden
+                final TextView t_textViewTimer = (TextView) findViewById(R.id.CountdownTimer);
+                t_textViewTimer.setVisibility(View.INVISIBLE);
                 final TextView t_textViewSpeed = (TextView) findViewById(R.id.ID_Speed);
                 RacingData racingData = dataModel.getRacingData();
                 int speed = (racingData != null) ? racingData.getCurrentSpeed() : -999;
