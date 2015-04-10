@@ -58,7 +58,7 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
                 System.out.println("clicked robo " + clickedRobo.getName());
 
                 //TODO
-                if((roboAppController.getDataModel().getPlayerByName(roboAppController.getDataModel().getCurrentPlayerName()).isReady()) == true){
+                //if((roboAppController.getDataModel().getPlayerByName(roboAppController.getDataModel().getCurrentPlayerName()).isReady()) == true){
 
                     int numberOfPlayers = roboAppController.getDataModel().getAssignedPlayer().size();
                     if (numberOfPlayers >= 2) {
@@ -67,10 +67,10 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
 
                     Intent intent = new Intent(RoboRegistrationActivity.this, SteeringActivity.class);
                     startActivity(intent);
-                } else {
+                //} else {
                     //Placeholder
-                    System.out.println("unready");
-                }
+                //    System.out.println("unready");
+                //}
            }
         });
 
