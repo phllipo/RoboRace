@@ -43,6 +43,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
     public void handleClientInformationFromJson(JSONArray jsonClientInfoArray) throws JSONException {
         String type;
         String name;
+        String stringReady;
         boolean ready;
         dataModel.clearRoboList();
         dataModel.clearPlayerList();
@@ -52,7 +53,8 @@ public class RoboAppController extends Application implements ActivityMontitor {
             JSONObject clientObject = jsonClientInfoArray.getJSONObject(i).getJSONObject("clientObject");
             type = clientObject.getString("type");
             name = clientObject.getString("name");
-            ready = clientObject.getBoolean("ready");
+            stringReady = clientObject.getString("ready");
+            ready = Boolean.valueOf(stringReady);
 
             if (type.equals("app")) {
                 dataModel.addPlayerToArray(name, ready);
@@ -82,6 +84,10 @@ public class RoboAppController extends Application implements ActivityMontitor {
 
     private void handleSpeedFromJson(JSONObject data) throws JSONException {
         int speed = data.getInt("speed");
+        int tachometer = speed/8;
+         dataModel.setTachometer(tachometer);
+         dataModel.getTachometer();
+
         RacingData racingData = dataModel.getRacingData();
         if (racingData != null) {
             racingData.setCurrentSpeed(speed);
@@ -96,6 +102,12 @@ public class RoboAppController extends Application implements ActivityMontitor {
         dataModel.getRacingData().initiatedCountdown();
         currentActiveActivity.switchActivity(SteeringActivity.class);
     }
+
+    private void handleStartRace() {
+        dataModel.getRacingData().initiatRaceStart();
+        currentActiveActivity.updateActivityFromBgThread();
+    }
+
     private void leftTrackVibration() {
         Vibrator v = (Vibrator) this.getBaseContext().getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(1000);
@@ -117,6 +129,9 @@ public class RoboAppController extends Application implements ActivityMontitor {
                 case "countdownStart":
                     handleCountdownStart();
                     break;
+                case "startRace":
+                    handleStartRace();
+                    break;
                 case "leftTrack":
                     leftTrackVibration();
                     break;
@@ -131,7 +146,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
     //-----------------------  Methods for processing events from user -------------------//
 
     public void playerNameEntered(final String playerName, final OnFinishedCallback onFinishedCallback) {
-        serverController = new ServerController("10.90.158.229", "8888");
+        serverController = new ServerController("10.90.152.221", "8888");
         dataModel.addPlayerToArray(playerName, false);
 
         serverController.connect(new WebSocketListener() {

@@ -35,7 +35,6 @@ public class DataModel {
 
 	public void setTargetSpeed(int targetSpeed) {
 		this.targetSpeed = targetSpeed * 15;
-		
 	}
 
 	public boolean wasBoundaryReachedRecently() {

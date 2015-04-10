@@ -54,7 +54,7 @@ public class Controller {
                 serverController.sendMsg(connectMessage);
 
                 System.out.println("trying to start motorController");
-                motorController = new MotorController(dataModel);
+                motorController = new MotorController(dataModel, Controller.this);
                 courseController = new CourseController(dataModel, Controller.this);
             }
 
@@ -93,6 +93,10 @@ public class Controller {
 
     public void courseBoundaryReached() {
         serverController.sendBoundaryReachedMessage();
+    }
+
+    public void speedChangeDetected() {
+        serverController.sendSpeedMessage(dataModel.getTargetSpeed());
     }
 
     private void changeSteerDirection(Steering direction) {

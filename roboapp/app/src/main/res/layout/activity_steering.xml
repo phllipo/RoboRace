@@ -93,10 +93,18 @@
                 android:layout_below="@+id/ID_Speed" />
 
         </RelativeLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/CountdownTimer"/>
+            android:id="@+id/CountdownTimer"
+            android:enabled="false"
+            android:textAlignment="center"
+            android:textColor="#ff239e00"
+            android:textSize="222dp"
+            android:clickable="true"
+            android:focusable="true" />
+
     </FrameLayout>
 
 

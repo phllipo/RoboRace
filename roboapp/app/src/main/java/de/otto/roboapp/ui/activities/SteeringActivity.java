@@ -1,11 +1,17 @@
 package de.otto.roboapp.ui.activities;
 
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
@@ -20,9 +26,12 @@ import static de.otto.roboapp.util.ThreadStarter.processInNewThread;
 
 public class SteeringActivity extends AbstractUpdatableActivity {
 
+    TextView speedText;
+    ArrayList <ImageView> imageViews = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_steering);
 
@@ -119,7 +128,17 @@ public class SteeringActivity extends AbstractUpdatableActivity {
         switch (dataModel.getRacingData().getRacingState()) {
             case COUNTDOWN_RUNNING: {
                 final TextView t_textViewTimer = (TextView) findViewById(R.id.CountdownTimer);
-                t_textViewTimer.setText(String.valueOf(dataModel.getRacingData().getCountdownRemainingTime()));
+                new CountDownTimer(3000, 1000) {
+
+                    public void onTick(long millisUntilFinished) {
+                        t_textViewTimer.setText(String.valueOf((millisUntilFinished+500)/1000));
+                        // String.valueOf(dataModel.getRacingData().getCountdownRemainingTime())
+                    }
+
+                    public void onFinish() {
+                        t_textViewTimer.setText("GO!");
+                    }
+                }.start();
                 break;
             }
             case STARTED: {
@@ -133,7 +152,6 @@ public class SteeringActivity extends AbstractUpdatableActivity {
             }
         }
     }
-
 
     @Override
     public void updateActivity() {

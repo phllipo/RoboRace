@@ -3,12 +3,12 @@ package de.otto.roboapp.model;
 import java.util.Date;
 
 public class RacingData {
-    final static long COUNTDOWN_TIME = 3000;
+    final static long COUNTDOWN_TIME = 5000;
     private int currentSpeed;
-    private Date startTime;
     private Gadget ActiveGadget;
     private RacingState racingState = RacingState.NOT_STARTED;
     private long countdownStartTime;
+    private Date raceStartingTime;
 
     public int getCurrentSpeed() {
         return currentSpeed;
@@ -16,14 +16,6 @@ public class RacingData {
 
     public void setCurrentSpeed(int currentSpeed) {
         this.currentSpeed = currentSpeed;
-    }
-
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
     }
 
     public Gadget getActiveGadget() {
@@ -50,4 +42,8 @@ public class RacingData {
         return racingState;
     }
 
+    public void initiatRaceStart() {
+        racingState = RacingState.STARTED;
+        raceStartingTime = new Date();
+    }
 }
