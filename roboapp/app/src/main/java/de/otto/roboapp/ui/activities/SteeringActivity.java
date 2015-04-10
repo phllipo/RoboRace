@@ -11,6 +11,7 @@ import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
 import de.otto.roboapp.model.DataModel;
 import de.otto.roboapp.model.RacingData;
+import de.otto.roboapp.model.RacingState;
 import de.otto.roboapp.model.SteeringDirection;
 import de.otto.roboapp.ui.activities.base.AbstractUpdatableActivity;
 
@@ -55,33 +56,6 @@ public class SteeringActivity extends AbstractUpdatableActivity {
         });
 
         final ImageView t_imageViewLeft = (ImageView) findViewById(R.id.ID_Left);
-        /*t_imageViewLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                processInNewThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        System.out.println("clicked left");
-                        roboAppController.steer(SteeringDirection.LEFT);
-                    }
-                });
-            }
-        });*/
-
-        final ImageView t_imageViewRight = (ImageView) findViewById(R.id.ID_Rigth);
-        /*t_imageViewRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                processInNewThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        System.out.println("clicked right");
-                        roboAppController.steer(SteeringDirection.RIGHT);
-                    }
-                });
-            }
-        });*/
-
         t_imageViewLeft.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -108,6 +82,7 @@ public class SteeringActivity extends AbstractUpdatableActivity {
             }
         });
 
+        final ImageView t_imageViewRight = (ImageView) findViewById(R.id.ID_Rigth);
         t_imageViewRight.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -140,10 +115,21 @@ public class SteeringActivity extends AbstractUpdatableActivity {
     }
 
     public void displayModel(DataModel dataModel) {
-        final TextView t_textViewSpeed = (TextView) findViewById(R.id.ID_Speed);
-        RacingData racingData = dataModel.getRacingData();
-        int speed = (racingData != null) ? racingData.getCurrentSpeed() : -999;
-        t_textViewSpeed.setText(String.valueOf(speed));
+
+        switch (dataModel.getRacingData().getRacingState()) {
+            case COUNTDOWN_RUNNING: {
+                //textfeld einblenden
+                break;
+            }
+            case STARTED: {
+                //textfeld ausblenden
+                final TextView t_textViewSpeed = (TextView) findViewById(R.id.ID_Speed);
+                RacingData racingData = dataModel.getRacingData();
+                int speed = (racingData != null) ? racingData.getCurrentSpeed() : -999;
+                t_textViewSpeed.setText(String.valueOf(speed));
+                break;
+            }
+        }
     }
 
 
