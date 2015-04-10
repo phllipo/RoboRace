@@ -1,5 +1,7 @@
 package de.otto.roboapp;
 import android.app.Application;
+import android.content.Context;
+import android.os.Vibrator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -88,6 +90,11 @@ public class RoboAppController extends Application implements ActivityMontitor {
         }
     }
 
+    private void leftTrackVibration() {
+        Vibrator v = (Vibrator) this.getBaseContext().getSystemService(Context.VIBRATOR_SERVICE);
+        v.vibrate(1000);
+    }
+
     /* Eingehende Nachrichten vom Server im JSON-Format auseinander nehmen und weiter verarbeiten */
     private void handleJsonMessage(JSONObject json) {
         try {
@@ -101,6 +108,9 @@ public class RoboAppController extends Application implements ActivityMontitor {
                 case "speed":
                     handleSpeedFromJson(json.getJSONObject("data"));
                     break;
+                case "leftTrack":
+                    leftTrackVibration();
+                    break;
                 default:
                     System.out.println("no valid eventType: " + eventType);
             }
@@ -112,7 +122,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
     //-----------------------  Methods for processing events from user -------------------//
 
     public void playerNameEntered(final String playerName, final OnFinishedCallback onFinishedCallback) {
-        serverController = new ServerController("10.90.151.135", "8888");
+        serverController = new ServerController("10.90.162.6", "8888");
         dataModel.addPlayerToArray(playerName, false);
 
         serverController.connect(new WebSocketListener() {

@@ -52,7 +52,10 @@ module.exports = {
             }
             else if (jsonMessage.eventType === "move") {
               messageTransmitter.transmitMove(connectedClient, jsonMessage, datamodel);
-            } else {
+            }
+            else if (jsonMessage.eventType === "leftTrack") {
+              messageTransmitter.transmitLeftTrack(connectedClient, jsonMessage, datamodel);
+            }else {
               ws.send(JSON.stringify({eventType: "error", data: { message: "unknownEventtype"}}));
             }
         });
