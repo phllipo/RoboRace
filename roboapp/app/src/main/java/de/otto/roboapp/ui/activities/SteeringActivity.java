@@ -1,11 +1,15 @@
 package de.otto.roboapp.ui.activities;
 
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
@@ -20,15 +24,24 @@ import static de.otto.roboapp.util.ThreadStarter.processInNewThread;
 
 public class SteeringActivity extends AbstractUpdatableActivity {
 
+    ArrayList <ImageView> imageViews = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_steering);
 
         final RoboAppController roboAppController = (RoboAppController)getApplicationContext();
 
         SeekBar speedSlider = (SeekBar) findViewById(R.id.ID_Speed_Slider);
+        imageViews.add((ImageView)findViewById(R.id.speedlight1));
+        imageViews.add((ImageView)findViewById(R.id.speedlight2));
+        imageViews.add((ImageView)findViewById(R.id.speedlight3));
+        imageViews.add((ImageView)findViewById(R.id.speedlight4));
+        imageViews.add((ImageView)findViewById(R.id.speedlight5));
+        imageViews.add((ImageView)findViewById(R.id.speedlight6));
+        imageViews.add((ImageView)findViewById(R.id.speedlight7));
 
 
         speedSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -116,6 +129,17 @@ public class SteeringActivity extends AbstractUpdatableActivity {
 
     public void displayModel(DataModel dataModel) {
 
+        int count = 0;
+        for (ImageView i : imageViews) {
+
+            if (count < dataModel.getTachometer()) {
+                i.setImageResource(R.drawable.speedlight_black);
+            }else {
+                i.setImageResource(R.drawable.speedlight_red);
+               // i.setImageResource(R.drawable.speedlight_orange);
+                //i.setImageResource(R.drawable.speedlight_green);
+            }
+        }
         switch (dataModel.getRacingData().getRacingState()) {
             case COUNTDOWN_RUNNING: {
                 //textfeld einblenden
@@ -129,8 +153,11 @@ public class SteeringActivity extends AbstractUpdatableActivity {
                 t_textViewSpeed.setText(String.valueOf(speed));
                 break;
             }
+
         }
     }
+
+
 
 
     @Override
