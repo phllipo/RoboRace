@@ -15,3 +15,5 @@
 {eventType: "countdownStart"}
 
 {eventType: "startRace"}
+
+{eventType: "leftTrack"}
