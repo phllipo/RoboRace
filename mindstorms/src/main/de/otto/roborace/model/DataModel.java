@@ -44,6 +44,7 @@ public class DataModel {
 
 	public void courseBoundaryReached() {
 		if(!isBoundaryReached()) {
+			System.out.println("Boundary reached");
 			boundaryReachedTime = System.currentTimeMillis();
 		}
 	}

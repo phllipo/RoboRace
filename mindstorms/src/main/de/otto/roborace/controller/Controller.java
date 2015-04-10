@@ -11,7 +11,6 @@ import de.otto.roborace.model.DataModel;
 import de.otto.roborace.model.Steering;
 import org.json.JSONException;
 import org.json.JSONObject;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 
 /**
