@@ -47,13 +47,14 @@ var processConnect = function(connectedClient, jsonMessage){
             countRobos = 0
 
         for (i in connectedClients) {
-            if (connectedClients[i].data.type == "robo" && connectedClients[i].data.controlledBy) {
+            if (connectedClients[i].data.type == "robo") {
                 countRobos+=1;
             } else if (connectedClients[i].data.type == "app" && connectedClients[i].data.selectedRobo && connectedClients[i].data.ready == "true") {
                 readyClients+=1;
             }
         }
 
+        console.log(readyClients + " / " + countRobos);
         if(countRobos == readyClients) {
             messageTransmitter.transmitCountdownStart(connectedClients);
             setTimeout(function() {messageTransmitter.transmitStart(connectedClients)}, 3000);
