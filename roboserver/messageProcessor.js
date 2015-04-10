@@ -53,9 +53,9 @@ var processConnect = function(connectedClient, jsonMessage){
                 readyClients+=1;
             }
         }
-
-        console.log(readyClients + " / " + countRobos);
+        console.log("Pruefe ob  Robos ready sind..." + countRobos + " - " + readyClients);
         if(countRobos == readyClients) {
+          console.log("Alle Robos ready")
             messageTransmitter.transmitCountdownStart(connectedClients);
             setTimeout(function() {messageTransmitter.transmitStart(connectedClients)}, 3000);
         }
