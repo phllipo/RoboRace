@@ -13,11 +13,13 @@ import java.util.Arrays;
 public class CourseController {
     private EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S1);
     private DataModel dataModel;
+    private Controller controller;
     private final SensorMode brightnessSensorMode;
     private final float[] lastSample;
 
-    public CourseController(DataModel dataModel) {
+    public CourseController(DataModel dataModel, Controller controller) {
         this.dataModel = dataModel;
+        this.controller = controller;
         brightnessSensorMode = sensor.getMode("Red");
         lastSample = new float[brightnessSensorMode.sampleSize()];
 
@@ -33,8 +35,8 @@ public class CourseController {
 
 
                     if(isCourseBoundary(lastSample[0])) {
-                        System.out.println(Arrays.toString(lastSample));
                         dataModel.courseBoundaryReached();
+                        controller.courseBoundaryReached();
                     }
                 }
             }

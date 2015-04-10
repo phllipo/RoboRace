@@ -12,6 +12,8 @@
 
 {"eventType": "deselectRobo"}
 
-{eventType: "countdownStart"}
+{"eventType": "countdownStart"}
 
-{eventType: "startRace"}
+{"eventType": "startRace"}
+
+{"eventType": "leftTrack"}

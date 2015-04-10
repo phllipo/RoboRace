@@ -1,7 +1,8 @@
 package de.otto.roboapp;
 import android.app.Application;
 import android.content.Intent;
-import android.os.CountDownTimer;
+import android.content.Context;
+import android.os.Vibrator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -96,6 +97,10 @@ public class RoboAppController extends Application implements ActivityMontitor {
         Intent intent = new Intent(this, SteeringActivity.class);
         startActivity(intent);
     }
+    private void leftTrackVibration() {
+        Vibrator v = (Vibrator) this.getBaseContext().getSystemService(Context.VIBRATOR_SERVICE);
+        v.vibrate(1000);
+    }
 
     /* Eingehende Nachrichten vom Server im JSON-Format auseinander nehmen und weiter verarbeiten */
     private void handleJsonMessage(JSONObject json) {
@@ -112,6 +117,9 @@ public class RoboAppController extends Application implements ActivityMontitor {
                     break;
                 case "countdownStart":
                     handleCountdownStart();
+                    break;
+                case "leftTrack":
+                    leftTrackVibration();
                     break;
                 default:
                     System.out.println("no valid eventType: " + eventType);

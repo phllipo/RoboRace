@@ -55,7 +55,7 @@ public class Controller {
 
                 System.out.println("trying to start motorController");
                 motorController = new MotorController(dataModel);
-                courseController = new CourseController(dataModel);
+                courseController = new CourseController(dataModel, Controller.this);
             }
 
             @Override
@@ -89,6 +89,10 @@ public class Controller {
             e.printStackTrace();
         }
 
+    }
+
+    public void courseBoundaryReached() {
+        serverController.sendBoundaryReachedMessage();
     }
 
     private void changeSteerDirection(Steering direction) {
