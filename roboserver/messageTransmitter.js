@@ -50,6 +50,15 @@ var transmitClients = function(connectedClients){
 			};
 			connectedClients[i].webSocketConnection.send(JSON.stringify(startMessage));
 		}
+	},
+	transmitLeftTrack = function(roboclient, jsonMessage, datamodel) {
+	    if(roboclient.data.controlledBy) {
+	    var controllingAppName = roboclient.data.controlledBy,
+	        controllingApp  = datamodel.getClientByName(controllingAppName)
+	        controllingApp.webSocketConnection.send(JSON.stringify(jsonMessage));
+	    }else {
+	        console.log("Robo wird von keiner App kontrolliert");
+	     }
 	}
 
 
@@ -58,5 +67,6 @@ module.exports = {
     transmitSpeed: transmitSpeed,
     transmitMove: transmitMove,
     transmitCountdownStart: transmitCountdownStart,
-    transmitStart: transmitStart
+    transmitStart: transmitStart,
+    transmitLeftTrack: transmitLeftTrack
 };
