@@ -24,12 +24,14 @@ var transmitClients = function(connectedClients){
 					speed: roboclient.data.speed
 				}
 			}
+		console.log(datamodel.displayTime() + " Send to " + controllingAppName + JSON.stringify(speedData) + "\n");	
 		controllingApp.webSocketConnection.send(JSON.stringify(speedData));
 	},
 	transmitMove = function(appclient, jsonMessage, datamodel) {
 		if(appclient.data.selectedRobo) {
 			var controlledRoboName = appclient.data.selectedRobo.name,
 				controlledRobo = datamodel.getClientByName(controlledRoboName)
+			console.log(datamodel.displayTime() + "Send to" + controlledRoboName + JSON.stringify(jsonMessage) + "\n");
 			controlledRobo.webSocketConnection.send(JSON.stringify(jsonMessage));
 		} else {
 			console.log("Die sendende App hat zurzeit keinen Robo");
@@ -40,6 +42,7 @@ var transmitClients = function(connectedClients){
 			var countdownMessage = {
 				eventType: "countdownStart"
 			};
+			console.log(datamodel.displayTime() + " Send to " + connectedClients[i] + JSON.stringify(countdownMessage) + "\n");
 			connectedClients[i].webSocketConnection.send(JSON.stringify(countdownMessage));
 		}
 	},
@@ -48,14 +51,16 @@ var transmitClients = function(connectedClients){
 			var startMessage = {
 				eventType: "startRace"
 			};
+			console.log(datamodel.displayTime() + " Send to " + connectedClients[i] + JSON.stringify(startMessage) + "\n");
 			connectedClients[i].webSocketConnection.send(JSON.stringify(startMessage));
 		}
 	},
 	transmitLeftTrack = function(roboclient, jsonMessage, datamodel) {
 	    if(roboclient.data.controlledBy) {
-	    var controllingAppName = roboclient.data.controlledBy,
-	        controllingApp  = datamodel.getClientByName(controllingAppName)
-	        controllingApp.webSocketConnection.send(JSON.stringify(jsonMessage));
+		    var controllingAppName = roboclient.data.controlledBy,
+		        controllingApp  = datamodel.getClientByName(controllingAppName)
+		    console.log(datamodel.displayTime() + " Send to " + controllingApp + JSON.stringify(jsonMessage) + "\n");
+		    controllingApp.webSocketConnection.send(JSON.stringify(jsonMessage));
 	    }else {
 	        console.log("Robo wird von keiner App kontrolliert");
 	     }

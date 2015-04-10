@@ -22,7 +22,7 @@ public class DataModel {
 	}
 
 	public int getTargetSpeed() {
-		if(isBoundaryReached()) {
+		if(wasBoundaryReachedRecently()) {
 			return (int)Math.ceil(targetSpeed * 0.2);
 		} else {
 			return targetSpeed;
@@ -38,14 +38,12 @@ public class DataModel {
 		
 	}
 
-	public boolean isBoundaryReached() {
+	public boolean wasBoundaryReachedRecently() {
 		return System.currentTimeMillis() - boundaryReachedTime < SLOW_TIME_MILLIS;
 	}
 
 	public void courseBoundaryReached() {
-		if(!isBoundaryReached()) {
-			System.out.println("Boundary reached");
-			boundaryReachedTime = System.currentTimeMillis();
-		}
+		System.out.println("Boundary reached");
+		boundaryReachedTime = System.currentTimeMillis();
 	}
 }

@@ -5,8 +5,6 @@ import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.SensorMode;
 
-import java.util.Arrays;
-
 /**
  * Created by luca on 27.03.15.
  */
@@ -33,8 +31,7 @@ public class CourseController {
                 while(true) {
                     brightnessSensorMode.fetchSample(lastSample, 0);
 
-
-                    if(isCourseBoundary(lastSample[0])) {
+                    if(isCourseBoundary(lastSample[0]) && !dataModel.wasBoundaryReachedRecently()) {
                         dataModel.courseBoundaryReached();
                         controller.courseBoundaryReached();
                     }
@@ -45,6 +42,6 @@ public class CourseController {
     }
 
     private boolean isCourseBoundary(float brightness) {
-        return brightness < 0.2;
+        return brightness > 0.8;
     }
 }
