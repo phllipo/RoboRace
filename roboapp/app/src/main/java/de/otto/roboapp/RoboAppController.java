@@ -1,10 +1,13 @@
 package de.otto.roboapp;
 import android.app.Application;
+import android.content.Intent;
+import android.os.CountDownTimer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import de.otto.roboapp.ui.activities.SteeringActivity;
 import de.otto.roboapp.ui.activities.base.ActivityMontitor;
 import de.otto.roboapp.ui.activities.base.UpdatableActivity;
 import de.otto.roboapp.model.DataModel;
@@ -88,6 +91,12 @@ public class RoboAppController extends Application implements ActivityMontitor {
         }
     }
 
+    private void handleCountdownStart() throws JSONException {
+        dataModel.getRacingData().initiatedCountdown();
+        Intent intent = new Intent(this, SteeringActivity.class);
+        startActivity(intent);
+    }
+
     /* Eingehende Nachrichten vom Server im JSON-Format auseinander nehmen und weiter verarbeiten */
     private void handleJsonMessage(JSONObject json) {
         try {
@@ -101,6 +110,9 @@ public class RoboAppController extends Application implements ActivityMontitor {
                 case "speed":
                     handleSpeedFromJson(json.getJSONObject("data"));
                     break;
+                case "countdownStart":
+                    handleCountdownStart();
+                    break;
                 default:
                     System.out.println("no valid eventType: " + eventType);
             }
@@ -112,7 +124,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
     //-----------------------  Methods for processing events from user -------------------//
 
     public void playerNameEntered(final String playerName, final OnFinishedCallback onFinishedCallback) {
-        serverController = new ServerController("10.90.151.135", "8888");
+        serverController = new ServerController("10.90.158.229", "8888");
         dataModel.addPlayerToArray(playerName, false);
 
         serverController.connect(new WebSocketListener() {
