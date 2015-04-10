@@ -98,8 +98,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
 
     private void handleCountdownStart() throws JSONException {
         dataModel.getRacingData().initiatedCountdown();
-        Intent intent = new Intent(this, SteeringActivity.class);
-        startActivity(intent);
+        currentActiveActivity.switchActivity(SteeringActivity.class);
     }
     private void leftTrackVibration() {
         Vibrator v = (Vibrator) this.getBaseContext().getSystemService(Context.VIBRATOR_SERVICE);
@@ -186,6 +185,6 @@ public class RoboAppController extends Application implements ActivityMontitor {
     }
 
     public void readyStateChange(boolean readyState) {
-        serverController.sendMsg("{\"eventType\": \"ready\", \"data\": { \"ready\": " + readyState + "}}");
+        serverController.sendMsg("{\"eventType\": \"ready\", \"data\": { \"ready\": \"" + readyState + "\" }}");
     }
 }

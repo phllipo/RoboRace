@@ -64,15 +64,21 @@ module.exports = {
           var disconnectedClient = getClientByWsConnection(ws);
           if(disconnectedClient.data.type === "robo") {
             console.log("robo losing connection");
-            disconnectedClient.data.speed = 0;
-            console.log(disconnectedClient.data.speed);
             if (disconnectedClient.data.controlledBy) {
 	            var app = datamodel.getClientByName(disconnectedClient.data.controlledBy);
               if(app != null) {
   	            app.data.selectedRobo = null;
   	            app.data.ready = "waiting";
               }
-	        }
+	          }
+          } else if(disconnectedClient.data.type === "app") {
+            if(disconnectedClient.data.selectedRobo) {
+              var robo = datamodel.getClientByName(disconnectedClient.data.selectedRobo.name);
+              if(robo) {
+                delete robo.data.controlledBy;
+                robo.data.speed = 0;
+              }
+            }
           }
           connectedClients.splice(connectedClients.indexOf(disconnectedClient), 1);
           messageTransmitter.transmitClients(connectedClients);
