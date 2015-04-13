@@ -38,7 +38,13 @@ public class SteeringActivity extends AbstractUpdatableActivity {
         final RoboAppController roboAppController = (RoboAppController)getApplicationContext();
 
         SeekBar speedSlider = (SeekBar) findViewById(R.id.ID_Speed_Slider);
-
+        imageViews.add((ImageView)findViewById(R.id.speedlight1));
+        imageViews.add((ImageView)findViewById(R.id.speedlight2));
+        imageViews.add((ImageView)findViewById(R.id.speedlight3));
+        imageViews.add((ImageView)findViewById(R.id.speedlight4));
+        imageViews.add((ImageView)findViewById(R.id.speedlight5));
+        imageViews.add((ImageView)findViewById(R.id.speedlight6));
+        imageViews.add((ImageView)findViewById(R.id.speedlight7));
 
         speedSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
