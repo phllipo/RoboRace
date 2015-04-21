@@ -52,7 +52,7 @@ var processConnect = function(connectedClient, jsonMessage){
                 countRobos+=1;
             } else if (connectedClients[i].data.type == "app" && connectedClients[i].data.selectedRobo && connectedClients[i].data.ready == "true") {
                 readyClients+=1;
-                assignedClients += connectedClients[i];
+                assignedClients.push(connectedClients[i]);
             }
         }
         console.log("Pruefe ob  Robos ready sind..." + countRobos + " - " + readyClients);
