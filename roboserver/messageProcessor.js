@@ -44,19 +44,22 @@ var processConnect = function(connectedClient, jsonMessage){
     processReady = function(appclient, jsonMessage, connectedClients){
         appclient.data.ready = jsonMessage.data.ready;
         var readyClients = 0,
-            countRobos = 0
+            countRobos = 0,
+            assignedClients = [];
 
         for (i in connectedClients) {
             if (connectedClients[i].data.type == "robo") {
                 countRobos+=1;
             } else if (connectedClients[i].data.type == "app" && connectedClients[i].data.selectedRobo && connectedClients[i].data.ready == "true") {
                 readyClients+=1;
+                assignedClients += connectedClients[i];
             }
         }
         console.log("Pruefe ob  Robos ready sind..." + countRobos + " - " + readyClients);
         if(countRobos == readyClients) {
-          console.log("Alle Robos ready")
-            messageTransmitter.transmitCountdownStart(connectedClients);
+            console.log("Alle Robos ready")
+
+            messageTransmitter.transmitCountdownStart(assignedClients);
             setTimeout(function() {messageTransmitter.transmitStart(connectedClients)}, 3000);
         }
     }
