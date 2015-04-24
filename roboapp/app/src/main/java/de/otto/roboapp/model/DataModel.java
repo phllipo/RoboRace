@@ -7,24 +7,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import de.otto.roboapp.RoboAppController;
-
 public class DataModel {
-    String serverIp;
-
-    public int getTachometer() {
-        return tachometer;
-    }
-
-    public void setTachometer(int tachometer) {
-        this.tachometer = tachometer;
-    }
 
     int tachometer;
     List<Robo> roboList;
     List<Player> playerList;
     Map<Player, Robo> playerToRoboAssignmentMap;
     Map<Player, Integer> playerToResultMap;
+
+
 
     public String currentPlayerName;
 
@@ -64,8 +55,11 @@ public class DataModel {
 
     /* Füge Player dem Array hinzu */
     public void addPlayerToArray(String playername, boolean isReady) {
-        currentPlayerName = playername;
         playerList.add(new Player(playername, isReady));
+    }
+
+    public void setCurrentPlayerName(String currentPlayerName) {
+        this.currentPlayerName = currentPlayerName;
     }
 
     public void addRoboToArray(String roboname) {
