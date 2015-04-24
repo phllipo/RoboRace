@@ -42,14 +42,6 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
         playerListAdapter = new PlayerListAdapter(this);
         assignmentListAdapter = new AssignmentListAdapter(this);
 
-/*        assignedPlayers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Player clickedPlayer = (Player) assignedPlayers.getItemAtPosition(position);
-                roboAppController.
-            }
-        });*/
-
         unassignedRobos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -64,7 +56,10 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
         unassignedPlayers.setAdapter(playerListAdapter);
         unassignedRobos.setAdapter(roboListAdapter);
         assignedPlayers.setAdapter(assignmentListAdapter);
+
+
     }
+
 
     @Override
     public void updateActivity() {

@@ -2,8 +2,11 @@ package de.otto.roboapp.ui.activities.base;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
+import android.widget.Toast;
 
 public abstract class AbstractUpdatableActivity extends Activity implements UpdatableActivity {
+    private Boolean exit = false;
 
     @Override
     protected void onStart() {
@@ -35,5 +38,25 @@ public abstract class AbstractUpdatableActivity extends Activity implements Upda
     public void switchActivity(Class<? extends Activity> activityClass) {
         Intent intent = new Intent(this, activityClass);
         startActivity(intent);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if (exit) {
+            finishAffinity(); // finish activity
+        } else {
+            Toast.makeText(this, "Press Back again to Exit.",
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
+        }
+
     }
 }

@@ -1,6 +1,6 @@
 package de.otto.roboapp;
+
 import android.app.Application;
-import android.content.Intent;
 import android.content.Context;
 import android.os.Vibrator;
 
@@ -8,12 +8,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+import de.otto.roboapp.model.Player;
 import de.otto.roboapp.ui.activities.SteeringActivity;
 import de.otto.roboapp.ui.activities.base.ActivityMontitor;
 import de.otto.roboapp.ui.activities.base.UpdatableActivity;
+
 import de.otto.roboapp.model.DataModel;
 import de.otto.roboapp.model.RacingData;
 import de.otto.roboapp.model.SteeringDirection;
+import de.otto.roboapp.ui.activities.SteeringActivity;
+import de.otto.roboapp.ui.activities.base.ActivityMontitor;
+import de.otto.roboapp.ui.activities.base.UpdatableActivity;
 import de.otto.roboapp.util.OnFinishedCallback;
 import de.otto.roboapp.websocket.ServerController;
 import de.otto.roboapp.websocket.WebSocketListener;
@@ -70,10 +76,12 @@ public class RoboAppController extends Application implements ActivityMontitor {
             name = clientObject.getString("name");
             if (type.equals("app")) {
 
-                if(clientObject.has("selectedRobo")){
+                if(clientObject.has("selectedRobo") && !"null".equals(clientObject.getString("selectedRobo"))){
                     JSONObject selectedRoboObject = clientObject.getJSONObject("selectedRobo");
                     dataModel.assignPlayerToRobo(name, selectedRoboObject.getString("name"));
+
                 }
+
             }
         }
 
@@ -84,13 +92,11 @@ public class RoboAppController extends Application implements ActivityMontitor {
 
     private void handleSpeedFromJson(JSONObject data) throws JSONException {
         int speed = data.getInt("speed");
-        int tachometer = speed/8;
-         dataModel.setTachometer(tachometer);
-         dataModel.getTachometer();
+
 
         RacingData racingData = dataModel.getRacingData();
         if (racingData != null) {
-            racingData.setCurrentSpeed(speed);
+            racingData.setCurrentSpeed(speed/6);
         }
 
         if (currentActiveActivity != null) {
@@ -146,7 +152,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
     //-----------------------  Methods for processing events from user -------------------//
 
     public void playerNameEntered(final String playerName, final OnFinishedCallback onFinishedCallback) {
-        serverController = new ServerController("10.90.152.221", "8888");
+        serverController = new ServerController("10.90.167.47", "8888");
         dataModel.addPlayerToArray(playerName, false);
 
         serverController.connect(new WebSocketListener() {
@@ -198,4 +204,6 @@ public class RoboAppController extends Application implements ActivityMontitor {
     public void readyStateChange(boolean readyState) {
         serverController.sendMsg("{\"eventType\": \"ready\", \"data\": { \"ready\": \"" + readyState + "\" }}");
     }
-}
+
+      }
+

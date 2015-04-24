@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SpeedLights extends LinearLayout {
@@ -47,10 +48,11 @@ public class SpeedLights extends LinearLayout {
             imageViews.add(imageView);
             super.addView(imageView);
         }
+        Collections.reverse(imageViews);
         setSpeed(speed);
     }
 
-    private void setSpeed(int speed) {
+    public void setSpeed(int speed) {
         this.speed = speed;
         float orangePercentage = (float)greenCount / imageCount;
         float redPercentage = (float)(greenCount + orangeCount) / imageCount;
