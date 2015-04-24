@@ -42,6 +42,10 @@ public class RacingData {
         return racingState;
     }
 
+    public void setRacingState(RacingState racingState) {
+        this.racingState = racingState;
+    }
+
     public void initiatRaceStart() {
         racingState = RacingState.STARTED;
         raceStartingTime = new Date();

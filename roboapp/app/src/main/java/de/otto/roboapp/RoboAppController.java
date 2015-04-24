@@ -9,8 +9,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import de.otto.roboapp.model.DataModel;
+import de.otto.roboapp.model.Player;
 import de.otto.roboapp.model.RacingData;
+import de.otto.roboapp.model.RacingState;
 import de.otto.roboapp.model.SteeringDirection;
+import de.otto.roboapp.ui.activities.SteeringActivity;
+import de.otto.roboapp.ui.activities.base.ActivityMontitor;
+import de.otto.roboapp.ui.activities.base.UpdatableActivity;
 import de.otto.roboapp.util.OnFinishedCallback;
 import de.otto.roboapp.websocket.ServerController;
 import de.otto.roboapp.websocket.WebSocketListener;
@@ -102,6 +107,9 @@ public class RoboAppController extends Application implements ActivityMontitor {
 
     private void handleResultsFromJson(JSONObject data) throws JSONException {
         for(int i = 0; i < data.length(); i++) {
+            dataModel.getRacingData().setRacingState(RacingState.FINISHED);
+
+            // ergebnisse in dataModel speichern
             dataModel.clearPlayerToResultMap();
 
             JSONObject result = data.getJSONObject("resultObject");
@@ -109,6 +117,8 @@ public class RoboAppController extends Application implements ActivityMontitor {
             Integer timeInSeconds = result.getInt("time");
 
             dataModel.addPlayerToResultMap(player, timeInSeconds);
+
+            getActiveActivity().updateActivityFromBgThread();
         }
     }
 

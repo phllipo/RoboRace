@@ -1,5 +1,6 @@
 package de.otto.roboapp.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MotionEvent;
@@ -14,6 +15,7 @@ import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
 import de.otto.roboapp.model.DataModel;
 import de.otto.roboapp.model.RacingData;
+import de.otto.roboapp.model.RacingState;
 import de.otto.roboapp.model.SteeringDirection;
 import de.otto.roboapp.ui.activities.base.AbstractUpdatableActivity;
 import de.otto.roboapp.ui.components.SpeedLights;
@@ -161,6 +163,10 @@ public class SteeringActivity extends AbstractUpdatableActivity {
 
     @Override
     public void updateActivity() {
-        displayModel(((RoboAppController)getApplicationContext()).getDataModel());
+        DataModel dataModel = ((RoboAppController)getApplicationContext()).getDataModel();
+        displayModel(dataModel);
+        if(dataModel.getRacingData().getRacingState().equals(RacingState.FINISHED)) {
+            switchActivity(ResultsActivity.class);
+        }
     }
 }
