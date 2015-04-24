@@ -20,6 +20,7 @@ import de.otto.roboapp.model.RacingData;
 import de.otto.roboapp.model.RacingState;
 import de.otto.roboapp.model.SteeringDirection;
 import de.otto.roboapp.ui.activities.base.AbstractUpdatableActivity;
+import de.otto.roboapp.ui.components.SpeedLights;
 
 import static de.otto.roboapp.util.ThreadStarter.processInNewThread;
 
@@ -148,6 +149,8 @@ public class SteeringActivity extends AbstractUpdatableActivity {
                 RacingData racingData = dataModel.getRacingData();
                 int speed = (racingData != null) ? racingData.getCurrentSpeed() : -999;
                 t_textViewSpeed.setText(String.valueOf(speed));
+                final SpeedLights speedLights = (SpeedLights) findViewById(R.id.ID_Speed_Lights);
+                speedLights.setSpeed(speed);
                 break;
             }
         }

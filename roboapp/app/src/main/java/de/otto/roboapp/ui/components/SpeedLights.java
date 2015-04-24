@@ -50,7 +50,7 @@ public class SpeedLights extends LinearLayout {
         setSpeed(speed);
     }
 
-    private void setSpeed(int speed) {
+    public void setSpeed(int speed) {
         this.speed = speed;
         float orangePercentage = (float)greenCount / imageCount;
         float redPercentage = (float)(greenCount + orangeCount) / imageCount;
