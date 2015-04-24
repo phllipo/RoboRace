@@ -24,7 +24,7 @@ var transmitClients = function(connectedClients){
 					speed: roboclient.data.speed
 				}
 			}
-		console.log(datamodel.displayTime() + " Send to " + controllingAppName + JSON.stringify(speedData) + "\n");	
+		console.log(datamodel.displayTime() + " Send to " + controllingAppName + JSON.stringify(speedData) + "\n");
 		controllingApp.webSocketConnection.send(JSON.stringify(speedData));
 	},
 	transmitMove = function(appclient, jsonMessage, datamodel) {
@@ -64,6 +64,24 @@ var transmitClients = function(connectedClients){
 	    }else {
 	        console.log("Robo wird von keiner App kontrolliert");
 	     }
+	},
+	transmitTimes = function(finishedClients, result, roboClient) {
+			var timeData = {
+				eventType: "results",
+				data: result
+			};
+			var moveData = {
+				eventType: "move",
+				data: [{
+					speed: 0
+				}]
+			};
+			for(i in finishedClients) {
+				console.log("Time results send: " + JSON.stringify(timeData));
+				finishedClients[i].webSocketConnection.send(JSON.stringify(timeData));
+			}
+			console.log("Set speed to 0 for " + roboClient.data.name + " Message: " + JSON.stringify(moveData));
+			roboClient.webSocketConnection.send(JSON.stringify(moveData));
 	}
 
 
@@ -73,5 +91,6 @@ module.exports = {
     transmitMove: transmitMove,
     transmitCountdownStart: transmitCountdownStart,
     transmitStart: transmitStart,
-    transmitLeftTrack: transmitLeftTrack
+    transmitLeftTrack: transmitLeftTrack,
+		transmitTimes: transmitTimes
 };

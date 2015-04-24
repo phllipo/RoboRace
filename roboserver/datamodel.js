@@ -1,7 +1,7 @@
 /*
     connectedClients Array, wo alle Clients gespeichert werden wird initiiert
     datamode = {
-        connectedClients: 
+        connectedClients:
             [{
                 webSocketConnection: ws,
                 data: {type: "App",
@@ -9,11 +9,13 @@
                     ready: "true",
                     speed: "100",
                     selectedRobo: "testRobo",
-                    roboName: "testRobo"
+                    roboName: "testRobo",
+                    startTime: "",
+                    endTime:""
                 },
                 id: connectedClients.length
             }]
-        
+
     }
 */
 
@@ -21,7 +23,7 @@ var connectedClients = [],
     getConnectedClients = function(){
         return connectedClients;
     },
-    
+
     getClientByName = function (name) {
         for (i = 0; i <= connectedClients.length; i++) {
             if (connectedClients[i]) {

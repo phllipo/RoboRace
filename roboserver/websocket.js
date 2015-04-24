@@ -55,7 +55,11 @@ module.exports = {
             }
             else if (jsonMessage.eventType === "leftTrack") {
               messageTransmitter.transmitLeftTrack(connectedClient, jsonMessage, datamodel);
-            }else {
+            }
+            else if (jsonMessage.eventType === "finish") {
+              messageProcessor.processFinish(connectedClient, connectedClients, jsonMessage);
+            }
+            else {
               ws.send(JSON.stringify({eventType: "error", data: { message: "unknownEventtype"}}));
             }
         });
@@ -77,13 +81,13 @@ module.exports = {
               if(robo) {
                 delete robo.data.controlledBy;
                 robo.data.speed = "0";
-                var speedMessage = { 
+                var speedMessage = {
                   eventType: "move",
                   data: {
                     speed: "0"
                   }
                 }
-                console.log(datamodel.displayTime() + " Send to " + robo.name + JSON.stringify(speedMessage) + "\n"); 
+                console.log(datamodel.displayTime() + " Send to " + robo.name + JSON.stringify(speedMessage) + "\n");
                 robo.webSocketConnection.send(JSON.stringify(speedMessage));
               }
             }

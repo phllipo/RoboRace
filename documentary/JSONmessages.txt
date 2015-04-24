@@ -17,3 +17,8 @@
 {"eventType": "startRace"}
 
 {"eventType": "leftTrack"}
+
+{"eventType": "finish"}
+
+{"eventType":"results","data":[{"resultObject":{"name":"TestApp","time":1092}}]}
+

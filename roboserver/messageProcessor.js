@@ -60,14 +60,43 @@ var processConnect = function(connectedClient, jsonMessage){
             console.log("Alle Robos ready")
 
             messageTransmitter.transmitCountdownStart(assignedClients);
-            setTimeout(function() {messageTransmitter.transmitStart(connectedClients)}, 3000);
+            setTimeout(function() {
+              var now = new Date().getTime();
+              console.log("Time: " + now);
+              for (i in assignedClients) {
+                assignedClients[i].data.startTime = now;
+              }
+              messageTransmitter.transmitStart(assignedClients);
+            }, 3000);
         }
-    }
+    },
+    processFinish = function(roboClient, connectedClients, jsonMessage){
+        var roboname = roboClient.data.name,
+            finishedClients = [],
+            result = [],
+            time;
+
+        for(i in connectedClients) {
+            if(connectedClients[i].data.type == "app" && connectedClients[i].data.selectedRobo.name == roboname) {
+              connectedClients[i].data.endTime = new Date().getTime();
+              finishedClients.push(connectedClients[i]);
+            } else if (connectedClients[i].data.type == "app" && connectedClients[i].data.endTime != null && connectedClients[i].data.endTime.length > 0) {
+              finishedClients.push(connectedClients[i]);
+            }
+        }
+        for(i in finishedClients) {
+            time = finishedClients[i].data.endTime - finishedClients[i].data.startTime;
+
+            result.push({resultObject: {"name": finishedClients[i].data.name, "time": time}});
+        }
+        messageTransmitter.transmitTimes(finishedClients, result, roboClient);
+    };
 
 module.exports = {
     processConnect: processConnect,
     processSpeed: processSpeed,
     processRoboSelected: processRoboSelected,
     processRoboDeselect: processRoboDeselect,
-    processReady: processReady
+    processReady: processReady,
+    processFinish: processFinish
 };
