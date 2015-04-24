@@ -4,11 +4,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import lejos.hardware.motor.Motor;
 import de.otto.roborace.connection.ServerController;
 import de.otto.roborace.connection.WebSocketListener;
 import de.otto.roborace.model.DataModel;
-
 import de.otto.roborace.model.Steering;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,16 +17,24 @@ import org.json.JSONObject;
 /**
  * Created by luca on 06.03.15.
  */
-public class Controller {
+public class RacerController {
     DataModel dataModel;
     ServerController serverController;
-    MotorController motorController;
+    SpeedController motorController;
     CourseController courseController;
 	private Properties properties;
+	private EventLoop eventLoop = new EventLoop();
 
-    public Controller() {
+    public RacerController() {
     	properties = loadProperties();
         dataModel = new DataModel();
+        
+        System.out.println("start event loop");
+        eventLoop.register(new SpeedController(dataModel, RacerController.this));
+        eventLoop.register(new SteeringController(Motor.C, dataModel));
+        eventLoop.register(new CourseController(dataModel, RacerController.this));
+        eventLoop.start();
+        
         establishConnection();
         // motorController = new MotorController(dataModel);
         // courseController = new CourseController(dataModel);
@@ -52,10 +61,7 @@ public class Controller {
 
                 System.out.println("sending conntect message: " + connectMessage);
                 serverController.sendMsg(connectMessage);
-
-                System.out.println("trying to start motorController");
-                motorController = new MotorController(dataModel, Controller.this);
-                courseController = new CourseController(dataModel, Controller.this);
+                
             }
 
             @Override
