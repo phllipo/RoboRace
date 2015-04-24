@@ -15,8 +15,10 @@ var transmitClients = function(connectedClients){
 		}
 	},
 	transmitSpeed = function(roboclient, datamodel) {
+		var controllingAppName, controllingApp;
 		console.log("Transmit Speed: " + roboclient.data.name);
-		var controllingAppName = roboclient.data.controlledBy,
+		controllingAppName = roboclient.data.controlledBy;
+		if(controllingAppName) {
 			controllingApp = datamodel.getClientByName(controllingAppName),
 			speedData = {
 				eventType: "speed",
@@ -24,8 +26,9 @@ var transmitClients = function(connectedClients){
 					speed: roboclient.data.speed
 				}
 			}
-		console.log(datamodel.displayTime() + " Send to " + controllingAppName + JSON.stringify(speedData) + "\n");
-		controllingApp.webSocketConnection.send(JSON.stringify(speedData));
+			console.log(datamodel.displayTime() + " Send to " + controllingAppName + JSON.stringify(speedData) + "\n");
+			controllingApp.webSocketConnection.send(JSON.stringify(speedData));
+		}
 	},
 	transmitMove = function(appclient, jsonMessage, datamodel) {
 		if(appclient.data.selectedRobo) {
