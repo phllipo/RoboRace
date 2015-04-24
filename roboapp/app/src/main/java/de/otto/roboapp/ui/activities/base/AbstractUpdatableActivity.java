@@ -44,7 +44,7 @@ public abstract class AbstractUpdatableActivity extends Activity implements Upda
     @Override
     public void onBackPressed() {
         if (exit) {
-            finish(); // finish activity
+            finishAffinity(); // finish activity
         } else {
             Toast.makeText(this, "Press Back again to Exit.",
                     Toast.LENGTH_SHORT).show();

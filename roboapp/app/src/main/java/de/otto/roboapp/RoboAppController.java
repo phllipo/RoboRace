@@ -70,7 +70,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
             name = clientObject.getString("name");
             if (type.equals("app")) {
 
-                if(clientObject.has("selectedRobo")){
+                if(clientObject.has("selectedRobo") && !"null".equals(clientObject.getString("selectedRobo"))){
                     JSONObject selectedRoboObject = clientObject.getJSONObject("selectedRobo");
                     dataModel.assignPlayerToRobo(name, selectedRoboObject.getString("name"));
                 }

@@ -69,15 +69,15 @@
         android:layout_height="250dp">
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Assigned player(s)"
             android:id="@+id/assignmentListHeadline"
             android:textColor="#01a9d4" />
 
         <ListView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:id="@+id/assignmentList" />
 
     </LinearLayout>
