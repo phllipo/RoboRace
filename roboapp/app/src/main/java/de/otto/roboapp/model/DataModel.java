@@ -24,6 +24,7 @@ public class DataModel {
     List<Robo> roboList;
     List<Player> playerList;
     Map<Player, Robo> playerToRoboAssignmentMap;
+    Map<Player, Integer> playerToResultMap;
 
     public String currentPlayerName;
 
@@ -34,7 +35,7 @@ public class DataModel {
         roboList = new ArrayList<Robo>();
         playerList = new ArrayList<Player>();
         playerToRoboAssignmentMap = new HashMap<Player, Robo>();
-
+        playerToResultMap = new HashMap<Player, Integer>();
    }
 
     public Map<Player, Robo> getPlayerToRoboAssignmentMap() {
@@ -49,8 +50,16 @@ public class DataModel {
         roboList.clear();
     }
 
-    public void clearAssignmentMap() {
+    public void clearPlayerToRoboAssignmentMap() {
         playerToRoboAssignmentMap.clear();
+    }
+
+    public void clearPlayerToResultMap() {
+        playerToResultMap.clear();
+    }
+
+    public void addPlayerToResultMap(Player player, int result) {
+        playerToResultMap.put(player, result);
     }
 
     /* Füge Player dem Array hinzu */
@@ -62,6 +71,7 @@ public class DataModel {
     public void addRoboToArray(String roboname) {
         roboList.add(new Robo(roboname));
     }
+
     public void assignPlayerToRobo(String playerName, String roboName){
         playerToRoboAssignmentMap.put(getPlayerByName(playerName), getRoboByName(roboName));
         System.out.println("Test" + playerToRoboAssignmentMap.isEmpty());

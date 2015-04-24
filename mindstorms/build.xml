@@ -7,7 +7,7 @@
     <property name="jar.dir"        value="dist"/>
     <property name="main-class"     value="de.otto.roborace.RacerMain"/>
     <property name="lejos.home"     value="/home/lejos/programs/"/>
-    <property name="ev3.host"       value="10.90.162.198"/>
+    <property name="ev3.host"       value="10.90.166.183"/>
     <!--<property name="ev3.host"       value="10.90.150.183"/>-->
 
     
