@@ -19,23 +19,33 @@ public class CourseController implements EventLoopListener{
     public CourseController(DataModel dataModel, RacerController controller) {
         this.dataModel = dataModel;
         this.controller = controller;
-        brightnessSensorMode = sensor.getMode("Red");
+        brightnessSensorMode = sensor.getRGBMode();
         lastSample = new float[brightnessSensorMode.sampleSize()];
 
     }
 
 
-    private boolean isCourseBoundary(float brightness) {
-        return brightness > 0.8;
+    private boolean isCourseBoundary(float[] sample) {
+        return sample[0] > 0.8;
+    }
+
+    private boolean isFinishingLine(float[] sample) {
+        float r = sample[0];
+        float g = sample[1];
+        float b = sample[2];
+
+        return r > 0.15 && g < 0.1 && b < 0.1;
     }
 
 	@Override
 	public void process() {
 		brightnessSensorMode.fetchSample(lastSample, 0);
 
-        if(isCourseBoundary(lastSample[0]) && !dataModel.wasBoundaryReachedRecently()) {
+        if(isCourseBoundary(lastSample) && !dataModel.wasBoundaryReachedRecently()) {
             dataModel.courseBoundaryReached();
             controller.courseBoundaryReached();
+        } else if (isFinishingLine(lastSample)) {
+            controller.finishLineReached();
         }
 		
 	}

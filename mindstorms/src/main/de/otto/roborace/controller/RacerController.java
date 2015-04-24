@@ -101,6 +101,10 @@ public class RacerController {
         serverController.sendBoundaryReachedMessage();
     }
 
+    public void finishLineReached() {
+        serverController.sendFinishLineReachedMessage();
+    }
+
     public void speedChangeDetected() {
         serverController.sendSpeedMessage(dataModel.getTargetSpeed());
     }
