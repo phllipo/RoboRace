@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SpeedLights extends LinearLayout {
@@ -47,6 +48,7 @@ public class SpeedLights extends LinearLayout {
             imageViews.add(imageView);
             super.addView(imageView);
         }
+        Collections.reverse(imageViews);
         setSpeed(speed);
     }
 
