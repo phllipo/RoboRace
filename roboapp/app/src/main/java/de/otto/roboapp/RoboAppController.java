@@ -1,6 +1,6 @@
 package de.otto.roboapp;
+
 import android.app.Application;
-import android.content.Intent;
 import android.content.Context;
 import android.os.Vibrator;
 
@@ -8,13 +8,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import de.otto.roboapp.model.Player;
 import de.otto.roboapp.ui.activities.SteeringActivity;
 import de.otto.roboapp.ui.activities.base.ActivityMontitor;
 import de.otto.roboapp.ui.activities.base.UpdatableActivity;
+
 import de.otto.roboapp.model.DataModel;
 import de.otto.roboapp.model.RacingData;
 import de.otto.roboapp.model.SteeringDirection;
+import de.otto.roboapp.ui.activities.SteeringActivity;
+import de.otto.roboapp.ui.activities.base.ActivityMontitor;
+import de.otto.roboapp.ui.activities.base.UpdatableActivity;
 import de.otto.roboapp.util.OnFinishedCallback;
 import de.otto.roboapp.websocket.ServerController;
 import de.otto.roboapp.websocket.WebSocketListener;
@@ -71,7 +76,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
             name = clientObject.getString("name");
             if (type.equals("app")) {
 
-                if(clientObject.has("selectedRobo")){
+                if(clientObject.has("selectedRobo") && !"null".equals(clientObject.getString("selectedRobo"))){
                     JSONObject selectedRoboObject = clientObject.getJSONObject("selectedRobo");
                     dataModel.assignPlayerToRobo(name, selectedRoboObject.getString("name"));
 

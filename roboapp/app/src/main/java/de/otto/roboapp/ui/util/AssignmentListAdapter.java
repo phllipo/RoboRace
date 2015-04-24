@@ -3,7 +3,6 @@ package de.otto.roboapp.ui.util;
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,9 +11,11 @@ import android.widget.TextView;
 
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
+
 import de.otto.roboapp.model.DataModel;
 import de.otto.roboapp.model.Player;
 import de.otto.roboapp.model.Robo;
+
 
 /**
  * Created by samaeder on 23.03.15.
@@ -51,23 +52,28 @@ public class AssignmentListAdapter extends BaseAdapter {
         TextView assignedRobo = new TextView(activity);
         TextView seperatorView = new TextView(activity);
         final Button deselectRoboButton = new Button(activity);
-        Button readyButton = new Button(activity);
+        ImageView readyButton = new ImageView(activity);
 
         Player player = roboAppController.getDataModel().getAssignedPlayer().get(position);
         final String assignedPlayerName = player.getName();
         final String assignedRoboName = roboAppController.getDataModel().getAssignedRobo().get(position).getName();
-        String seperatror = " @ ";
+        String separator = " @ ";
 
         assignedPlayer.setText(assignedPlayerName);
         assignedRobo.setText(assignedRoboName);
-        seperatorView.setText(seperatror);
+        seperatorView.setText(separator);
         deselectRoboButton.setText("x");
 
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(100, LinearLayout.LayoutParams.MATCH_PARENT);
+        params.setMargins(40, 10, 40, 10);
+        params.weight = 1;
+        readyButton.setLayoutParams(params);
+        readyButton.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        if (roboAppController.getDataModel().getAssignedPlayer().get(position).isReady()) {
+            readyButton.setBackgroundResource(R.drawable.ready_slider);
 
-        if (player.isReady()) {
-            readyButton.setBackgroundResource(R.drawable.ready);
         } else {
-            readyButton.setBackgroundResource(R.drawable.unready);
+            readyButton.setBackgroundResource(R.drawable.waiting_slider);
         }
         if (player.getName().equals(roboAppController.getDataModel().currentPlayerName)) {
 
