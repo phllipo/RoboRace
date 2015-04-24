@@ -34,7 +34,7 @@ public class DataModel {
 	}
 
 	public void setTargetSpeed(int targetSpeed) {
-		this.targetSpeed = targetSpeed * 15;
+		this.targetSpeed = targetSpeed * 8; //800 ist das maximum zu sein.
 	}
 
 	public boolean wasBoundaryReachedRecently() {

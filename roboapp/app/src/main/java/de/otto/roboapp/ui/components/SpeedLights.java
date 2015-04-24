@@ -27,6 +27,7 @@ public class SpeedLights extends LinearLayout {
         super(context, attr);
         setOrientation(VERTICAL);
         imageCount = attr.getAttributeIntValue(null, "imageCount", 10);
+        boolean topTobottom = attr.getAttributeBooleanValue(null, "topToBottom", false);
         orangeCount = attr.getAttributeIntValue(null, "imageLightOrange_count", 2);
         redCount = attr.getAttributeIntValue(null, "imageLightRed_count", 2);
         greenCount = imageCount - orangeCount - redCount;
@@ -48,7 +49,9 @@ public class SpeedLights extends LinearLayout {
             imageViews.add(imageView);
             super.addView(imageView);
         }
-        Collections.reverse(imageViews);
+        if (!topTobottom) {
+            Collections.reverse(imageViews);
+        }
         setSpeed(speed);
     }
 
@@ -58,7 +61,7 @@ public class SpeedLights extends LinearLayout {
         float redPercentage = (float)(greenCount + orangeCount) / imageCount;
 
         for(int i = 0; i < imageCount; i++) {
-            float curPercentage = (float)i / imageCount;
+            float curPercentage = (float)(i + 0.5) / imageCount;
             if(curPercentage * 100 > speed) {
                 imageViews.get(i).setImageResource(imageLightOff_src_id);
                 continue;

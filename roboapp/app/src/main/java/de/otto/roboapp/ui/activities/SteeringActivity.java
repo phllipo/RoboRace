@@ -1,10 +1,7 @@
 package de.otto.roboapp.ui.activities;
 
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,7 +14,6 @@ import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
 import de.otto.roboapp.model.DataModel;
 import de.otto.roboapp.model.RacingData;
-import de.otto.roboapp.model.RacingState;
 import de.otto.roboapp.model.SteeringDirection;
 import de.otto.roboapp.ui.activities.base.AbstractUpdatableActivity;
 import de.otto.roboapp.ui.components.SpeedLights;
@@ -47,7 +43,7 @@ public class SteeringActivity extends AbstractUpdatableActivity {
                 processInNewThread(new Runnable() {
                     @Override
                     public void run() {
-                        long targetSpeed = Math.round((progress - 20) * 1.25);
+                        long targetSpeed = Math.round((progress - 20) * 1.25); //-25 <-> +100
                         System.out.println("slided to " + targetSpeed);
                         roboAppController.steer(targetSpeed);
                     }
@@ -149,8 +145,15 @@ public class SteeringActivity extends AbstractUpdatableActivity {
                 RacingData racingData = dataModel.getRacingData();
                 int speed = (racingData != null) ? racingData.getCurrentSpeed() : -999;
                 t_textViewSpeed.setText(String.valueOf(speed));
-                final SpeedLights speedLights = (SpeedLights) findViewById(R.id.ID_Speed_Lights);
-                speedLights.setSpeed(speed);
+                final SpeedLights speedLightsForward = (SpeedLights) findViewById(R.id.ID_Speed_Lights_Forward);
+                final SpeedLights speedLightsBackward = (SpeedLights) findViewById(R.id.ID_Speed_Lights_Backward);
+                if(speed > 0 ) {
+                    speedLightsForward.setSpeed(speed);
+                    speedLightsBackward.setSpeed(0);
+                } else {
+                    speedLightsForward.setSpeed(0);
+                    speedLightsBackward.setSpeed(-speed * 3);
+                }
                 break;
             }
         }

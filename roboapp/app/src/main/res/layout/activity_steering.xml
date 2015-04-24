@@ -43,17 +43,6 @@
                 android:layout_toRightOf="@+id/ID_Left"
                 android:layout_toEndOf="@+id/ID_Left" />
 
-            <!--ImageView
-                android:id="@+id/ID_tachometer"
-                android:contentDescription="@string/DSCRP_tachometer"
-                android:src="@drawable/tachometer"
-                android:layout_width="1100dp"
-                android:layout_height="1000dp"
-                tools:ignore="RtlHardcoded"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" /-->
-
 
             <ImageView
                 android:id="@+id/ID_Background_Menu"
@@ -92,23 +81,51 @@
                 android:layout_alignBottom="@+id/ID_Menu_Gear"
                 android:layout_below="@+id/ID_Speed" />
 
-            <de.otto.roboapp.ui.components.SpeedLights
-                android:id="@+id/ID_Speed_Lights"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                imageCount="10"
-                imageLightOrange_count="3"
-                imageLightRed_count="2"
-                imageWidth="150"
-                imageLightOff_src="@drawable/speedlight_black"
-                imageLightGreen_src="@drawable/speedlight_green"
-                imageLightOrange_src="@drawable/speedlight_orange"
-                imageLightRed_src="@drawable/speedlight_red"
-                speed="100"
+                android:orientation="vertical"
                 android:layout_toLeftOf="@+id/ID_Speed_Slider"
                 android:layout_toStartOf="@+id/ID_Speed_Slider"
                 android:layout_alignTop="@+id/ID_Speed_Slider"
-                android:layout_alignParentBottom="true" />
+                android:layout_alignParentBottom="true">
+
+                <de.otto.roboapp.ui.components.SpeedLights
+                    android:id="@+id/ID_Speed_Lights_Forward"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    imageCount="10"
+                    imageLightOrange_count="3"
+                    imageLightRed_count="2"
+                    imageWidth="150"
+                    imageLightOff_src="@drawable/speedlight_black"
+                    imageLightGreen_src="@drawable/speedlight_green"
+                    imageLightOrange_src="@drawable/speedlight_orange"
+                    imageLightRed_src="@drawable/speedlight_red"
+                    speed="0"
+                     />
+
+                <de.otto.roboapp.ui.components.SpeedLights
+                    android:id="@+id/ID_Speed_Lights_Backward"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    imageCount="3"
+                    topToBottom="true"
+                    imageLightOrange_count="2"
+                    imageLightRed_count="1"
+                    imageWidth="150"
+                    imageLightOff_src="@drawable/speedlight_black"
+                    imageLightGreen_src="@drawable/speedlight_green"
+                    imageLightOrange_src="@drawable/speedlight_orange"
+                    imageLightRed_src="@drawable/speedlight_red"
+                    speed="0"
+                    />
+
+                </LinearLayout>
+
+
 
             <!--RelativeLayout
                 android:layout_width="wrap_content"
