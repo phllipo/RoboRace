@@ -20,5 +20,9 @@
     <string name="DSCRP_Menu_Gear">Menü Rädchen</string>
     <string name="DSCRP_Tacho">Tacho</string>
     <string name="DSCRP_tachometer">Dies ist der Tachometer der im Hintergrund die Geschwindigkeit zeigen soll</string>
+    <string name="title_results_activity">Ergebnisse</string>
+    <string name="results_names_title">Spieler</string>
+    <string name="results_times_title">Zeit</string>
+    <string name="results_placement_title">Platz</string>
 
 </resources>
