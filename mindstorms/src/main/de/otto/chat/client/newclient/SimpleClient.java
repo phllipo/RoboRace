@@ -1,29 +1,20 @@
-package de.otto.chat.client;
+package de.otto.chat.client.newclient;
 
-import java.awt.Container;
-import java.awt.GridLayout;
+import org.java_websocket.WebSocketImpl;
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.drafts.*;
+import org.java_websocket.handshake.ServerHandshake;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.net.URI;
 import java.net.URISyntaxException;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import org.java_websocket.WebSocketImpl;
-import org.java_websocket.client.WebSocketClient;
-import org.java_websocket.drafts.Draft;
-import org.java_websocket.drafts.Draft_10;
-import org.java_websocket.drafts.Draft_17;
-import org.java_websocket.drafts.Draft_75;
-import org.java_websocket.drafts.Draft_76;
-import org.java_websocket.handshake.ServerHandshake;
 
 
-public class SimpleClient extends JFrame implements ActionListener {
+public class SimpleClient extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -6056260699202978657L;
 	private final JTextField uriField;
 	private final JButton connect;
@@ -31,11 +22,11 @@ public class SimpleClient extends JFrame implements ActionListener {
 	private final JTextArea ta;
 	private final JTextField chatField;
 	private final JComboBox draft;
+	private final JButton send;
 	private WebSocketClient cc;
-	public SimpleClient( String defaultlocation ) {
-		super( "WebSocket Chat Client" );
-		Container c = getContentPane();
-		c.setLayout( new GridLayout(6,1) );
+	public SimpleClient(String defaultlocation,final JFrame mainFrame) {
+		Container c = this;
+		c.setLayout( new GridLayout(8,1) );
 		Draft[] drafts = { new Draft_17(), new Draft_10(), new Draft_76(), new Draft_75() };
 		draft = new JComboBox( drafts );
 		c.add( draft );
@@ -49,27 +40,32 @@ public class SimpleClient extends JFrame implements ActionListener {
 		close.addActionListener( this );
 		close.setEnabled( false );
 		c.add( close );
+		// self written
+		chatField = new JTextField();
+		c.add(new QuickMessageButtons(chatField));
+		// end self written
 		JScrollPane scroll = new JScrollPane();
 		ta = new JTextArea();
 		scroll.setViewportView( ta );
-		c.add( scroll );
-		chatField = new JTextField();
-		chatField.setText( "" );
-		chatField.addActionListener( this );
-		c.add( chatField );
-		java.awt.Dimension d = new java.awt.Dimension( 300, 400 );
-		setPreferredSize( d );
-		setSize( d );
-		addWindowListener( new java.awt.event.WindowAdapter() {
+		c.add(scroll);
+		chatField.setText("");
+		chatField.addActionListener(this);
+		c.add(chatField);
+		send = new JButton("send");
+		send.addActionListener(this);
+		c.add(send);
+		java.awt.Dimension d = new java.awt.Dimension( 300, 500 );
+		setPreferredSize(d);
+		setSize(d);
+		mainFrame.addWindowListener(new java.awt.event.WindowAdapter() {
 			@Override
-			public void windowClosing( WindowEvent e ) {
-				if( cc != null ) {
+			public void windowClosing(WindowEvent e) {
+				if (cc != null) {
 					cc.close();
 				}
-				dispose();
+				mainFrame.dispose();
 			}
-		} );
-		setLocationRelativeTo( null );
+		});
 		setVisible( true );
 	}
 	public void actionPerformed( ActionEvent e ) {
@@ -78,6 +74,11 @@ public class SimpleClient extends JFrame implements ActionListener {
 				cc.send( chatField.getText() );
 				chatField.setText( "" );
 				chatField.requestFocus();
+			}
+		} else if (e.getSource().equals(send)) {
+			if( cc != null ) {
+				cc.send( chatField.getText() );
+				chatField.setText( "" );
 			}
 		} else if( e.getSource() == connect ) {
 			try {
@@ -124,17 +125,5 @@ public class SimpleClient extends JFrame implements ActionListener {
 		} else if( e.getSource() == close ) {
 			cc.close();
 		}
-	}
-	public static void main( String[] args ) {
-		WebSocketImpl.DEBUG = true;
-		String location;
-		if( args.length != 0 ) {
-			location = args[ 0 ];
-			System.out.println( "Default server url specified: \'" + location + "\'" );
-		} else {
-			location = "ws://localhost:8888";
-			System.out.println( "Default server url not specified: defaulting to \'" + location + "\'" );
-		}
-		new SimpleClient( location );
 	}
 }
