@@ -41,7 +41,7 @@ var processConnect = function(connectedClient, jsonMessage){
             delete roboToDeselect.data.controlledBy;
         }
     },
-    processReady = function(appclient, jsonMessage, connectedClients){
+    processReady = function(appclient, jsonMessage, connectedClients, datamodel){
         appclient.data.ready = jsonMessage.data.ready;
         var readyClients = 0,
             countRobos = 0,
@@ -53,6 +53,7 @@ var processConnect = function(connectedClient, jsonMessage){
             } else if (connectedClients[i].data.type == "app" && connectedClients[i].data.selectedRobo && connectedClients[i].data.ready == "true") {
                 readyClients+=1;
                 assignedClients.push(connectedClients[i]);
+                assignedClients.push(datamodel.getClientByName(connectedClients[i].data.selectedRobo.name));
             }
         }
         console.log("Pruefe ob  Robos ready sind..." + countRobos + " - " + readyClients);

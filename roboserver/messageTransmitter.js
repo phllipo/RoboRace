@@ -34,19 +34,21 @@ var transmitClients = function(connectedClients){
 		if(appclient.data.selectedRobo) {
 			var controlledRoboName = appclient.data.selectedRobo.name,
 				controlledRobo = datamodel.getClientByName(controlledRoboName)
-			console.log(datamodel.displayTime() + "Send to" + controlledRoboName + JSON.stringify(jsonMessage) + "\n");
+			console.log(datamodel.displayTime() + "Send to " + controlledRoboName + JSON.stringify(jsonMessage) + "\n");
 			controlledRobo.webSocketConnection.send(JSON.stringify(jsonMessage));
 		} else {
 			console.log("Die sendende App hat zurzeit keinen Robo");
 		}
 	},
 	transmitCountdownStart = function(connectedClients) {
+		var countdownMessage = {
+			eventType: "countdownStart"
+		};
 		for (i in connectedClients) {
-			var countdownMessage = {
-				eventType: "countdownStart"
-			};
-			console.log(datamodel.displayTime() + " Send to " + connectedClients[i] + JSON.stringify(countdownMessage) + "\n");
-			connectedClients[i].webSocketConnection.send(JSON.stringify(countdownMessage));
+			console.log(datamodel.displayTime() + " Send to " + connectedClients[i].data.name + JSON.stringify(countdownMessage) + "\n");
+			//console.log(JSON.stringify(connectedClients[i].data));
+			datamodel.getClientByName(connectedClients[i].data.name).webSocketConnection.send(JSON.stringify(countdownMessage));
+			console.log("sent");
 		}
 	},
 	transmitStart = function(connectedClients) {
@@ -75,9 +77,9 @@ var transmitClients = function(connectedClients){
 			};
 			var moveData = {
 				eventType: "move",
-				data: [{
-					speed: 0
-				}]
+				data: {
+					speed: "0"
+				}
 			};
 			for(i in finishedClients) {
 				console.log("Time results send: " + JSON.stringify(timeData));

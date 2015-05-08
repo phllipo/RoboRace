@@ -47,7 +47,7 @@ module.exports = {
               messageTransmitter.transmitClients(connectedClients);
             }
             else if (jsonMessage.eventType === "ready") {
-              messageProcessor.processReady(connectedClient, jsonMessage, connectedClients);
+              messageProcessor.processReady(connectedClient, jsonMessage, connectedClients, datamodel);
               messageTransmitter.transmitClients(connectedClients);
             }
             else if (jsonMessage.eventType === "move") {
