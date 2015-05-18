@@ -82,7 +82,7 @@ var processConnect = function(connectedClient, jsonMessage){
         console.log("roboclient: " + roboname);
         console.log("get all finished clients...");
         for(i in connectedClients) {
-            if(connectedClients[i].data.type == "app") {
+            if(connectedClients[i].data.type == "app" && typeof connectedClients[i].data.selectedRobo != 'undefined') {
                 console.log("Connected client: " + connectedClients[i].data.type);
                 console.log("selected robo name: " + connectedClients[i].data.selectedRobo.name + " | roboname: " + roboname);
                 if(connectedClients[i].data.selectedRobo.name == roboname) {
