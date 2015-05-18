@@ -151,4 +151,8 @@ public class DataModel {
     public String getCurrentPlayerName() {
         return currentPlayerName;
     }
+
+    public Robo getMyAssignedRobo() {
+        return playerToRoboAssignmentMap.get(getPlayerByName(currentPlayerName));
+    }
 }

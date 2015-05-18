@@ -1,6 +1,5 @@
 package de.otto.roboapp.ui.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MotionEvent;
@@ -30,11 +29,10 @@ public class SteeringActivity extends AbstractUpdatableActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_steering);
-
         final RoboAppController roboAppController = (RoboAppController)getApplicationContext();
+
+        setContentView(R.layout.activity_steering);
 
         SeekBar speedSlider = (SeekBar) findViewById(R.id.ID_Speed_Slider);
 
@@ -167,6 +165,22 @@ public class SteeringActivity extends AbstractUpdatableActivity {
         displayModel(dataModel);
         if(dataModel.getRacingData().getRacingState().equals(RacingState.FINISHED)) {
             switchActivity(ResultsActivity.class);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //CF: prüfen, ob in Konflikt mit dem erfolgreichen abschluss des Rennens.
+        //((RoboAppController)getApplicationContext()).deselect();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        final RoboAppController roboAppController = (RoboAppController)getApplicationContext();
+        if(roboAppController.getDataModel().getMyAssignedRobo() == null) {
+            switchActivity(RoboRegistrationActivity.class);
         }
     }
 }
