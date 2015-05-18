@@ -5,7 +5,6 @@ import android.webkit.WebView;
 
 import de.otto.roboapp.R;
 import de.otto.roboapp.ui.activities.base.AbstractUpdatableActivity;
-import de.otto.roboapp.ui.components.GifWebView;
 
 /**
  * Created by luca on 24.04.15.
@@ -18,7 +17,6 @@ public class ResultsActivity extends AbstractUpdatableActivity {
         setContentView(R.layout.activity_results);
         WebView webView = (WebView) findViewById(R.id.background_webview);
         webView.loadUrl("file:///android_asset/giphy.gif");
-
     }
 
     @Override
