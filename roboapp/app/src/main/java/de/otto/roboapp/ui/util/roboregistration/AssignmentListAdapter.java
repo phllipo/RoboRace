@@ -1,4 +1,4 @@
-package de.otto.roboapp.ui.util;
+package de.otto.roboapp.ui.util.roboregistration;
 
 import android.app.Activity;
 import android.view.View;
@@ -56,7 +56,7 @@ public class AssignmentListAdapter extends BaseAdapter {
 
         Player player = roboAppController.getDataModel().getAssignedPlayer().get(position);
         final String assignedPlayerName = player.getName();
-            final String assignedRoboName = roboAppController.getDataModel().getAssignedRobo().get(position).getName();
+        final String assignedRoboName = roboAppController.getDataModel().getAssignedRobo().get(position).getName();
         String separator = " @ ";
 
         assignedPlayer.setText(assignedPlayerName);

@@ -3,6 +3,7 @@ package de.otto.roboapp;
 import android.app.Application;
 import android.content.Context;
 import android.os.Vibrator;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -117,7 +118,8 @@ public class RoboAppController extends Application implements ActivityMontitor {
             Player player = dataModel.getPlayerByName(result.getString("name"));
             Integer timeInSeconds = result.getInt("time");
 
-            dataModel.addPlayerToResultMap(player, timeInSeconds);
+            player.setResultTime(timeInSeconds);
+            dataModel.addPlayerToFinishedPlayerList(player);
 
         }
         UpdatableActivity activeActivity = getActiveActivity();

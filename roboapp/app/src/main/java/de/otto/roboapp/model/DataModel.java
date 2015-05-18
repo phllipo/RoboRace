@@ -3,6 +3,8 @@ package de.otto.roboapp.model;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,12 +14,17 @@ public class DataModel {
     int tachometer;
     List<Robo> roboList;
     List<Player> playerList;
+
     Map<Player, Robo> playerToRoboAssignmentMap;
-    Map<Player, Integer> playerToResultMap;
 
-
-
+    List<Player> finishedPlayers;
     public String currentPlayerName;
+
+
+
+    public List<Player> getFinishedPlayerList() {
+        return finishedPlayers;
+    }
 
     RacingData racingData = new RacingData();
 
@@ -26,8 +33,18 @@ public class DataModel {
         roboList = new ArrayList<Robo>();
         playerList = new ArrayList<Player>();
         playerToRoboAssignmentMap = new HashMap<Player, Robo>();
-        playerToResultMap = new HashMap<Player, Integer>();
+        finishedPlayers = new ArrayList<Player>();
    }
+
+    public List<Player> getOrderedResultsList() {
+        List<Player> p = getFinishedPlayerList();
+        Collections.sort(p);
+        return p;
+    }
+
+    public int getResultTimeByPlayer(Player p) {
+        return p.getResultTime();
+    }
 
     public Map<Player, Robo> getPlayerToRoboAssignmentMap() {
         return playerToRoboAssignmentMap;
@@ -46,11 +63,11 @@ public class DataModel {
     }
 
     public void clearPlayerToResultMap() {
-        playerToResultMap.clear();
+        finishedPlayers.clear();
     }
 
-    public void addPlayerToResultMap(Player player, int result) {
-        playerToResultMap.put(player, result);
+    public void addPlayerToFinishedPlayerList(Player player) {
+        finishedPlayers.add(player);
     }
 
     /* Füge Player dem Array hinzu */

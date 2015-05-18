@@ -1,4 +1,4 @@
-package de.otto.roboapp.ui.util;
+package de.otto.roboapp.ui.util.roboregistration;
 
 import android.app.Activity;
 import android.view.View;

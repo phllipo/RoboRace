@@ -1,6 +1,5 @@
 package de.otto.roboapp.ui.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,11 +8,11 @@ import android.widget.TextView;
 
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
-import de.otto.roboapp.ui.util.AssignmentListAdapter;
+import de.otto.roboapp.ui.util.roboregistration.AssignmentListAdapter;
 import de.otto.roboapp.model.Robo;
 import de.otto.roboapp.ui.activities.base.AbstractUpdatableActivity;
-import de.otto.roboapp.ui.util.PlayerListAdapter;
-import de.otto.roboapp.ui.util.RoboListAdapter;
+import de.otto.roboapp.ui.util.roboregistration.PlayerListAdapter;
+import de.otto.roboapp.ui.util.roboregistration.RoboListAdapter;
 
 public class RoboRegistrationActivity extends AbstractUpdatableActivity {
 
