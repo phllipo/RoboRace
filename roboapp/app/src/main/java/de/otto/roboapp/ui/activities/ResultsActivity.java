@@ -1,7 +1,9 @@
 package de.otto.roboapp.ui.activities;
 
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import de.otto.roboapp.R;
@@ -27,6 +29,15 @@ public class ResultsActivity extends AbstractUpdatableActivity {
         placementListAdapter = new PlacementListAdapter(this);
 
         resultsListView.setAdapter(placementListAdapter);
+
+        final Button button = (Button) findViewById(R.id.backToLobbyButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchActivity(RoboRegistrationActivity.class);
+            }
+        });
+
     }
 
     @Override
