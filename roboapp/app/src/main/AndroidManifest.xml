@@ -26,9 +26,10 @@
         <activity android:name=".ui.activities.SteeringActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
-            android:configChanges="orientation|keyboardHidden">
-
-        </activity>
+            android:configChanges="orientation|keyboardHidden" />
+        <activity android:name=".ui.activities.ResultsActivity"
+            android:label="RoboRace"
+            android:screenOrientation="portrait" />
 
     </application>
 

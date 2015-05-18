@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import de.otto.roborace.model.RacingState;
 import lejos.hardware.motor.Motor;
 import de.otto.roborace.connection.ServerController;
 import de.otto.roborace.connection.WebSocketListener;
@@ -88,13 +89,32 @@ public class RacerController {
             eventType = json.get("eventType").toString();
             System.out.println("EVENTTYPE: " + eventType);
 
-            if (eventType.equals("move")) {
-                moveMessageReceived(json.getJSONObject("data"));
+            switch (eventType) {
+                case "move":
+                    moveMessageReceived(json.getJSONObject("data"));
+                    break;
+                case "startRace":
+                    startMessageReceived();
+                    break;
+                case "results":
+                    resultsMessageReceived();
+                    break;
+                default:
+                    System.out.println("Invalid eventType: " + eventType);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+    }
+
+    private void resultsMessageReceived() {
+        // when this message is received, the race is over for this roboter
+        dataModel.setRacingState(RacingState.NORACE);
+    }
+
+    private void startMessageReceived() {
+        dataModel.setRacingState(RacingState.RACE);
     }
 
     public void courseBoundaryReached() {

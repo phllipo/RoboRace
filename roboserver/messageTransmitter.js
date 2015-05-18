@@ -85,6 +85,7 @@ var transmitClients = function(connectedClients){
 				console.log("Time results send: " + JSON.stringify(timeData));
 				finishedClients[i].webSocketConnection.send(JSON.stringify(timeData));
 			}
+			roboClient.webSocketConnection.send(JSON.stringify(timeData));
 			console.log("Set speed to 0 for " + roboClient.data.name + " Message: " + JSON.stringify(moveData));
 			roboClient.webSocketConnection.send(JSON.stringify(moveData));
 	}

@@ -71,24 +71,48 @@ var processConnect = function(connectedClient, jsonMessage){
             }, 3000);
         }
     },
-    processFinish = function(roboClient, connectedClients, jsonMessage){
+    processFinish = function(roboClient, connectedClients, jsonMessage, datamodel){
         var roboname = roboClient.data.name,
             finishedClients = [],
             result = [],
-            time;
+            time,
+            allFinished = true;
 
+        // get all finished clients
+        console.log("roboclient: " + roboname);
+        console.log("get all finished clients...");
         for(i in connectedClients) {
-            if(connectedClients[i].data.type == "app" && connectedClients[i].data.selectedRobo.name == roboname) {
-              connectedClients[i].data.endTime = new Date().getTime();
-              finishedClients.push(connectedClients[i]);
-            } else if (connectedClients[i].data.type == "app" && connectedClients[i].data.endTime != null && connectedClients[i].data.endTime.length > 0) {
-              finishedClients.push(connectedClients[i]);
+            if(connectedClients[i].data.type == "app") {
+                console.log("Connected client: " + connectedClients[i].data.type);
+                console.log("selected robo name: " + connectedClients[i].data.selectedRobo.name + " | roboname: " + roboname);
+                if(connectedClients[i].data.selectedRobo.name == roboname) {
+                    console.log("connected client with robo: " + connectedClients[i].data.type)
+                  connectedClients[i].data.endTime = new Date().getTime();
+                  finishedClients.push(connectedClients[i]);
+                } else if (connectedClients[i].data.type == "app" && connectedClients[i].data.endTime != null && connectedClients[i].data.endTime.length > 0) {
+                  finishedClients.push(connectedClients[i]);
+                }
             }
         }
+        // get race-time for every finished client
         for(i in finishedClients) {
             time = finishedClients[i].data.endTime - finishedClients[i].data.startTime;
 
+
             result.push({resultObject: {"name": finishedClients[i].data.name, "time": time}});
+        }
+        // if all clients finished, free the robos
+        for(i in connectedClients) {
+            if (connectedClients[i].data.type == "app" && !connectedClients[i].data.endTime == null && !connectedClients[i].data.endTime.length > 0) {
+                allFinished = false;
+            }
+        }
+        if(allFinished) {
+            for(i in connectedClients) {
+                if(connectedClients[i].data.type == "app") {
+                    processRoboDeselect(connectedClients[i], datamodel);
+                }
+            }
         }
         messageTransmitter.transmitTimes(finishedClients, result, roboClient);
     };

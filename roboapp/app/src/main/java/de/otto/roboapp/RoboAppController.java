@@ -13,6 +13,7 @@ import de.otto.roboapp.model.Player;
 import de.otto.roboapp.model.RacingData;
 import de.otto.roboapp.model.RacingState;
 import de.otto.roboapp.model.SteeringDirection;
+import de.otto.roboapp.ui.activities.ResultsActivity;
 import de.otto.roboapp.ui.activities.SteeringActivity;
 import de.otto.roboapp.ui.activities.base.ActivityMontitor;
 import de.otto.roboapp.ui.activities.base.UpdatableActivity;
@@ -105,21 +106,26 @@ public class RoboAppController extends Application implements ActivityMontitor {
         currentActiveActivity.switchActivity(SteeringActivity.class);
     }
 
-    private void handleResultsFromJson(JSONObject data) throws JSONException {
+    private void handleResultsFromJson(JSONArray data) throws JSONException {
         for(int i = 0; i < data.length(); i++) {
             dataModel.getRacingData().setRacingState(RacingState.FINISHED);
 
             // ergebnisse in dataModel speichern
             dataModel.clearPlayerToResultMap();
 
-            JSONObject result = data.getJSONObject("resultObject");
+            JSONObject result = data.getJSONObject(i).getJSONObject("resultObject");
             Player player = dataModel.getPlayerByName(result.getString("name"));
             Integer timeInSeconds = result.getInt("time");
 
             dataModel.addPlayerToResultMap(player, timeInSeconds);
 
-            getActiveActivity().updateActivityFromBgThread();
         }
+        UpdatableActivity activeActivity = getActiveActivity();
+        System.out.println("onResults: current activity: " + activeActivity.toString() + " " + activeActivity + " " + ResultsActivity.class);
+        if(!activeActivity.equals(ResultsActivity.class)) {
+            activeActivity.switchActivity(ResultsActivity.class);
+        }
+        getActiveActivity().updateActivityFromBgThread();
     }
 
     private void handleStartRace() {
@@ -155,7 +161,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
                     leftTrackVibration();
                     break;
                 case "results":
-                    handleResultsFromJson(json.getJSONObject("data"));
+                    handleResultsFromJson(json.getJSONArray("data"));
                     break;
                 default:
                     System.out.println("no valid eventType: " + eventType);

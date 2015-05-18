@@ -8,7 +8,7 @@
                     name: "test",
                     ready: "true",
                     speed: "100",
-                    selectedRobo: "testRobo",
+                    selectedRobo: "testRobo", <--- hier wird das ganze roboobjekt gespeichert!
                     roboName: "testRobo",
                     startTime: "",
                     endTime:""

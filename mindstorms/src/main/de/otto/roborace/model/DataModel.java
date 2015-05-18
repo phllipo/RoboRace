@@ -11,6 +11,16 @@ public class DataModel {
 	private int targetSpeed;
 	private Steering desiredSteeringDirection = Steering.NONE;
 
+	public RacingState getRacingState() {
+		return racingState;
+	}
+
+	public void setRacingState(RacingState racingState) {
+		this.racingState = racingState;
+	}
+
+	private RacingState racingState = RacingState.NONE;
+
 	private long boundaryReachedTime = 0;
 
 	public Steering getDesiredSteeringDirection() {

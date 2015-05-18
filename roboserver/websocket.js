@@ -57,7 +57,7 @@ module.exports = {
               messageTransmitter.transmitLeftTrack(connectedClient, jsonMessage, datamodel);
             }
             else if (jsonMessage.eventType === "finish") {
-              messageProcessor.processFinish(connectedClient, connectedClients, jsonMessage);
+              messageProcessor.processFinish(connectedClient, connectedClients, jsonMessage, datamodel);
             }
             else {
               ws.send(JSON.stringify({eventType: "error", data: { message: "unknownEventtype"}}));

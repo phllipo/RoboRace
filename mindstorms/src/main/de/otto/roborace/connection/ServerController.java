@@ -76,6 +76,7 @@ public class ServerController {
 	}
 
 	public void sendMsg(String msg) throws NotYetConnectedException {
+		System.out.println("Sending message: " + msg);
 		wsc.send(msg);
 	}
 	private URI createUri() {
