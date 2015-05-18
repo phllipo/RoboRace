@@ -40,6 +40,31 @@
                 android:id="@+id/playerName"
                 android:layout_marginTop="10dp"/>
 
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_ipAdress"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="60dp"
+                    android:id="@+id/label_ipAddress" />
+
+                <EditText
+                    android:singleLine="true"
+                    android:textColor="#FFFFFF"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:text="@string/text_ipAdress"
+                    android:layout_below="@+id/label_playerName"
+                    android:layout_alignParentRight="false"
+                    android:layout_alignParentEnd="false"
+                    android:id="@+id/ipAddress"
+                    android:layout_marginTop="10dp"/>
+
+
+
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

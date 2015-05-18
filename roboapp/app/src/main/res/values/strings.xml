@@ -24,5 +24,7 @@
     <string name="results_names_title">Spieler</string>
     <string name="results_times_title">Zeit</string>
     <string name="results_placement_title">Platz</string>
+    <string name="label_ipAdress">Server IP-Adresse</string>
+    <string name="text_ipAdress">10.90.171.241</string>
 
 </resources>
