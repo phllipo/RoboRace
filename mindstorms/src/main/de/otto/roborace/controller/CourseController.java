@@ -1,5 +1,6 @@
 package de.otto.roborace.controller;
 
+import jline.ArgumentCompletor.WhitespaceArgumentDelimiter;
 import de.otto.roborace.controller.EventLoop.EventLoopListener;
 import de.otto.roborace.model.DataModel;
 import de.otto.roborace.model.RacingState;
@@ -27,19 +28,11 @@ public class CourseController implements EventLoopListener{
 
 
     private boolean isCourseBoundary(float[] sample) {
-        float r = sample[0];
-        float g = sample[1];
-        float b = sample[2];
-
-        return r > 1.;
+        return CourseColor.WHITE.matches(sample);
     }
 
     private boolean isFinishingLine(float[] sample) {
-        float r = sample[0];
-        float g = sample[1];
-        float b = sample[2];
-
-        return r < 0.06 && g < 0.06 && b < 0.06;
+    	return CourseColor.BLACK.matches(sample);
     }
 
 	@Override
