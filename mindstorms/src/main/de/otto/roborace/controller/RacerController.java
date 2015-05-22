@@ -25,15 +25,18 @@ public class RacerController {
     CourseController courseController;
 	private Properties properties;
 	private EventLoop eventLoop = new EventLoop();
+	private AudioVideoController audioVideoController;
 
     public RacerController() {
     	properties = loadProperties();
         dataModel = new DataModel();
         
         System.out.println("start event loop");
+        audioVideoController = new AudioVideoController();
         eventLoop.register(new SpeedController(dataModel, RacerController.this));
         eventLoop.register(new SteeringController(Motor.C, dataModel));
-        eventLoop.register(new CourseController(dataModel, RacerController.this));
+        eventLoop.register(new CourseController(dataModel, RacerController.this));        
+		eventLoop.register(audioVideoController);
         eventLoop.start();
         
         establishConnection();
@@ -115,14 +118,17 @@ public class RacerController {
 
     private void startMessageReceived() {
         dataModel.setRacingState(RacingState.RACE);
+        audioVideoController.raceStarting();
     }
 
     public void courseBoundaryReached() {
         serverController.sendBoundaryReachedMessage();
+        audioVideoController.trackLost();
     }
 
     public void finishLineReached() {
         serverController.sendFinishLineReachedMessage();
+        audioVideoController.raceFinished();
     }
 
     public void speedChangeDetected() {
