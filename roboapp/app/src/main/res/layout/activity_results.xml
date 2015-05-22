@@ -67,6 +67,13 @@
                 android:layout_height="match_parent"
                 android:id="@+id/placement_list"
                 android:layout_gravity="center_horizontal" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/backToLobbyButton"
+                android:id="@+id/backToLobbyButton"
+                android:layout_gravity="center_horizontal" />
         </LinearLayout>
 
     </LinearLayout>

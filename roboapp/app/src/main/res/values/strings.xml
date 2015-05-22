@@ -26,5 +26,6 @@
     <string name="results_placement_title">Platz</string>
     <string name="label_ipAdress">Server IP-Adresse</string>
     <string name="text_ipAdress">10.90.171.241</string>
+    <string name="backToLobbyButton">Zurück zur Lobby</string>
 
 </resources>
