@@ -82,6 +82,7 @@ var processConnect = function(connectedClient, jsonMessage){
         console.log("roboclient: " + roboname);
         console.log("get all finished clients...");
         for(i in connectedClients) {
+            console.log("SÖKAHDALKJSHDLKJSAHDLKJSAHDLSAD" + connectedClients[i].data.type + " " + typeof connectedClients[i].data.selectedRobo);
             if(connectedClients[i].data.type == "app" && typeof connectedClients[i].data.selectedRobo != 'undefined') {
                 console.log("Connected client: " + connectedClients[i].data.type);
                 console.log("selected robo name: " + connectedClients[i].data.selectedRobo.name + " | roboname: " + roboname);
@@ -89,7 +90,7 @@ var processConnect = function(connectedClient, jsonMessage){
                     console.log("connected client with robo: " + connectedClients[i].data.type)
                   connectedClients[i].data.endTime = new Date().getTime();
                   finishedClients.push(connectedClients[i]);
-                } else if (connectedClients[i].data.type == "app" && connectedClients[i].data.endTime != null && connectedClients[i].data.endTime.length > 0) {
+                } else if (connectedClients[i].data.type == "app" && connectedClients[i].data.endTime) {
                   finishedClients.push(connectedClients[i]);
                 }
             }
@@ -103,10 +104,13 @@ var processConnect = function(connectedClient, jsonMessage){
         }
         // if all clients finished, free the robos
         for(i in connectedClients) {
-            if (connectedClients[i].data.type == "app" && !connectedClients[i].data.endTime == null && !connectedClients[i].data.endTime.length > 0) {
+            console.log("ABDCDASD " + JSON.stringify(connectedClients[i].data));
+            if (connectedClients[i].data.type == "app" && !connectedClients[i].data.endTime) {
+                console.log("finished: " + JSON.stringify(connectedClients[i].data));
                 allFinished = false;
             }
         }
+        messageTransmitter.transmitTimes(finishedClients, result, roboClient);
         if(allFinished) {
             for(i in connectedClients) {
                 if(connectedClients[i].data.type == "app") {
@@ -114,7 +118,6 @@ var processConnect = function(connectedClient, jsonMessage){
                 }
             }
         }
-        messageTransmitter.transmitTimes(finishedClients, result, roboClient);
     };
 
 module.exports = {

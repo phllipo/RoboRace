@@ -20,12 +20,12 @@ public class RoboListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return  roboAppController.getDataModel().getUnassignedRobo().size();
+        return  roboAppController.getDataModel().getUnassignedRobos().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return roboAppController.getDataModel().getRoboList().get(position);
+        return roboAppController.getDataModel().getUnassignedRobos().get(position);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class RoboListAdapter extends BaseAdapter {
 
         TextView unassignedRobo = new TextView(activity);
 
-        String unassignedRoboName = roboAppController.getDataModel().getUnassignedRobo().get(position).getName();
+        String unassignedRoboName = roboAppController.getDataModel().getUnassignedRobos().get(position).getName();
         unassignedRobo.setText(unassignedRoboName);
 
         linearLayout.addView(unassignedRobo);

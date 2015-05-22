@@ -3,7 +3,6 @@ package de.otto.roboapp;
 import android.app.Application;
 import android.content.Context;
 import android.os.Vibrator;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,7 +63,7 @@ public class RoboAppController extends Application implements ActivityMontitor {
                 dataModel.addPlayerToArray(name, ready);
 
             } else if (type.equals("robo")) {
-                    dataModel.addRoboToArray(name);
+                dataModel.addRoboToArray(name);
             }
         }
 
@@ -77,7 +76,6 @@ public class RoboAppController extends Application implements ActivityMontitor {
                 if(clientObject.has("selectedRobo") && !"null".equals(clientObject.getString("selectedRobo"))){
                     JSONObject selectedRoboObject = clientObject.getJSONObject("selectedRobo");
                     dataModel.assignPlayerToRobo(name, selectedRoboObject.getString("name"));
-
                 }
 
             }
@@ -108,20 +106,24 @@ public class RoboAppController extends Application implements ActivityMontitor {
     }
 
     private void handleResultsFromJson(JSONArray data) throws JSONException {
+        dataModel.clearFinishedPlayerList();
         for(int i = 0; i < data.length(); i++) {
             dataModel.getRacingData().setRacingState(RacingState.FINISHED);
 
             // ergebnisse in dataModel speichern
-            dataModel.clearPlayerToResultMap();
 
             JSONObject result = data.getJSONObject(i).getJSONObject("resultObject");
             Player player = dataModel.getPlayerByName(result.getString("name"));
             Integer timeInSeconds = result.getInt("time");
 
+            System.out.println("Player: " + player.getName() + "  time: " + timeInSeconds);
+
             player.setResultTime(timeInSeconds);
             dataModel.addPlayerToFinishedPlayerList(player);
 
         }
+
+        // switch zur ResultActivity
         UpdatableActivity activeActivity = getActiveActivity();
         System.out.println("onResults: current activity: " + activeActivity.toString() + " " + activeActivity + " " + ResultsActivity.class);
         if(!activeActivity.equals(ResultsActivity.class)) {

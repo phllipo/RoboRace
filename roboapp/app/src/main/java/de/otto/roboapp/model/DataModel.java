@@ -62,7 +62,7 @@ public class DataModel {
         playerToRoboAssignmentMap.clear();
     }
 
-    public void clearPlayerToResultMap() {
+    public void clearFinishedPlayerList() {
         finishedPlayers.clear();
     }
 
@@ -135,7 +135,7 @@ public class DataModel {
         return assignedRoboList;
     }
 
-    public List<Robo> getUnassignedRobo() {
+    public List<Robo> getUnassignedRobos() {
         ArrayList<Robo> unassignedRoboList = new ArrayList<>();
         for (Robo robo : roboList) {
             if(!playerToRoboAssignmentMap.containsValue(robo)) {
