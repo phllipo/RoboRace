@@ -32,6 +32,7 @@ var processConnect = function(connectedClient, jsonMessage){
         controlledRobo.data.controlledBy = appclient.data.name;
     },
     processRoboDeselect = function(appclient, datamodel){
+        // console.log("proceeding deselect: " + appclient.data.name);
         if(appclient.data.selectedRobo != null) {
             var roboToDeselect = datamodel.getClientByName(appclient.data.selectedRobo.name);
         }
@@ -74,7 +75,9 @@ var processConnect = function(connectedClient, jsonMessage){
               var now = new Date().getTime();
               console.log("Time: " + now);
               for (i in assignedClients) {
-                assignedClients[i].data.startTime = now;
+                if(assignedClients[i].data.type == 'app') {
+                    assignedClients[i].data.startTime = now;
+                }
               }
               messageTransmitter.transmitStart(assignedClients);
             }, 3000);
@@ -91,11 +94,12 @@ var processConnect = function(connectedClient, jsonMessage){
         console.log("roboclient: " + roboname);
         console.log("get all finished clients...");
         for(i in connectedClients) {
-            console.log("SÖKAHDALKJSHDLKJSAHDLKJSAHDLSAD" + connectedClients[i].data.type + " " + typeof connectedClients[i].data.selectedRobo);
-            if(connectedClients[i].data.type == "app" && typeof connectedClients[i].data.selectedRobo != 'undefined') {
-                console.log("Connected client: " + connectedClients[i].data.type);
-                console.log("selected robo name: " + connectedClients[i].data.selectedRobo.name + " | roboname: " + roboname);
-                if(connectedClients[i].data.selectedRobo.name == roboname) {
+            // console.log("get all finished" + connectedClients[i].data.type + " " + typeof connectedClients[i].data.selectedRobo);
+            // client must be app and must have a start time
+            if(connectedClients[i].data.type == "app" && typeof connectedClients[i].data.startTime != 'undefined') {
+                // console.log("Connected client: " + connectedClients[i].data.type);
+                // if client has a robo and robo is this robo
+                if(typeof connectedClients[i].data.selectedRobo != 'undefined' && connectedClients[i].data.selectedRobo.name == roboname) {
                     console.log("connected client with robo: " + connectedClients[i].data.type)
                   connectedClients[i].data.endTime = new Date().getTime();
                   finishedClients.push(connectedClients[i]);
@@ -113,12 +117,14 @@ var processConnect = function(connectedClient, jsonMessage){
         }
         // if all clients finished, free the robos
         for(i in connectedClients) {
-            console.log("ABDCDASD " + JSON.stringify(connectedClients[i].data));
+            console.log("connected client free robos: " + JSON.stringify(connectedClients[i].data));
             if (connectedClients[i].data.type == "app" && !connectedClients[i].data.endTime) {
                 console.log("finished: " + JSON.stringify(connectedClients[i].data));
                 allFinished = false;
             }
         }
+
+        // send result msg to finished robo
         messageTransmitter.transmitTimes(finishedClients, result, roboClient);
         if(allFinished) {
             for(i in connectedClients) {

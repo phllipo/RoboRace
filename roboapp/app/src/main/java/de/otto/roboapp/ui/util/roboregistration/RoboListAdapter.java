@@ -25,7 +25,7 @@ public class RoboListAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return roboAppController.getDataModel().getUnassignedRobos().get(position);
+        return roboAppController.getDataModel().getUnassignedRobos  ().get(position);
     }
 
     @Override

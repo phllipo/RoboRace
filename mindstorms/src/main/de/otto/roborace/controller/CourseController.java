@@ -28,11 +28,12 @@ public class CourseController implements EventLoopListener{
 
 
     private boolean isCourseBoundary(float[] sample) {
-        return CourseColor.GREY.matches(sample);
+
+        return CourseColor.LIGHTYELLOW.matches(sample);
     }
 
     private boolean isFinishingLine(float[] sample) {
-    	return CourseColor.GREY.matches(sample);
+    	return CourseColor.TEST.matches(sample);
     }
 
 	@Override
