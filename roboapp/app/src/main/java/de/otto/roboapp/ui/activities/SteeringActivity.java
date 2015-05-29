@@ -141,10 +141,8 @@ public class SteeringActivity extends AbstractUpdatableActivity {
             case STARTED: {
                 final TextView t_textViewTimer = (TextView) findViewById(R.id.CountdownTimer);
                 t_textViewTimer.setVisibility(View.INVISIBLE);
-                final TextView t_textViewSpeed = (TextView) findViewById(R.id.ID_Speed);
                 RacingData racingData = dataModel.getRacingData();
                 int speed = (racingData != null) ? racingData.getCurrentSpeed() : -999;
-                t_textViewSpeed.setText(String.valueOf(speed));
                 final SpeedLights speedLightsForward = (SpeedLights) findViewById(R.id.ID_Speed_Lights_Forward);
                 final SpeedLights speedLightsBackward = (SpeedLights) findViewById(R.id.ID_Speed_Lights_Backward);
                 if(speed > 0 ) {
@@ -172,7 +170,7 @@ public class SteeringActivity extends AbstractUpdatableActivity {
     protected void onStop() {
         super.onStop();
         //CF: prüfen, ob in Konflikt mit dem erfolgreichen abschluss des Rennens.
-        //((RoboAppController)getApplicationContext()).deselect();
+        ((RoboAppController)getApplicationContext()).deselect();
     }
 
     @Override

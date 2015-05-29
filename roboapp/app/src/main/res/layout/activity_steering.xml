@@ -16,12 +16,10 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/ID_Speed"
-                android:layout_centerHorizontal="true" />
+            android:layout_height="match_parent"
+            android:background="@drawable/racingtrack"
+            android:backgroundTint="#66666666"
+            android:backgroundTintMode="multiply">
 
             <ImageView
                 android:id="@+id/ID_Left"
@@ -29,9 +27,10 @@
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 tools:ignore="RtlHardcoded"
-                android:layout_alignTop="@+id/ID_Rigth"
+                android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="50dp" />
 
             <ImageView
                 android:id="@+id/ID_Rigth"
@@ -39,56 +38,18 @@
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 tools:ignore="RtlHardcoded"
-                android:layout_alignParentBottom="true"
+                android:layout_alignTop="@+id/ID_Left"
                 android:layout_toRightOf="@+id/ID_Left"
                 android:layout_toEndOf="@+id/ID_Left" />
 
 
-            <ImageView
-                android:id="@+id/ID_Background_Menu"
-                android:contentDescription="@string/DSCRP_Background_Menu"
-                android:src="@drawable/background"
-                android:layout_width="210dp"
-                android:layout_height="210dp"
-                tools:ignore="RtlHardcoded"
-                android:layout_marginLeft="42dp"
-                android:layout_marginStart="42dp"
-                android:layout_marginTop="132dp"
-                android:layout_below="@+id/ID_Speed"
-                android:layout_toRightOf="@+id/ID_Rigth"
-                android:layout_toEndOf="@+id/ID_Rigth" />
-
-            <ImageView
-                android:id="@+id/ID_Menu_Gear"
-                android:contentDescription="@string/DSCRP_Menu_Gear"
-                android:src="@drawable/menu_gear"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                tools:ignore="RtlHardcoded"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-
-            <de.otto.roboapp.ui.components.VerticalSeekBar
-                android:layout_width="wrap_content"
-                android:layout_height="250dp"
-                android:id="@+id/ID_Speed_Slider"
-                android:progress="20"
-                android:layout_toStartOf="@+id/ID_Menu_Gear"
-                android:layout_toLeftOf="@+id/ID_Menu_Gear"
-                android:background="@color/background_floating_material_dark"
-                android:splitTrack="false"
-                android:layout_alignBottom="@+id/ID_Menu_Gear"
-                android:layout_below="@+id/ID_Speed" />
-
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/ID_Speed_Slider"
-                android:layout_toStartOf="@+id/ID_Speed_Slider"
-                android:layout_alignTop="@+id/ID_Speed_Slider"
-                android:layout_alignParentBottom="true">
+                android:layout_toStartOf="@+id/ID_Rigth">
 
                 <de.otto.roboapp.ui.components.SpeedLights
                     android:id="@+id/ID_Speed_Lights_Forward"
@@ -123,102 +84,18 @@
                     speed="0"
                     />
 
-                </LinearLayout>
-
-
-
-            <!--RelativeLayout
+            </LinearLayout>
+            <de.otto.roboapp.ui.components.VerticalSeekBar
                 android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_alignParentTop="true"
-                android:layout_toLeftOf="@+id/ID_Rigth"
-                android:layout_toStartOf="@+id/ID_Rigth"
-                android:layout_above="@+id/ID_Left">
-
-                <ImageView
-                    android:src="@drawable/speedlight_black"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/speedlight1"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="0dp" />
-
-                <ImageView
-                    android:src="@drawable/speedlight_red"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/speedlight2"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="27dp" />
-
-                <ImageView
-                    android:src="@drawable/speedlight_red"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/speedlight3"
-                    android:layout_below="@+id/speedlight1"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="4dp" />
-
-              <ImageView
-                  android:src="@drawable/speedlight_orange"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/speedlight4"
-                  android:layout_below="@+id/speedlight2"
-                  android:layout_alignParentLeft="true"
-                  android:layout_alignParentStart="true"
-                  android:layout_marginTop="4dp" />
-
-              <ImageView
-                  android:src="@drawable/speedlight_orange"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/speedlight5"
-                  android:layout_below="@+id/speedlight3"
-                  android:layout_alignParentLeft="true"
-                  android:layout_alignParentStart="true"
-                  android:layout_marginTop="4dp" />
-
-              <ImageView
-                  android:src="@drawable/speedlight_darkgreen"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/speedlight6"
-                  android:layout_below="@+id/speedlight4"
-                  android:layout_alignParentLeft="true"
-                  android:layout_alignParentStart="true"
-                  android:layout_marginTop="4dp" />
-
-              <ImageView
-                  android:src="@drawable/speedlight_darkgreen"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/speedlight7"
-                  android:layout_below="@+id/speedlight5"
-                  android:layout_alignParentLeft="true"
-                  android:layout_alignParentStart="true"
-                  android:layout_marginTop="4dp" />
-
-              <ImageView
-                  android:src="@drawable/speedlight_green"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/speedlight8"
-                  android:layout_below="@+id/speedlight6"
-                  android:layout_alignParentLeft="true"
-                  android:layout_alignParentStart="true"
-                  android:layout_marginTop="4dp" />
-
-
-
-                </RelativeLayout-->
-
+                android:layout_height="match_parent"
+                android:id="@+id/ID_Speed_Slider"
+                android:progress="20"
+                android:splitTrack="false"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:backgroundTintMode="multiply"
+                android:padding="20dp" />
         </RelativeLayout>
         <TextView
             android:layout_width="wrap_content"
@@ -237,6 +114,8 @@
             android:layout_alignParentEnd="true" />
 
     </FrameLayout>
+
+
 
 
 </RelativeLayout>
