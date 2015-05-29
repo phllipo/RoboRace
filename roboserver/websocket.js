@@ -87,7 +87,7 @@ module.exports = {
                     speed: "0"
                   }
                 }
-                console.log(datamodel.displayTime() + " Send to " + robo.name + JSON.stringify(speedMessage) + "\n");
+                console.log(datamodel.displayTime() + " Send to " + robo.data.name + JSON.stringify(speedMessage) + "\n");
                 robo.webSocketConnection.send(JSON.stringify(speedMessage));
               }
             }

@@ -38,6 +38,15 @@ var processConnect = function(connectedClient, jsonMessage){
         delete appclient.data.selectedRobo;
         appclient.data.ready = "false";
         if(roboToDeselect) {
+            var speedMessage = {
+              eventType: "move",
+              data: {
+                speed: "0"
+              }
+            }
+            roboToDeselect.data.speed = "0";
+            console.log(datamodel.displayTime() + " Send to " + roboToDeselect.data.name + JSON.stringify(speedMessage) + "\n");
+            roboToDeselect.webSocketConnection.send(JSON.stringify(speedMessage));
             delete roboToDeselect.data.controlledBy;
         }
     },
