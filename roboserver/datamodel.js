@@ -24,6 +24,8 @@ var connectedClients = [],
         return connectedClients;
     },
 
+    playerList = [{name: "hallo", robo: "lightning", time: "15,555 sec"}, {name: "peter", robo: "black", time: "16,435 sec"}],
+
     getClientByName = function (name) {
         for (i = 0; i <= connectedClients.length; i++) {
             if (connectedClients[i]) {
@@ -61,5 +63,6 @@ var connectedClients = [],
 module.exports = {
     getConnectedClients: getConnectedClients,
     getClientByName: getClientByName,
-    displayTime: displayTime
+    displayTime: displayTime,
+    playerList: playerList
 };

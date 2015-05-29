@@ -5,13 +5,12 @@ block content
   p Number of connected clients: #{connectedClients.length}
   
   hl
-  table
+  table.ingame
     thead
       tr
         th Spieler 
         th Robo
         th Speed
-        th Item
         th Time
         th Ready
       tbody
@@ -22,12 +21,10 @@ block content
               if client.data.selectedRobo!=undefined
                 td.silver #{client.data.selectedRobo.name}
                 td.white #{client.data.selectedRobo.speed}
-                td.silver #{client.data.selectedRobo.item}
               else
                 td.silver
                 td.white
-                td.silver
-              td.white #{client.data.time}
+              td.silver #{client.data.resultTime} sec
               if client.data.ready=='true'
                 td.green
               else if client.data.ready=='waiting'
@@ -35,4 +32,16 @@ block content
               else
                 td.red
           else
+  table.result
+    thead
+      tr
+        th Spieler
+        th Robo
+        th Time
+      tbody
+        for player in playerList
+          tr
+            td.white #{player.name}
+            td.silver #{player.robo}
+            td.white #{player.time}
   a(href ='/downloads/app-debug.apk' class='apkdownload') download apk
