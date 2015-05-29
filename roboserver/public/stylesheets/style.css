@@ -20,12 +20,18 @@ table, td, th {
 
 table {
 	width: 50%;
+	margin-left: 25%;
+	margin-right: 25%;
 }
 
 th {
 	background-color: #848484;
 	color: white;
 	width: 18%;
+}
+
+h1 {
+	text-align: center;
 }
 
 .white {
@@ -49,4 +55,8 @@ th {
 .yellow {
 	background-color: yellow;
 	width: 10%;
+}
+
+.ingame {
+	margin-bottom: 50px;
 }
