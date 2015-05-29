@@ -22,7 +22,10 @@ public class EventLoop {
 					for (EventLoopListener eventLoopListener: eventLoopListenerList) {
 						eventLoopListener.process();						
 					}
-				}
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {}
+				}			
 			}			
 		}
 		).start();;

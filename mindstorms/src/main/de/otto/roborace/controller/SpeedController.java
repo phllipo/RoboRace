@@ -3,7 +3,6 @@ package de.otto.roborace.controller;
 import de.otto.roborace.controller.EventLoop.EventLoopListener;
 import de.otto.roborace.model.DataModel;
 import lejos.hardware.motor.Motor;
-import static java.lang.Thread.sleep;
 
 /**
  * Created by luca on 06.03.15.

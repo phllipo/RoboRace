@@ -8,7 +8,6 @@ import lejos.hardware.motor.NXTRegulatedMotor;
 
 import java.util.Date;
 
-import static java.lang.Thread.sleep;
 
 /**
  * Created by luca on 27.03.15.
