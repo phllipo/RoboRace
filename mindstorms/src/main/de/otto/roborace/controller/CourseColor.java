@@ -1,9 +1,11 @@
 package de.otto.roborace.controller;
 
 public enum CourseColor {
-	WHITE(0.9, 0.9, 0.9, 1.0, 1.0, 1.0),
-	BLACK(0.0, 0.0, 0.0, 0.1, 0.1, 0.1),
-	GREY(0.5, 0.5, 0.5, 0.6, 0.6, 0.6);
+	GREY(0.5, 0.5, 0.5, 0.6, 0.6, 0.6),
+	WHITE(0.9, 0.9f, 0.9f, 1.0f, 1.0f, 1.0),
+	BLACK(0.0, 0.0f, 0.0f, 0.1f, 0.1f, 0.1),
+	LIGHTYELLOW(0.12f, 0.14f,0.09f,0.2f,0.2f,0.15f),
+	GREEN(0.02f,0.1f,0.05f,0.06f,0.15f,0.1f);
 	
 	private double rMin;
 	private double gMin;
