@@ -111,6 +111,7 @@ var processConnect = function(connectedClient, jsonMessage){
         // get race-time for every finished client
         for(i in finishedClients) {
             time = finishedClients[i].data.endTime - finishedClients[i].data.startTime;
+            finishedClients[i].data.resultTime = time/1000;
 
 
             result.push({resultObject: {"name": finishedClients[i].data.name, "time": time}});
