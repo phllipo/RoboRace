@@ -1,4 +1,7 @@
 var messageTransmitter = require('./messageTransmitter.js');
+var database = require('./database.js');
+
+//database.insertResult("test", "robo", "123");
 
 var processConnect = function(connectedClient, jsonMessage){
 //console.log("jsonMessage " + JSON.stringify(jsonMessage));
@@ -100,9 +103,11 @@ var processConnect = function(connectedClient, jsonMessage){
                 // console.log("Connected client: " + connectedClients[i].data.type);
                 // if client has a robo and robo is this robo
                 if(typeof connectedClients[i].data.selectedRobo != 'undefined' && connectedClients[i].data.selectedRobo.name == roboname) {
-                    console.log("connected client with robo: " + connectedClients[i].data.type)
+                  console.log("connected client with robo: " + connectedClients[i].data.type)
                   connectedClients[i].data.endTime = new Date().getTime();
                   finishedClients.push(connectedClients[i]);
+                  // send data to database
+                  database.insertResult(connectedClients[i].data.name, connectedClients[i].data.selectedRobo.name, (connectedClients[i].data.endTime - connectedClients[i].data.startTime));
                 } else if (connectedClients[i].data.type == "app" && connectedClients[i].data.endTime) {
                   finishedClients.push(connectedClients[i]);
                 }

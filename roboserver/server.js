@@ -5,6 +5,7 @@ var app = express();
 var path = require('path');
 var websocket = require('./websocket.js');
 var datamodel = require('./datamodel.js');
+var database = require('./database.js');
 var routes = require('./routes/index');
 var app = express();
 
@@ -16,6 +17,7 @@ app.set('view engine', 'jade');
 
 app.use(function(req,res,next){
     req.datamodel = datamodel;
+    req.database = database;
     next();
 });
 

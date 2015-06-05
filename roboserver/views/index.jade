@@ -37,9 +37,9 @@ block content
         th Robo
         th Time
       tbody
-        for player in playerList
+        for results in playerList
           tr
-            td.white #{player.name}
-            td.silver #{player.robo}
-            td.white #{player.time}
+            td.white #{results.player}
+            td.silver #{results.robo}
+            td.white #{results.time}
   a(href ='/downloads/app-debug.apk' class='apkdownload') download apk
