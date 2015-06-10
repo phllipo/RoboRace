@@ -4,7 +4,7 @@ var database = require('../database.js');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  database.getPlayerList(res, function(err, results) {
+ database.getPlayerList(res, function(err, results) {
     res.render('index', {
       title: "Roborace",
       connectedClients: req.datamodel.getConnectedClients(),

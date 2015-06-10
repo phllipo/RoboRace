@@ -6,8 +6,11 @@ var path = require('path');
 var websocket = require('./websocket.js');
 var datamodel = require('./datamodel.js');
 var database = require('./database.js');
+var qrcode = require('./qrcode.js');
 var routes = require('./routes/index');
 var app = express();
+
+
 
 
 websocket.connect(datamodel);
@@ -45,5 +48,8 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
+qrcode.createQr();
+
 
 module.exports = app;

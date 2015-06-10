@@ -5,11 +5,16 @@ body {
 .apkdownload {
 	position: absolute;
 	bottom: 0px;
-	right: 0px;
 	padding: 5px 5px 5px 5px;
 	border-style: solid;
 	border-color: lightgrey;
 	border-width: 1px;
+}
+.apkdownload.qr {
+	right: 0px;
+}
+.apkdownload.text {
+	left: 0px;
 }
 
 table, td, th {
