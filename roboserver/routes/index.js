@@ -8,7 +8,8 @@ router.get('/', function(req, res) {
     res.render('index', {
       title: "Roborace",
       connectedClients: req.datamodel.getConnectedClients(),
-      playerList: results
+      playerList: results,
+      formatTime: database.formatTime
     });
   });
   //  res.render('index', { title: "Roborace", connectedClients: req.datamodel.getConnectedClients(), playerList: req.datamodel.playerList, currentTime: req.datamodel.getRacingTime()});

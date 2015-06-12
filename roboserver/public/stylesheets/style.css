@@ -1,10 +1,31 @@
 body {
-	font-family: tahoma;
+	font-family: Arial;
+	/*background-image: url(../img/background.jpg);*/
+	background-color: black;
+	background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+body::after {
+  content: "";
+  background: url(../img/background.jpg);
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.apk {
+	display: none;
 }
 
 .apkdownload {
 	position: absolute;
-	bottom: 0px;
 	padding: 5px 5px 5px 5px;
 	border-style: solid;
 	border-color: lightgrey;
@@ -12,39 +33,43 @@ body {
 }
 .apkdownload.qr {
 	right: 0px;
+	bottom: 0px;
 }
 .apkdownload.text {
-	left: 0px;
+	left: 30px;
+	top: 0px;
 }
 
 table, td, th {
 	text-align: center;
 	padding: 0px;
 	font-size: 1em;
+	border: 1px solid black;
 }
 
 table {
-	width: 50%;
-	margin-left: 25%;
-	margin-right: 25%;
+	width: 60%;
+	margin-left: 20%;
+	margin-right: 20%;
 }
 
 th {
-	background-color: #848484;
+	background-color: black;
 	color: white;
-	width: 18%;
+	height: 25px;
+	padding: 1px;
 }
 
-h1 {
+td {
+	background-color: white;
+	height: 25px;
+	padding: 1px;
+}
+
+h1, h2, h3 {
 	text-align: center;
-}
-
-.white {
-	background-color: #FAFAFA;
-}
-
-.silver {
-	background-color: #F2F2F2;
+	color: white;
+	text-shadow: 2px 2px 2px blue;
 }
 
 .green {
@@ -65,3 +90,32 @@ h1 {
 .ingame {
 	margin-bottom: 50px;
 }
+
+.finished {
+	color: green;
+}
+
+@media (max-width: 720px) { 
+	body {
+		/*height: 900px;*/
+		background-image: none;
+		background-color: black;
+		background-size: contain;
+	    background-repeat: no-repeat;
+	}
+
+	table {
+		width: 100%;
+		margin: 0%;
+	}
+
+	.qr {
+		display: none;
+	}
+
+	.apk {
+		display: block;
+		transform: rotate(90deg);
+		transform-origin: left top 0;
+	}
+ }

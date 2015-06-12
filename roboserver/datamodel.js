@@ -37,15 +37,6 @@ var connectedClients = [],
         return null;
     },
 
-    getRacingTime = function(connectedClient){
-        if (connectedClient.data.resultTime) {
-            return connectedClient.data.resultTime;
-        } else {
-            var time = (new Date().getTime() - connectedClient.startTime)/1000;
-            return time;
-        }
-    },
-
     displayTime = function() {
         var str = "";
 
@@ -74,5 +65,4 @@ module.exports = {
     getClientByName: getClientByName,
     displayTime: displayTime,
     playerList: playerList,
-    getRacingTime: getRacingTime
 };

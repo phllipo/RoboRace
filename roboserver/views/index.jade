@@ -1,8 +1,9 @@
 extends layout
 
 block content
-  h1 TSW-I
+  h1 Otto Mario Kart
   
+  h2 AKTUELLES RENNEN
   table.ingame
     thead
       tr
@@ -15,14 +16,17 @@ block content
         for client in connectedClients
           if client.data.type=='app'
             tr
-              td.white #{client.data.name}
+              td #{client.data.name}
               if client.data.selectedRobo!=undefined
-                td.silver #{client.data.selectedRobo.name}
-                td.white #{client.data.selectedRobo.speed}
+                td #{client.data.selectedRobo.name}
+                td #{client.data.selectedRobo.speed}
               else
-                td.silver
-                td.white
-              td.silver #{client.data.resultTime} sec
+                td
+                td
+              if client.data.resultTime
+                td.finished #{formatTime(client.data.resultTime)}
+              else
+                td #{formatTime(new Date().getTime() - client.data.startTime)} 
               if client.data.ready=='true'
                 td.green
               else if client.data.ready=='waiting'
@@ -30,18 +34,21 @@ block content
               else
                 td.red
           else
+  h2 BESTENLISTE
   table.result
     thead
       tr
+        th #
         th Spieler
         th Robo
         th Time
       tbody
         for results in playerList
           tr
-            td.white #{results.player}
-            td.silver #{results.robo}
-            td.white #{results.time}
-  a(href='/downloads/app-debug.apk' class='apkdownload text') download app
+            td #{results.place}
+            td #{results.player}
+            td #{results.robo}
+            td #{results.time}
+  a.apk(href='/downloads/app-debug.apk' class='apkdownload text') download app
   a(href='/downloads/app-debug.apk')
-    img(src= "/img/qrcode.png" class='apkdownload qr')
+    img.qr(src= "/img/qrcode.png" class='apkdownload qr')

@@ -40,6 +40,9 @@ var processConnect = function(connectedClient, jsonMessage){
             var roboToDeselect = datamodel.getClientByName(appclient.data.selectedRobo.name);
         }
         delete appclient.data.selectedRobo;
+        delete appclient.data.startTime;
+        delete appclient.data.endTime;
+        delete appclient.data.resultTime;
         appclient.data.ready = "false";
         if(roboToDeselect) {
             var speedMessage = {
@@ -116,7 +119,7 @@ var processConnect = function(connectedClient, jsonMessage){
         // get race-time for every finished client
         for(i in finishedClients) {
             time = finishedClients[i].data.endTime - finishedClients[i].data.startTime;
-            finishedClients[i].data.resultTime = time/1000;
+            finishedClients[i].data.resultTime = time;
 
 
             result.push({resultObject: {"name": finishedClients[i].data.name, "time": time}});

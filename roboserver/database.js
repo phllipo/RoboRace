@@ -24,25 +24,33 @@ var insertResult = function(playername, roboname, time) {
 }
 
 var getPlayerList = function(res, callback) {
-  collection.find().sort({time:1}).toArray(function(err, results) {
+  collection.find().sort({time:1}).limit(10).toArray(function(err, results) {
     if(err) {
         console.log("ERROR: " + err);
     } else {
+        var curPlace = 1;
         // change millisekonds to time string
         for(r in results) {
-            var totalMs = results[r].time;
-            var secsWithoutMins = Math.floor(totalMs / 1000);
-            var ms = totalMs - (secsWithoutMins * 1000);
-            var minutes = Math.floor(secsWithoutMins / 60);
-            var seconds = secsWithoutMins - (minutes * 60);
-
-            var result = minutes + " min   " + seconds + " s   " + ms + " ms "
-
-            results[r].time = result
+            results[r].place = curPlace++;
+            results[r].time = formatTime(results[r].time);
         }
     }
     callback(err, results);
   });
+}
+
+var formatTime = function(timeInMs){
+    if(!timeInMs) {
+        return "";
+    } else {
+        var totalMs = timeInMs;
+        var secsWithoutMins = Math.floor(totalMs / 1000);
+        var ms = totalMs - (secsWithoutMins * 1000);
+        var minutes = Math.floor(secsWithoutMins / 60);
+        var seconds = secsWithoutMins - (minutes * 60);
+
+        return minutes + " min   " + seconds + " s   " + ms + " ms ";
+    }
 }
 
 var clearCollection = function(callback) {
@@ -57,5 +65,6 @@ var clearCollection = function(callback) {
 module.exports = {
     insertResult: insertResult,
     getPlayerList: getPlayerList,
-    clearCollection: clearCollection
+    clearCollection: clearCollection,
+    formatTime: formatTime
 }

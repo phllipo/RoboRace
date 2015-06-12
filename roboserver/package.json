@@ -4,10 +4,9 @@
     "author": "samaeder",
     "dependencies": {
         "mongodb": "*",
-        "monk": "*",
         "ws": "*",
         "express": "*",
-        "jade": "~2.5.0"
+        "jade": "*"
     },
     "scripts": {
   		"test": "mocha test",
