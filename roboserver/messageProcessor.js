@@ -34,15 +34,19 @@ var processConnect = function(connectedClient, jsonMessage){
         appclient.data.selectedRobo = controlledRobo.data;
         controlledRobo.data.controlledBy = appclient.data.name;
     },
-    processRoboDeselect = function(appclient, datamodel){
+    processRoboDeselect = function(appclient, datamodel, withTimes){
+        withTimes = typeof withTimes !== 'undefined' ? withTimes : false;
+
         // console.log("proceeding deselect: " + appclient.data.name);
         if(appclient.data.selectedRobo != null) {
             var roboToDeselect = datamodel.getClientByName(appclient.data.selectedRobo.name);
         }
         delete appclient.data.selectedRobo;
-        delete appclient.data.startTime;
-        delete appclient.data.endTime;
-        delete appclient.data.resultTime;
+        if(withTimes) {
+            delete appclient.data.startTime;
+            delete appclient.data.endTime;
+            delete appclient.data.resultTime;
+        }
         appclient.data.ready = "false";
         if(roboToDeselect) {
             var speedMessage = {
@@ -112,6 +116,8 @@ var processConnect = function(connectedClient, jsonMessage){
                   // send data to database
                   database.insertResult(connectedClients[i].data.name, connectedClients[i].data.selectedRobo.name, (connectedClients[i].data.endTime - connectedClients[i].data.startTime));
                 } else if (connectedClients[i].data.type == "app" && connectedClients[i].data.endTime) {
+                  // clients finished before roboClient
+                  console.log("\nCLIENT FINISHED BEFORE:   " + connectedClients[i].data.name + "\n\n");
                   finishedClients.push(connectedClients[i]);
                 }
             }
@@ -124,7 +130,8 @@ var processConnect = function(connectedClient, jsonMessage){
 
             result.push({resultObject: {"name": finishedClients[i].data.name, "time": time}});
         }
-        // if all clients finished, free the robos
+
+        // find out if all clients are finished
         for(i in connectedClients) {
             console.log("connected client free robos: " + JSON.stringify(connectedClients[i].data));
             if (connectedClients[i].data.type == "app" && !connectedClients[i].data.endTime) {
@@ -133,12 +140,12 @@ var processConnect = function(connectedClient, jsonMessage){
             }
         }
 
-        // send result msg to finished robo
+        // deselect robos if all clients finished
         messageTransmitter.transmitTimes(finishedClients, result, roboClient);
         if(allFinished) {
             for(i in connectedClients) {
                 if(connectedClients[i].data.type == "app") {
-                    processRoboDeselect(connectedClients[i], datamodel);
+                    processRoboDeselect(connectedClients[i], datamodel, true);
                 }
             }
         }
