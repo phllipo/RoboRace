@@ -8,7 +8,9 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".MainActivity"
     android:clickable="true"
-    android:background="@color/background_floating_material_dark">
+    android:background="@drawable/racingtrack"
+    android:backgroundTint="#ca535353"
+    android:backgroundTintMode="multiply">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -16,10 +18,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/racingtrack"
-            android:backgroundTint="#66666666"
-            android:backgroundTintMode="multiply">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/ID_Left"

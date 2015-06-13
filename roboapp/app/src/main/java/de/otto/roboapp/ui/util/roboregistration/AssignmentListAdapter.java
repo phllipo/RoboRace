@@ -1,6 +1,7 @@
 package de.otto.roboapp.ui.util.roboregistration;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -21,6 +22,7 @@ import de.otto.roboapp.model.Robo;
  * Created by samaeder on 23.03.15.
  */
 public class AssignmentListAdapter extends BaseAdapter {
+    private Typeface tf;
     private Activity activity;
     private RoboAppController roboAppController;
 
@@ -46,6 +48,7 @@ public class AssignmentListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        tf = Typeface.createFromAsset(activity.getAssets(), "fonts/Munro.ttf");
       LinearLayout linearLayout = new LinearLayout(activity);
         ImageView profil = new ImageView(activity);
         TextView assignedPlayer = new TextView(activity);
@@ -53,6 +56,11 @@ public class AssignmentListAdapter extends BaseAdapter {
         TextView seperatorView = new TextView(activity);
         final Button deselectRoboButton = new Button(activity);
         ImageView readyButton = new ImageView(activity);
+
+        assignedPlayer.setTypeface(tf);
+        assignedRobo.setTypeface(tf);
+        seperatorView.setTypeface(tf);
+        deselectRoboButton.setTypeface(tf);
 
         Player player = roboAppController.getDataModel().getAssignedPlayer().get(position);
         final String assignedPlayerName = player.getName();

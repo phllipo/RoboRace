@@ -1,10 +1,13 @@
 package de.otto.roboapp.ui.activities;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
@@ -28,14 +31,25 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
         final RoboAppController roboAppController = (RoboAppController) getApplicationContext();
         String playerName = roboAppController.getDataModel().getCurrentPlayerName();
 
+        TextView t_welcome = (TextView) findViewById(R.id.welcomeMessage);
+        TextView t_unassinedPlayersHeadline = (TextView) findViewById(R.id.unassignedPlayerHeadline);
+        TextView t_unassignedRoboHeadline = (TextView) findViewById(R.id.unassignedRoboHeadline);
+        TextView t_assignedPlayersHeadline = (TextView) findViewById(R.id.assignmentListHeadline);
 
-        String welcomeMessage = ((TextView) findViewById(R.id.welcomeMessage)).getText().toString();
+        String welcomeMessage = t_welcome.getText().toString();
         String setPlayerName = welcomeMessage.replace("NAMEPLACEHOLDER", playerName);
-        ((TextView) findViewById(R.id.welcomeMessage)).setText(setPlayerName);
+        t_welcome.setText(setPlayerName);
 
         final ListView unassignedPlayers = (ListView) findViewById(R.id.unassignedPlayerList);
         final ListView unassignedRobos = (ListView) findViewById(R.id.unassignedRoboList);
         final ListView assignedPlayers = (ListView) findViewById(R.id.assignmentList);
+
+        //set typeface
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Munro.ttf");
+        t_welcome.setTypeface(tf);
+        t_unassinedPlayersHeadline.setTypeface(tf);
+        t_unassignedRoboHeadline.setTypeface(tf);
+        t_assignedPlayersHeadline.setTypeface(tf);
 
         roboListAdapter = new RoboListAdapter(this);
         playerListAdapter = new PlayerListAdapter(this);

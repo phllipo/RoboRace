@@ -1,6 +1,7 @@
 package de.otto.roboapp.ui.util.result;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import de.otto.roboapp.RoboAppController;
  * Created by luca on 18.05.15.
  */
 public class PlacementListAdapter extends BaseAdapter {
+    private Typeface tf;
     private Activity activity;
     private RoboAppController roboAppController;
 
@@ -40,6 +42,8 @@ public class PlacementListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        tf = Typeface.createFromAsset(activity.getAssets(), "fonts/Munro.ttf");
+
         System.out.println("Position " + position);
 
         GradientDrawable gd = new GradientDrawable();
@@ -57,6 +61,10 @@ public class PlacementListAdapter extends BaseAdapter {
         TextView placementView = new TextView(activity);
         TextView playerNameView = new TextView(activity);
         TextView timeView = new TextView(activity);
+
+        placementView.setTypeface(tf);
+        playerNameView.setTypeface(tf);
+        timeView.setTypeface(tf);
 
         LinearLayout.LayoutParams layoutParamsWeight2 =  new LinearLayout.LayoutParams(
                 0,

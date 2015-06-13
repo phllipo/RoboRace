@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,9 +30,20 @@ public class PlayerRegistrationActivity extends AbstractUpdatableActivity {
 
         final TextView t_playerName = (EditText) findViewById(R.id.playerName);
         final TextView t_ipAddress = (EditText) findViewById(R.id.ipAddress);
+        final TextView t_playerNameTitle = (TextView) findViewById(R.id.label_playerName);
+        final TextView t_ipAddressTitle = (TextView) findViewById(R.id.label_ipAddress);
+        Button submit = (Button) findViewById(R.id.btn_submit_playerName);
+
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Munro.ttf");
+
+        t_playerName.setTypeface(tf);
+        t_ipAddress.setTypeface(tf);
+        t_playerNameTitle.setTypeface(tf);
+        t_ipAddressTitle.setTypeface(tf);
+        submit.setTypeface(tf);
+
         loadLoginData(t_playerName, t_ipAddress);
 
-        Button submit = (Button) findViewById(R.id.btn_submit_playerName);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,9 +1,12 @@
 package de.otto.roboapp.ui.activities;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -32,6 +35,10 @@ public class SteeringActivity extends AbstractUpdatableActivity {
         super.onCreate(savedInstanceState);
         final RoboAppController roboAppController = (RoboAppController)getApplicationContext();
 
+        // remove title bar, set fullscreen
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_steering);
 
         SeekBar speedSlider = (SeekBar) findViewById(R.id.ID_Speed_Slider);
@@ -125,6 +132,10 @@ public class SteeringActivity extends AbstractUpdatableActivity {
         switch (dataModel.getRacingData().getRacingState()) {
             case COUNTDOWN_RUNNING: {
                 final TextView t_textViewTimer = (TextView) findViewById(R.id.CountdownTimer);
+
+                Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Munro.ttf");
+                t_textViewTimer.setTypeface(tf);
+
                 new CountDownTimer(3000, 1000) {
 
                     public void onTick(long millisUntilFinished) {
