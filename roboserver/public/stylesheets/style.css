@@ -109,11 +109,11 @@ h1, h2, h3 {
 		margin: 0%;
 	}
 
-	.qr {
+	img.qr {
 		display: none;
 	}
 
-	.apk {
+	a.apk {
 		display: block;
 		transform: rotate(90deg);
 		transform-origin: left top 0;
