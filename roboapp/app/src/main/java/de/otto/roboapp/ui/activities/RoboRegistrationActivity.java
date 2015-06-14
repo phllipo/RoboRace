@@ -2,6 +2,7 @@ package de.otto.roboapp.ui.activities;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -11,6 +12,7 @@ import org.w3c.dom.Text;
 
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
+import de.otto.roboapp.ui.util.BackgroundTextureListener;
 import de.otto.roboapp.ui.util.roboregistration.AssignmentListAdapter;
 import de.otto.roboapp.model.Robo;
 import de.otto.roboapp.ui.activities.base.AbstractUpdatableActivity;
@@ -30,6 +32,9 @@ public class RoboRegistrationActivity extends AbstractUpdatableActivity {
 
         final RoboAppController roboAppController = (RoboAppController) getApplicationContext();
         String playerName = roboAppController.getDataModel().getCurrentPlayerName();
+
+        TextureView backgroundView = (TextureView) findViewById(R.id.roboreg_background);
+        backgroundView.setSurfaceTextureListener(new BackgroundTextureListener(this));
 
         TextView t_welcome = (TextView) findViewById(R.id.welcomeMessage);
         TextView t_unassinedPlayersHeadline = (TextView) findViewById(R.id.unassignedPlayerHeadline);

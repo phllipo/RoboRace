@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
 import de.otto.roboapp.ui.activities.base.AbstractUpdatableActivity;
+import de.otto.roboapp.ui.util.BackgroundTextureListener;
 import de.otto.roboapp.util.OnFinishedCallback;
 
 import static de.otto.roboapp.util.ThreadStarter.processInNewThread;
@@ -27,6 +29,9 @@ public class PlayerRegistrationActivity extends AbstractUpdatableActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_registration);
         final RoboAppController roboAppController = (RoboAppController) getApplicationContext();
+
+        TextureView backgroundView = (TextureView) findViewById(R.id.playerreg_background);
+        backgroundView.setSurfaceTextureListener(new BackgroundTextureListener(this));
 
         final TextView t_playerName = (EditText) findViewById(R.id.playerName);
         final TextView t_ipAddress = (EditText) findViewById(R.id.ipAddress);

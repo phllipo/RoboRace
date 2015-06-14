@@ -1,86 +1,97 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="2"
-    android:padding="5dp"
-    android:background="@color/background_material_dark"><!-- to show what the parent is -->
-    <TextView
-        android:id="@+id/welcomeMessage"
-        android:textColor="#FFFFFF"
-        android:text="@string/welcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.15" />
+    android:background="@color/background_material_dark"
+    tools:context="de.otto.roboapp.ui.activities.RoboRegistrationActivity">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+    <TextureView
+        android:id="@+id/roboreg_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:weightSum="2"><!-- to show what the parent is -->
         <TextView
-            android:id="@+id/unassignedPlayerHeadline"
-            android:layout_width="175dp"
+            android:id="@+id/welcomeMessage"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Unassigned player(s)"
-            android:layout_weight="0.00"
-            android:textColor="#33b5e5" />
+            android:layout_weight="0.15"
+            android:text="@string/welcome"
+            android:textColor="#FFFFFF" />
 
-        <TextView
-            android:id="@+id/unassignedRoboHeadline"
-            android:layout_width="175dp"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Unassigned robo(s)"
-            android:textColor="#33b5e5" />
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/unassignedPlayerHeadline"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.00"
+                android:text="Unassigned player(s)"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#33b5e5" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="220dp">
+            <TextView
+                android:id="@+id/unassignedRoboHeadline"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:text="Unassigned robo(s)"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#33b5e5" />
 
-        <ListView
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="220dp"
+            android:orientation="horizontal">
+
+            <ListView
+                android:id="@+id/unassignedPlayerList"
                 android:layout_width="175dp"
                 android:layout_height="220dp"
-                android:id="@+id/unassignedPlayerList"
-                android:layout_below="@+id/unassignedRoboList"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_below="@+id/unassignedRoboList"
 
-            android:layout_gravity="right" />
+                android:layout_gravity="right" />
 
-        <ListView
-            android:layout_width="175dp"
-            android:layout_height="220dp"
-            android:id="@+id/unassignedRoboList"
-            android:layout_below="@+id/welcomeMessage"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            <ListView
+                android:id="@+id/unassignedRoboList"
+                android:layout_width="175dp"
+                android:layout_height="220dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/welcomeMessage" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/assignmentListHeadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Assigned player(s)"
+                android:textColor="#01a9d4" />
+
+            <ListView
+                android:id="@+id/assignmentList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="250dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Assigned player(s)"
-            android:id="@+id/assignmentListHeadline"
-            android:textColor="#01a9d4" />
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/assignmentList" />
-
-    </LinearLayout>
-
-
-</LinearLayout>
+</RelativeLayout>

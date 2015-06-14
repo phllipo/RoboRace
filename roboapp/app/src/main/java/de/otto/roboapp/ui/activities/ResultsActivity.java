@@ -1,30 +1,39 @@
 package de.otto.roboapp.ui.activities;
 
+import android.graphics.SurfaceTexture;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.TextureView;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.IOException;
+
 import de.otto.roboapp.R;
 import de.otto.roboapp.ui.activities.base.AbstractUpdatableActivity;
+import de.otto.roboapp.ui.util.BackgroundTextureListener;
 import de.otto.roboapp.ui.util.result.PlacementListAdapter;
 
 /**
  * Created by luca on 24.04.15.
  */
-public class ResultsActivity extends AbstractUpdatableActivity {
+public class ResultsActivity extends AbstractUpdatableActivity  {
 
     private PlacementListAdapter placementListAdapter;
+    private MediaPlayer mp = null;
+    TextureView mTextureView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
-        WebView webView = (WebView) findViewById(R.id.background_webview);
-        webView.loadUrl("file:///android_asset/giphy.gif");
+
+        mTextureView = (TextureView) findViewById(R.id.results_background);
+        mTextureView.setSurfaceTextureListener(new BackgroundTextureListener(this));
 
         final ListView resultsListView = (ListView) findViewById(R.id.placement_list);
         TextView t_title = (TextView) findViewById(R.id.title_results_activity);

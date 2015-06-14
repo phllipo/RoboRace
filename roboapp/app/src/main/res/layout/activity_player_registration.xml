@@ -1,89 +1,94 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="de.otto.roboapp.ui.activities.PlayerRegistrationActivity"
-    android:background="@color/background_material_dark">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_material_dark"
+    tools:context="de.otto.roboapp.ui.activities.PlayerRegistrationActivity">
+
+    <TextureView
+        android:id="@+id/playerreg_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
         <LinearLayout
-            android:orientation="vertical"
+            android:id="@+id/linearLayout2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/btn_submit_playerName"
             android:layout_alignEnd="@+id/btn_submit_playerName"
-            android:id="@+id/linearLayout2">
+            android:layout_alignRight="@+id/btn_submit_playerName"
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/label_playerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/label_setName"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="60dp"
-                android:id="@+id/label_playerName" />
+                android:text="@string/label_setName" />
 
             <EditText
-                android:singleLine="true"
-                android:textColor="#FFFFFF"
+                android:id="@+id/playerName"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:layout_below="@+id/label_playerName"
-                android:layout_alignParentRight="false"
                 android:layout_alignParentEnd="false"
-                android:id="@+id/playerName"
-                android:layout_marginTop="10dp"/>
+                android:layout_alignParentRight="false"
+                android:layout_below="@+id/label_playerName"
+                android:layout_marginTop="10dp"
+                android:singleLine="true"
+                android:textColor="#FFFFFF" />
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_ipAdress"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="60dp"
-                    android:id="@+id/label_ipAddress" />
+            <TextView
+                android:id="@+id/label_ipAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="60dp"
+                android:text="@string/label_ipAdress" />
 
-                <EditText
-                    android:singleLine="true"
-                    android:textColor="#FFFFFF"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:text="@string/text_ipAdress"
-                    android:layout_below="@+id/label_playerName"
-                    android:layout_alignParentRight="false"
-                    android:layout_alignParentEnd="false"
-                    android:id="@+id/ipAddress"
-                    android:layout_marginTop="10dp"/>
-
-
+            <EditText
+                android:id="@+id/ipAddress"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentRight="false"
+                android:layout_below="@+id/label_playerName"
+                android:layout_marginTop="10dp"
+                android:singleLine="true"
+                android:text="@string/text_ipAdress"
+                android:textColor="#FFFFFF" />
 
 
             <Button
+                android:id="@+id/btn_submit_playerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/button_submit"
-                android:id="@+id/btn_submit_playerName"
                 android:layout_below="@+id/playerName"
                 android:layout_centerHorizontal="true"
-                android:background="#33b5e5" />
+                android:background="#33b5e5"
+                android:text="@string/button_submit" />
 
         </LinearLayout>
 
         <GridView
+            android:id="@+id/gridView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/gridView"
             android:layout_gravity="center_horizontal"
+            android:horizontalSpacing="2dp"
             android:numColumns="2"
             android:stretchMode="columnWidth"
-            android:horizontalSpacing="2dp"
             android:verticalSpacing="2dp" />
     </LinearLayout>
 
