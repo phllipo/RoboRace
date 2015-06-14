@@ -5,5 +5,17 @@
         <!-- Customize your theme here. -->
         <item name="android:textColor">#FFFFFF</item>
     </style>
+    <style name="FontXtra" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">25dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <style name="FontBig" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">22dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <style name="FonstSmall" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">19dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
 
 </resources>

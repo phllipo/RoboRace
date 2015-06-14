@@ -28,6 +28,7 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/FontXtra"
                 android:id="@+id/label_playerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,9 +38,10 @@
                 android:text="@string/label_setName" />
 
             <EditText
+                style="@style/FontBig"
                 android:id="@+id/playerName"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="40dp"
                 android:layout_alignParentEnd="false"
                 android:layout_alignParentRight="false"
                 android:layout_below="@+id/label_playerName"
@@ -49,6 +51,7 @@
 
 
             <TextView
+                style="@style/FontXtra"
                 android:id="@+id/label_ipAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,9 +61,10 @@
                 android:text="@string/label_ipAdress" />
 
             <EditText
+                style="@style/FontBig"
                 android:id="@+id/ipAddress"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="40dp"
                 android:layout_alignParentEnd="false"
                 android:layout_alignParentRight="false"
                 android:layout_below="@+id/label_playerName"
@@ -71,12 +75,14 @@
 
 
             <Button
+                style="@style/FontBig"
                 android:id="@+id/btn_submit_playerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/playerName"
                 android:layout_centerHorizontal="true"
                 android:background="#33b5e5"
+                android:layout_marginTop="10dp"
                 android:text="@string/button_submit" />
 
         </LinearLayout>

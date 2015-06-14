@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
 
 /**
@@ -61,6 +62,10 @@ public class PlacementListAdapter extends BaseAdapter {
         TextView placementView = new TextView(activity);
         TextView playerNameView = new TextView(activity);
         TextView timeView = new TextView(activity);
+
+        placementView.setTextAppearance(activity, R.style.FonstSmall);
+        playerNameView.setTextAppearance(activity, R.style.FonstSmall);
+        timeView.setTextAppearance(activity, R.style.FonstSmall);
 
         placementView.setTypeface(tf);
         playerNameView.setTypeface(tf);

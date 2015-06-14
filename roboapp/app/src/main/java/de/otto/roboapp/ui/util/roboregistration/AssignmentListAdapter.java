@@ -17,6 +17,8 @@ import de.otto.roboapp.model.DataModel;
 import de.otto.roboapp.model.Player;
 import de.otto.roboapp.model.Robo;
 
+import static de.otto.roboapp.R.style.FonstSmall;
+
 
 /**
  * Created by samaeder on 23.03.15.
@@ -56,6 +58,11 @@ public class AssignmentListAdapter extends BaseAdapter {
         TextView seperatorView = new TextView(activity);
         final Button deselectRoboButton = new Button(activity);
         ImageView readyButton = new ImageView(activity);
+
+        assignedPlayer.setTextAppearance(activity, FonstSmall);
+        assignedRobo.setTextAppearance(activity, FonstSmall);
+        seperatorView.setTextAppearance(activity, FonstSmall);
+        deselectRoboButton.setTextAppearance(activity, FonstSmall);
 
         assignedPlayer.setTypeface(tf);
         assignedRobo.setTypeface(tf);

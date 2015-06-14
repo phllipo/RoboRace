@@ -17,6 +17,7 @@
         android:padding="5dp"
         android:weightSum="2"><!-- to show what the parent is -->
         <TextView
+            style="@style/FonstSmall"
             android:id="@+id/welcomeMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,6 +31,7 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/FonstSmall"
                 android:id="@+id/unassignedPlayerHeadline"
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"
@@ -39,6 +41,7 @@
                 android:textColor="#33b5e5" />
 
             <TextView
+                style="@style/FonstSmall"
                 android:id="@+id/unassignedRoboHeadline"
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"
@@ -79,6 +82,7 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/FonstSmall"
                 android:id="@+id/assignmentListHeadline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

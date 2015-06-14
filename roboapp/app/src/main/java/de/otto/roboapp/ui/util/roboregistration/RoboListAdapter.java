@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
 
 public class RoboListAdapter extends BaseAdapter {
@@ -42,6 +43,8 @@ public class RoboListAdapter extends BaseAdapter {
         LinearLayout linearLayout = new LinearLayout(activity);
 
         TextView unassignedRobo = new TextView(activity);
+
+        unassignedRobo.setTextAppearance(activity, R.style.FonstSmall);
 
         unassignedRobo.setTypeface(tf);
 

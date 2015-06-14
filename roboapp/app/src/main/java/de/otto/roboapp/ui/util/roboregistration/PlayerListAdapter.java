@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import de.otto.roboapp.R;
 import de.otto.roboapp.RoboAppController;
 
 public class PlayerListAdapter extends BaseAdapter {
@@ -42,6 +43,8 @@ public class PlayerListAdapter extends BaseAdapter {
         LinearLayout linearLayout = new LinearLayout(activity);
 
         TextView unassignedPlayer = new TextView(activity);
+
+        unassignedPlayer.setTextAppearance(activity, R.style.FonstSmall);
 
         unassignedPlayer.setTypeface(tf);
 
