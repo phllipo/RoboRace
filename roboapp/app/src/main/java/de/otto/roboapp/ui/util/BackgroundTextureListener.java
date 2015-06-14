@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.util.Log;
 import android.view.Surface;
 import android.view.TextureView;
+import android.view.ViewGroup;
 
 import java.io.IOException;
 
@@ -34,6 +35,23 @@ public class BackgroundTextureListener implements TextureView.SurfaceTextureList
             mMediaPlayer.setSurface(surface);
             mMediaPlayer.setLooping(true);
             mMediaPlayer.prepareAsync();
+
+            int videoWidth = mMediaPlayer.getVideoHeight();
+            int videoHeight = mMediaPlayer.getVideoWidth();
+
+            //Get the width of the screen
+            int screenWidth = activity.getWindowManager().getDefaultDisplay().getWidth();
+
+            //Get the SurfaceView layout parameters
+
+            //Set the width of the SurfaceView to the width of the screen
+            width = screenWidth;
+
+            //Set the height of the SurfaceView to match the aspect ratio of the video
+            //be sure to cast these as floats otherwise the calculation will likely be 0
+            height = (int) (((float)videoHeight / (float)videoWidth) * (float)screenWidth);
+            surfaceTexture.setDefaultBufferSize(width, height);
+
 
             // Play video when the media source is ready for playback.
             mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
