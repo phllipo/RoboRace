@@ -139,7 +139,7 @@ public class SteeringActivity extends AbstractUpdatableActivity {
                 new CountDownTimer(3000, 1000) {
 
                     public void onTick(long millisUntilFinished) {
-                        t_textViewTimer.setText(String.valueOf((millisUntilFinished+500)/1000));
+                        t_textViewTimer.setText(String.valueOf((millisUntilFinished)/1000));
                         // String.valueOf(dataModel.getRacingData().getCountdownRemainingTime())
                     }
 
