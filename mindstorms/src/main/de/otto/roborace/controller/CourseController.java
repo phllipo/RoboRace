@@ -33,7 +33,7 @@ public class CourseController implements EventLoopListener{
     }
 
     private boolean isFinishingLine(float[] sample) {
-    	return CourseColor.TEST.matches(sample);
+    	return CourseColor.RED.matches(sample);
     }
 
 	@Override

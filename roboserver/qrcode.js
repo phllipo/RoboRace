@@ -20,7 +20,7 @@ var getLocalIp = function() {
 }
 // create qr code
 var createQr = function() {
-    var address = "http://" + getLocalIp() + ":8080/downloads/app-debug.apk";
+    var address = "http://" + getLocalIp() + ":3000/downloads/app-debug.apk";
     var code = qr.image(address, { type: 'png' });
     var output = fs.createWriteStream('public/img/qrcode.png')
 

@@ -8,7 +8,7 @@
     <property name="main-class"     value="de.otto.roborace.RacerMain"/>
     <property name="lejos.home"     value="/home/lejos/programs/"/>
     <!--<property name="main-class"     value="de.otto.lighttest.LightTestMain"/>-->
-    <property name="ev3.host"       value="10.90.164.243"/>
+    <property name="ev3.host"       value="10.42.0.75"/>
     <!--<property name="ev3.host"       value="10.90.150.183"/>-->
 
     
